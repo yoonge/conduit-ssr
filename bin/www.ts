@@ -1,21 +1,21 @@
 #!/usr/bin/env node
-// @ts-nocheck
 
 /**
  * Module dependencies.
  */
 
-import app from '../app.ts'
 import http from 'http'
 import debugModule from 'debug'
+// @ts-ignore
 const debug = new debugModule('demo:server')
+import app from '../app.js'
 
 /**
  * Normalize a port into a number, string, or false.
  */
 
-const normalizePort = val => {
-  const port = parseInt(val, 10)
+const normalizePort = (val: string | number) => {
+  const port = parseInt(val as string, 10)
 
   if (isNaN(port)) {
     // named pipe
@@ -34,7 +34,7 @@ const normalizePort = val => {
  * Event listener for HTTP server "error" event.
  */
 
-const onError = error => {
+const onError = (error: { syscall: string; code: any }) => {
   if (error.syscall !== 'listen') {
     throw error
   }
@@ -62,7 +62,7 @@ const onError = error => {
 
 const onListening = () => {
   const addr = server.address()
-  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr.port
+  const bind = typeof addr === 'string' ? 'pipe ' + addr : 'port ' + addr?.port
   debug('Listening on ' + bind)
 }
 
