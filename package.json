@@ -15,8 +15,8 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "npx nodemon bin/www.ts",
-    "format": "prettier --plugin-search-dir . --write .",
-    "lint": "eslint .",
+    "format": "npx prettier --write .",
+    "lint": "npx eslint .",
     "prd": "pm2 start bin/www.ts",
     "start": "npx ts-node bin/www.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
