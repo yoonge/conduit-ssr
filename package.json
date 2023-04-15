@@ -14,11 +14,11 @@
   "type": "module",
   "version": "0.1.0",
   "scripts": {
-    "dev": "npx nodemon bin/www",
+    "dev": "npx nodemon bin/www.ts",
     "format": "prettier --plugin-search-dir . --write .",
     "lint": "eslint .",
-    "prd": "pm2 start bin/www",
-    "start": "node bin/www",
+    "prd": "pm2 start bin/www.ts",
+    "start": "npx ts-node bin/www.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -35,6 +35,13 @@
     "koa-static": "^5.0.0"
   },
   "devDependencies": {
+    "@types/debug": "^4.1.7",
+    "@types/koa": "^2.13.6",
+    "@types/koa-bodyparser": "^4.3.10",
+    "@types/koa-json": "^2.0.20",
+    "@types/koa-logger": "^3.1.2",
+    "@types/koa-router": "^7.4.4",
+    "@types/koa-static": "^4.0.2",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",

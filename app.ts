@@ -8,14 +8,15 @@ import bodyparser from 'koa-bodyparser'
 import json from 'koa-json'
 import koaStatic from 'koa-static'
 import logger from 'koa-logger'
+// @ts-ignore
 import onerror from 'koa-onerror'
+// @ts-ignore
 import render from 'koa-art-template'
 
 import index from './routes/index.js'
 import user from './routes/user.js'
 
 const _dirName = dirname(fileURLToPath(import.meta.url))
-console.log(_dirName)
 
 // error handler
 onerror(app)
@@ -46,15 +47,15 @@ render(app, {
 
 // logger
 app.use(async (ctx, next) => {
-  const start = new Date()
+  const start = Number(new Date())
   await next()
-  const ms = new Date() - start
+  const ms = Number(new Date()) - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
 // routes
-app.use(index.routes(), index.allowedMethods())
-app.use(user.routes(), user.allowedMethods())
+app.use(index.routes()).use(index.allowedMethods())
+app.use(user.routes()).use(user.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

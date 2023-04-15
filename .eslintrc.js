@@ -7,7 +7,6 @@ export default {
     'plugin:@typescript-eslint/recommended',
     'plugin:prettier/recommended'
   ],
-  ignorePatterns: ['tsconfig.json'],
   parser: '@typescript-eslint/parser',
   plugins: ['@typescript-eslint'],
   root: true

@@ -1,15 +1,15 @@
 {
   // "extends": "./config/base",
   // "files": ['app.ts', 'index.ts'],
-  "include": ["./src/**/*"],
+  "include": ["./**/*"],
   // "exclude": [ "./src/temp/**/*" ],
   "compilerOptions": {
     "baseUrl": "./",
     "module": "ESNext",
     "target": "ESNext",
     // "lib": [ "ESNext", "DOM" ],
-    "typeRoots": ["src/types", "node_modules/@types"],
-    // "outDir": "./dist",
+    "typeRoots": ["./types", "node_modules/@types"],
+    "outDir": "./dist",
     // "outFile": "./dist/bundle.js",
     "sourceMap": true,
     "allowJs": true,
@@ -31,5 +31,8 @@
     // "strictNullChecks": true,
     // "forceConsistentCasingInFileNames": true,
     // "noFallthroughCasesInSwitch": false,
+  },
+  "ts-node": {
+    "esm": true
   }
 }

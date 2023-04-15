@@ -1,10 +1,11 @@
 #!/usr/bin/env node
+// @ts-nocheck
 
 /**
  * Module dependencies.
  */
 
-import app from '../app.js'
+import app from '../app.ts'
 import http from 'http'
 import debugModule from 'debug'
 const debug = new debugModule('demo:server')
