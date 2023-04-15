@@ -1,0 +1,47 @@
+{
+  "author": "Yoonge <7884008@qq.com>",
+  "description": "Back-End of Message Board built with Art-Template + ESlint + JWT + Koa2 + Prettier + TypeScript.",
+  "keywords": [
+    "Art-Template",
+    "ESlint",
+    "JWT",
+    "Koa2",
+    "Prettier",
+    "TypeScript"
+  ],
+  "name": "message-board-be",
+  "private": true,
+  "type": "module",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "npx nodemon bin/www",
+    "format": "prettier --plugin-search-dir . --write .",
+    "lint": "eslint .",
+    "prd": "pm2 start bin/www",
+    "start": "node bin/www",
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "dependencies": {
+    "art-template": "^4.13.2",
+    "debug": "^4.3.4",
+    "koa": "^2.14.2",
+    "koa-art-template": "^1.1.1",
+    "koa-bodyparser": "^4.4.0",
+    "koa-convert": "^1.2.0",
+    "koa-json": "^2.0.2",
+    "koa-logger": "^3.2.1",
+    "koa-onerror": "^4.2.0",
+    "koa-router": "^7.4.0",
+    "koa-static": "^5.0.0"
+  },
+  "devDependencies": {
+    "@typescript-eslint/eslint-plugin": "^5.58.0",
+    "@typescript-eslint/parser": "^5.58.0",
+    "eslint": "^8.38.0",
+    "eslint-config-prettier": "^8.8.0",
+    "nodemon": "^1.19.4",
+    "prettier": "^2.8.7",
+    "ts-node": "^10.9.1",
+    "typescript": "^5.0.4"
+  }
+}
