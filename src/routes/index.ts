@@ -8,18 +8,6 @@ router.get('/', async (ctx: ParameterizedContext, next) => {
   })
 })
 
-router.get('/signup', async (ctx: ParameterizedContext, next) => {
-  await ctx.render('sign-up', {
-    title: 'Sign Up Page'
-  })
-})
-
-router.get('/signin', async (ctx: ParameterizedContext, next) => {
-  await ctx.render('sign-in', {
-    title: 'Sign In Page'
-  })
-})
-
 router.get('/string', async (ctx, next) => {
   ctx.body = 'koa2 string'
 })

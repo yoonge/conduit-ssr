@@ -29,7 +29,7 @@ app.use(
 )
 app.use(json())
 app.use(logger())
-app.use(koaStatic(_dirName + '/public'))
+app.use(koaStatic(path.resolve(_dirName, '../public')))
 
 // set templates global variable
 app.use(async (ctx, next) => {
@@ -40,7 +40,7 @@ app.use(async (ctx, next) => {
 
 // render the template
 render(app, {
-  root: path.join(_dirName, 'views'),
+  root: path.resolve(_dirName, 'views'),
   extname: '.html',
   debug: process.env.NODE_ENV !== 'production'
 })
