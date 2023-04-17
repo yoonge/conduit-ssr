@@ -1,4 +1,4 @@
-import koaRouter from 'koa-router'
+import koaRouter from '@koa/router'
 const router = new koaRouter()
 
 router.prefix('/user')

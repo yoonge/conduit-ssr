@@ -1,9 +1,10 @@
 {
   "author": "Yoonge <7884008@qq.com>",
-  "description": "Back-End of Message Board built with Art-Template + ESlint + JWT + Koa2 + Prettier + TypeScript.",
+  "description": "Back-End of Message Board built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.",
   "keywords": [
     "Art-Template",
     "ESlint",
+    "Joi",
     "JWT",
     "Koa2",
     "Prettier",
@@ -22,16 +23,18 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@koa/router": "^12.0.0",
     "art-template": "^4.13.2",
     "debug": "^4.3.4",
+    "joi": "^17.9.1",
     "koa": "^2.14.2",
     "koa-art-template": "^1.1.1",
     "koa-bodyparser": "^4.4.0",
-    "koa-convert": "^1.2.0",
     "koa-json": "^2.0.2",
+    "koa-jwt": "^4.0.4",
     "koa-logger": "^3.2.1",
     "koa-onerror": "^4.2.0",
-    "koa-router": "^7.4.0",
+    "koa-session": "^6.4.0",
     "koa-static": "^5.0.0"
   },
   "devDependencies": {
@@ -40,8 +43,9 @@
     "@types/koa-bodyparser": "^4.3.10",
     "@types/koa-json": "^2.0.20",
     "@types/koa-logger": "^3.1.2",
-    "@types/koa-router": "^7.4.4",
+    "@types/koa-session": "^6.4.0",
     "@types/koa-static": "^4.0.2",
+    "@types/koa__router": "^12.0.0",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
     "eslint": "^8.38.0",

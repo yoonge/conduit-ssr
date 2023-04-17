@@ -1,10 +1,22 @@
 import { ParameterizedContext } from 'koa'
-import koaRouter from 'koa-router'
+import koaRouter from '@koa/router'
 const router = new koaRouter()
 
 router.get('/', async (ctx: ParameterizedContext, next) => {
   await ctx.render('index', {
     title: 'Hello Koa 2!'
+  })
+})
+
+router.get('/signup', async (ctx: ParameterizedContext, next) => {
+  await ctx.render('sign-up', {
+    title: 'Sign Up Page'
+  })
+})
+
+router.get('/signin', async (ctx: ParameterizedContext, next) => {
+  await ctx.render('sign-in', {
+    title: 'Sign In Page'
   })
 })
 
