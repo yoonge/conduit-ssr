@@ -6,6 +6,7 @@ import url, { fileURLToPath } from 'node:url'
 
 import bodyparser from 'koa-bodyparser'
 import json from 'koa-json'
+import koaJwt from 'koa-jwt'
 import koaStatic from 'koa-static'
 import logger from 'koa-logger'
 // @ts-ignore
@@ -13,8 +14,10 @@ import onerror from 'koa-onerror'
 // @ts-ignore
 import render from 'koa-art-template'
 
-import index from './routes/index.js'
-import user from './routes/user.js'
+import DEFAULT from './config/default.js'
+
+import index from './route/index.js'
+import user from './route/user.js'
 
 const _dirName = dirname(fileURLToPath(import.meta.url))
 
@@ -40,7 +43,7 @@ app.use(async (ctx, next) => {
 
 // render the template
 render(app, {
-  root: path.resolve(_dirName, 'views'),
+  root: path.resolve(_dirName, 'view'),
   extname: '.html',
   debug: process.env.NODE_ENV !== 'production'
 })
@@ -52,6 +55,12 @@ app.use(async (ctx, next) => {
   const ms = Number(new Date()) - start
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
+
+app.use(
+  koaJwt({ secret: DEFAULT.JWT_SECRET }).unless({
+    path: ['/', /^\/register/, /^\/doRegister/, /^\/login/, /^\/doLogin/]
+  })
+)
 
 // routes
 app.use(index.routes()).use(index.allowedMethods())

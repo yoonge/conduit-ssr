@@ -16,8 +16,8 @@
   "version": "0.1.0",
   "scripts": {
     "dev": "npx nodemon bin/www.ts",
-    "format": "npx prettier --write .",
-    "lint": "npx eslint .",
+    "format": "npx prettier --write ./src",
+    "lint": "npx eslint ./src",
     "prd": "pm2 start bin/www.ts",
     "start": "npx ts-node bin/www.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -41,6 +41,7 @@
   },
   "devDependencies": {
     "@types/debug": "^4.1.7",
+    "@types/jsonwebtoken": "^9.0.1",
     "@types/koa": "^2.13.6",
     "@types/koa-bodyparser": "^4.3.10",
     "@types/koa-json": "^2.0.20",

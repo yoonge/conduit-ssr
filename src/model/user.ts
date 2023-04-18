@@ -14,11 +14,11 @@ const UserSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  create_time: {
+  createTime: {
     type: Date,
     default: Date.now
   },
-  last_modify_time: {
+  updateTime: {
     type: Date,
     default: Date.now
   },

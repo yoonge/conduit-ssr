@@ -1,7 +1,8 @@
 import mongoose from 'mongoose'
+import DEFAULT from '../config/default.js'
 
 const dbConnection = async () => {
-  await mongoose.connect('mongodb://127.0.0.1:27017/test')
+  await mongoose.connect(`${DEFAULT.DB_HOST}/${DEFAULT.DB_NAME}`)
 }
 
 dbConnection()

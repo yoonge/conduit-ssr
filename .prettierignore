@@ -13,4 +13,4 @@ package-lock.json
 yarn.lock
 
 # Ignore art template files
-/src/views/*.html
+/src/view/*.html
