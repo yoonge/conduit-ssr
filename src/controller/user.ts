@@ -12,13 +12,13 @@ declare type User = {
 }
 
 export default class UserCtrl {
-  static async register (ctx: Context, next: Next) {
+  static async register(ctx: Context, next: Next) {
     await ctx.render('register', {
       title: 'Register Page'
     })
   }
 
-  static async doRegister (ctx: Context, next: Next) {
+  static async doRegister(ctx: Context, next: Next) {
     const { email, username, password } = ctx.request.body as User
     const user = await UserModel.findOne({
       $or: [{ email }, { username }]
@@ -40,7 +40,7 @@ export default class UserCtrl {
     ctx.redirect(`/login?email=${email}`)
   }
 
-  static async login (ctx: Context, next: Next) {
+  static async login(ctx: Context, next: Next) {
     const { email = '' } = ctx.query
     await ctx.render('login', {
       title: 'Login Page',
@@ -48,7 +48,7 @@ export default class UserCtrl {
     })
   }
 
-  static async doLogin (ctx: Context, next: Next) {
+  static async doLogin(ctx: Context, next: Next) {
     const { email, password } = ctx.request.body as User
     const user = await UserModel.findOne({
       email,
@@ -63,16 +63,37 @@ export default class UserCtrl {
       return
     }
 
-    console.log('user', user)
-    const { _id, username } = user
-    const token = jwt.sign({ _id }, DEFAULT.JWT_SECRET)
+    const { _id } = user
+    const token = await new Promise((resolve, reject) => {
+      jwt.sign(
+        { currentUserId: _id },
+        DEFAULT.JWT_SECRET,
+        {
+          expiresIn: '1h'
+        },
+        (err, token) => {
+          if (err) reject(err)
+          resolve(token)
+        }
+      )
+    })
+
+    if (!token) {
+      ctx.status = 500
+      ctx.body = {
+        msg: 'Internal Server Error.'
+      }
+    }
 
     ctx.status = 200
     ctx.body = {
       msg: 'Login succeeded.',
-      user: { _id, username, token }
+      user,
+      token
     }
+  }
 
-    ctx.redirect('/')
+  static async getCurrentUser(ctx: Context, next: Next) {
+    console.log('ctx.currentUserId', ctx.currentUserId)
   }
 }

@@ -1,6 +1,6 @@
 import { Context, Next } from 'koa'
-import koaRouter from '@koa/router'
-const router = new koaRouter()
+import KoaRouter from '@koa/router'
+const router = new KoaRouter()
 
 router.get('/', async (ctx: Context, next: Next) => {
   await ctx.render('index', {

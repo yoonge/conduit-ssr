@@ -6,15 +6,12 @@ import url, { fileURLToPath } from 'node:url'
 
 import bodyparser from 'koa-bodyparser'
 import json from 'koa-json'
-import koaJwt from 'koa-jwt'
 import koaStatic from 'koa-static'
 import logger from 'koa-logger'
 // @ts-ignore
 import onerror from 'koa-onerror'
 // @ts-ignore
 import render from 'koa-art-template'
-
-import DEFAULT from './config/default.js'
 
 import index from './route/index.js'
 import user from './route/user.js'
@@ -25,11 +22,12 @@ const _dirName = dirname(fileURLToPath(import.meta.url))
 onerror(app)
 
 // middlewares
-app.use(
-  bodyparser({
-    enableTypes: ['json', 'form', 'text']
-  })
-)
+app
+  .use(
+    bodyparser({
+      enableTypes: ['json', 'form', 'text']
+    })
+  )
   .use(json())
   .use(logger())
   .use(koaStatic(path.resolve(_dirName, '../public')))
@@ -57,15 +55,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(
-  koaJwt({ secret: DEFAULT.JWT_SECRET }).unless({
-    path: ['/', /^\/register/, /^\/doRegister/, /^\/login/, /^\/doLogin/]
-  })
-)
-  .use(index.routes())
-  .use(index.allowedMethods())
-  .use(user.routes())
-  .use(user.allowedMethods())
+app.use(index.routes()).use(index.allowedMethods()).use(user.routes()).use(user.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

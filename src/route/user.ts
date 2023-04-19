@@ -1,7 +1,8 @@
-import koaRouter from '@koa/router'
-const router = new koaRouter()
-
+import KoaRouter from '@koa/router'
+import Authorization from '../middleware/authorization.js'
 import UserCtrl from '../controller/user.js'
+
+const router = new KoaRouter()
 
 router.get('/register', UserCtrl.register)
 
@@ -11,9 +12,7 @@ router.get('/login', UserCtrl.login)
 
 router.post('/login', UserCtrl.doLogin)
 
-router.get('/user', (ctx, next) => {
-  ctx.body = 'this is a users response!'
-})
+router.get('/user', Authorization, UserCtrl.getCurrentUser)
 
 router.get('/bar', (ctx, next) => {
   ctx.body = 'this is a users/bar response'
