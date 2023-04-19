@@ -1,15 +1,15 @@
 import koaRouter from '@koa/router'
 const router = new koaRouter()
 
-import userCtrl from '../controller/user.js'
+import UserCtrl from '../controller/user.js'
 
-router.get('/register', userCtrl.register)
+router.get('/register', UserCtrl.register)
 
-router.post('/register', userCtrl.doRegister)
+router.post('/register', UserCtrl.doRegister)
 
-router.get('/login', userCtrl.login)
+router.get('/login', UserCtrl.login)
 
-router.post('/login', userCtrl.doLogin)
+router.post('/login', UserCtrl.doLogin)
 
 router.get('/user', (ctx, next) => {
   ctx.body = 'this is a users response!'

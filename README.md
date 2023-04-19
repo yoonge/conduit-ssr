@@ -1,6 +1,6 @@
-# Message Board
+# Message Board SSR
 
-Back-End of [Message Board](https://github.com/yoonge/message-board-be.git) Message Board built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.
+[Message Board SSR](https://github.com/yoonge/message-board-be.git) built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.
 
 ## Getting Started
 

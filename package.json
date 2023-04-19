@@ -1,6 +1,6 @@
 {
   "author": "Yoonge <7884008@qq.com>",
-  "description": "Back-End of Message Board built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.",
+  "description": "Message Board SSR built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.",
   "keywords": [
     "Art-Template",
     "ESlint",
@@ -8,6 +8,7 @@
     "JWT",
     "Koa2",
     "Prettier",
+    "SSR",
     "TypeScript"
   ],
   "name": "message-board-be",

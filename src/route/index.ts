@@ -1,18 +1,18 @@
-import { ParameterizedContext } from 'koa'
+import { Context, Next } from 'koa'
 import koaRouter from '@koa/router'
 const router = new koaRouter()
 
-router.get('/', async (ctx: ParameterizedContext, next) => {
+router.get('/', async (ctx: Context, next: Next) => {
   await ctx.render('index', {
     title: 'Hello Koa 2!'
   })
 })
 
-router.get('/string', async (ctx, next) => {
+router.get('/string', async (ctx: Context, next: Next) => {
   ctx.body = 'koa2 string'
 })
 
-router.get('/json', async (ctx, next) => {
+router.get('/json', async (ctx: Context, next: Next) => {
   ctx.body = {
     title: 'koa2 json'
   }

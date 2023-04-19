@@ -30,9 +30,9 @@ app.use(
     enableTypes: ['json', 'form', 'text']
   })
 )
-app.use(json())
-app.use(logger())
-app.use(koaStatic(path.resolve(_dirName, '../public')))
+  .use(json())
+  .use(logger())
+  .use(koaStatic(path.resolve(_dirName, '../public')))
 
 // set templates global variable
 app.use(async (ctx, next) => {
@@ -56,15 +56,16 @@ app.use(async (ctx, next) => {
   console.log(`${ctx.method} ${ctx.url} - ${ms}ms`)
 })
 
+// routes
 app.use(
   koaJwt({ secret: DEFAULT.JWT_SECRET }).unless({
     path: ['/', /^\/register/, /^\/doRegister/, /^\/login/, /^\/doLogin/]
   })
 )
-
-// routes
-app.use(index.routes()).use(index.allowedMethods())
-app.use(user.routes()).use(user.allowedMethods())
+  .use(index.routes())
+  .use(index.allowedMethods())
+  .use(user.routes())
+  .use(user.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
