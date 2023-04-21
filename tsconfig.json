@@ -1,7 +1,7 @@
 {
   // "extends": "./config/base",
   // "files": ['app.ts', 'index.ts'],
-  "include": ["./bin/**/*", "./src/**/*"],
+  "include": ["./src/**/*"],
   // "exclude": [ "./src/temp/**/*" ],
   "compilerOptions": {
     "baseUrl": ".",

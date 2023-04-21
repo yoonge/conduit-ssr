@@ -8,7 +8,7 @@ import http from 'http'
 import debugModule from 'debug'
 // @ts-ignore
 const debug = new debugModule('demo:server')
-import app from '../src/app.js'
+import app from '../app.js'
 
 /**
  * Normalize a port into a number, string, or false.

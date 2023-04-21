@@ -1,9 +1,10 @@
 import { Context, Next } from 'koa'
-
-import DEFAULT from '../config/default.js'
 import jwt from 'jsonwebtoken'
 
+import DEFAULT from '../config/default.js'
+
 export default async (ctx: Context, next: Next) => {
+  console.log('ctx.headers', ctx.headers)
   const { authorization } = ctx.headers
   const token = authorization ? authorization.split('Bearer ')[1] : null
 

@@ -16,11 +16,12 @@
   "type": "module",
   "version": "0.1.0",
   "scripts": {
-    "dev": "npx nodemon bin/www.ts",
-    "format": "npx prettier --write ./src",
-    "lint": "npx eslint ./src",
-    "prd": "pm2 start bin/www.ts",
-    "start": "npx ts-node bin/www.ts",
+    "apidoc": "npx apidoc -i src -o apidoc",
+    "dev": "npx nodemon src/bin/www.ts",
+    "format": "npx prettier --write src",
+    "lint": "npx eslint src",
+    "prd": "pm2 start src/bin/www.ts",
+    "start": "npx ts-node src/bin/www.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
@@ -41,6 +42,7 @@
     "mongoose": "^7.0.3"
   },
   "devDependencies": {
+    "@types/apidoc": "^0.50.0",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/koa": "^2.13.6",
@@ -53,6 +55,7 @@
     "@types/md5": "^2.3.2",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
+    "apidoc": "^0.54.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "nodemon": "^1.19.4",

@@ -1,0 +1,7 @@
+{
+  "description": "Documentation for the REST API access provided at Message Board",
+  "name": "Message Board API documentation",
+  "title": "Message Board API",
+  "url" : "http://localhost:3000/apidoc",
+  "version": "0.1.0"
+}
