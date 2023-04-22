@@ -16,7 +16,7 @@
   "type": "module",
   "version": "0.1.0",
   "scripts": {
-    "apidoc": "npx apidoc -i src -o apidoc",
+    "apidoc": "npx apidoc -i src -o docs",
     "dev": "npx nodemon src/bin/www.ts",
     "format": "npx prettier --write src",
     "lint": "npx eslint src",

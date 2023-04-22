@@ -2,7 +2,7 @@ import { Context, Next } from 'koa'
 import jwt from 'jsonwebtoken'
 
 import DEFAULT from '../config/default.js'
-import UserModel from '../model/user.js'
+import UserModel from '../models/user.js'
 import md5 from '../util/md5.js'
 
 declare type User = {
@@ -11,10 +11,6 @@ declare type User = {
   password: string
 }
 
-/**
- * @apiDefine admin:computer User access only
- * This optional description belong to to the group admin.
- */
 export default class UserCtrl {
   static async register(ctx: Context, next: Next) {
     await ctx.render('register', {
@@ -52,6 +48,21 @@ export default class UserCtrl {
     })
   }
 
+  /**
+   * @api {post} /login Login
+   * @apiVersion 0.1.0
+   * @apiName DoLogin
+   * @apiGroup User
+   *
+   * @apiParam {String} email Email
+   * @apiParam {String} password Password
+   *
+   * @apiSuccess {String} msg Message
+   * @apiSuccess {Object} user Current user's profile
+   *
+   * @apiError UserNotFound   The <code>id</code> of the User was not found.
+   * @apiError (500 Internal Server Error) InternalServerError The server encountered an internal error
+   */
   static async doLogin(ctx: Context, next: Next) {
     const { email, password } = ctx.request.body as User
     const user = await UserModel.findOne({
@@ -90,6 +101,7 @@ export default class UserCtrl {
     }
 
     ctx.status = 200
+    ctx.cookies.set('token', token as string)
     ctx.body = {
       msg: 'Login succeeded.',
       user,
@@ -102,7 +114,6 @@ export default class UserCtrl {
    * @apiVersion 0.1.0
    * @apiName GetCurrentUser
    * @apiGroup User
-   * @apiPermission admin:computer
    *
    * @apiDescription Compare version 0.3.0 with 0.2.0 and you will see the green markers with new items in version 0.3.0 and red markers with removed items since 0.2.0.
    *
@@ -157,7 +168,9 @@ export default class UserCtrl {
       }
     }
 
+    ctx.status = 200
     await ctx.render('user', {
+      title: 'User Profile',
       msg: 'Query succeeded.',
       user
     })

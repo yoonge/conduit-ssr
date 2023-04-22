@@ -1,6 +1,7 @@
 import KoaRouter from '@koa/router'
+
 import Authorization from '../middleware/authorization.js'
-import UserCtrl from '../controller/user.js'
+import UserCtrl from '../controllers/user.js'
 
 const router = new KoaRouter()
 

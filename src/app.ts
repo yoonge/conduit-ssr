@@ -13,8 +13,8 @@ import onerror from 'koa-onerror'
 // @ts-ignore
 import render from 'koa-art-template'
 
-import index from './route/index.js'
-import user from './route/user.js'
+import index from './routes/index.js'
+import user from './routes/user.js'
 
 const _dirName = dirname(fileURLToPath(import.meta.url))
 
@@ -40,7 +40,7 @@ app.use(async (ctx, next) => {
 
 // render the template
 render(app, {
-  root: path.resolve(_dirName, 'view'),
+  root: path.resolve(_dirName, 'views'),
   extname: '.html',
   debug: process.env.NODE_ENV !== 'production'
 })
