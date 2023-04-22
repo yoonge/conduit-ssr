@@ -4,6 +4,7 @@ import KoaRouter from '@koa/router'
 const router = new KoaRouter()
 
 router.get('/', async (ctx: Context, next: Next) => {
+  console.log('ctx index', ctx.state)
   await ctx.render('index', {
     title: 'Hello Koa 2!'
   })

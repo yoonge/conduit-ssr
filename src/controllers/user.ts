@@ -78,14 +78,12 @@ export default class UserCtrl {
       return
     }
 
-    const { _id } = user
+    const { _id, username } = user
     const token = await new Promise((resolve, reject) => {
       jwt.sign(
-        { currentUserId: _id },
+        { currentUserId: _id, username },
         DEFAULT.JWT_SECRET,
-        {
-          expiresIn: '1h'
-        },
+        { expiresIn: '1h' },
         (err, token) => {
           if (err) reject(err)
           resolve(token)
@@ -157,9 +155,8 @@ export default class UserCtrl {
    *     }
    */
   static async getCurrentUser(ctx: Context, next: Next) {
-    console.log('ctx.currentUserId', ctx.currentUserId)
-    const user = await UserModel.findById(ctx.currentUserId)
-    console.log('user', user)
+    const { currentUserId } = ctx.state
+    const user = await UserModel.findById(currentUserId)
 
     if (!user) {
       ctx.status = 500

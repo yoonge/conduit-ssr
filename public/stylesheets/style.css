@@ -1,8 +1,37 @@
 body {
-  padding: 50px;
   font: 14px 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00b7ff;
+}
+
+.header .navbar-dark {
+  padding: 12px 0;
+}
+
+.header .navbar-brand {
+  font-size: 24px;
+}
+
+.header .navbar-brand img {
+  margin-right: 6px;
+  vertical-align: -7px;
+}
+
+.header .nav-link {
+  font-size: 18px;
+}
+
+.header .login {
+  color: #fff;
+  font-size: 20px;
+}
+
+.header .login .btn {
+  margin-left: 12px;
+}
+
+.content {
+  padding: 24px 36px;
 }

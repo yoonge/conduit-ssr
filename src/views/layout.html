@@ -1,3 +1,4 @@
+<html lang="en">
 {{block 'head'}}
 <link
   rel="stylesheet"
@@ -11,12 +12,46 @@
 <title>{{ title }}</title>
 {{/block}}
 
+<div class="header">
 {{block 'header'}}
+<nav class="navbar navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="/">
+      <img src="/images/typescript.svg" alt="TypeScript">
+      Message Board SSR
+    </a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item">
+          <a {{if (pathname == '/')}}class="nav-link active"{{else}}class="nav-link"{{/if}} href="/">Home</a>
+        </li>
+        <li class="nav-item">
+          <a {{if (pathname.indexOf('/user') == 0)}}class="nav-link active"{{else}}class="nav-link"{{/if}} href="/user">User</a>
+        </li>
+      </ul>
+      <div class="d-flex login">
+        {{if !user}}
+        <a href="/login" class="btn btn-outline-light">Login</a>
+        <a href="/register" class="btn btn-light">Register</a>
+        {{else}}
+        {{ user.username }}
+        {{/if}}
+      </div>
+    </div>
+  </div>
+</nav>
 {{/block}}
+</div>
 
+<div class="content">
 {{block 'content'}}
 {{/block}}
+</div>
 
 {{block 'footer'}}
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
 {{/block}}
+</html>

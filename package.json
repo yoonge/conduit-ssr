@@ -11,7 +11,7 @@
     "SSR",
     "TypeScript"
   ],
-  "name": "message-board-be",
+  "name": "message-board-ssr",
   "private": true,
   "type": "module",
   "version": "0.1.0",
