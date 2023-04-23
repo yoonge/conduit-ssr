@@ -13,7 +13,9 @@ router.get('/login', UserCtrl.login)
 
 router.post('/login', UserCtrl.doLogin)
 
-router.get('/user', Authorization, UserCtrl.getCurrentUser)
+router.get('/user', Authorization, UserCtrl.getUserProfile)
+
+router.post('/user/update', Authorization, UserCtrl.updateUserProfile)
 
 router.post('/logout', UserCtrl.logout)
 

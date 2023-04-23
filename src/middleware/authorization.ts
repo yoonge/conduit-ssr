@@ -13,10 +13,11 @@ export default async (ctx: Context, next: Next) => {
       })
     })
     // console.log('decoded', decoded)
-    const { currentUserId } = decoded as jwt.JwtPayload
-    ctx.state.currentUserId = currentUserId
+    const { cuid } = decoded as jwt.JwtPayload
+    ctx.state.cuid = cuid
     await next()
   } catch (err) {
+    console.error('err', err)
     ctx.status = 401
     await ctx.render('error', {
       msg: 'Unauthorized.',

@@ -12,12 +12,12 @@
 <title>{{ title }}</title>
 {{/block}}
 
-<div class="header">
+<section class="header">
 {{block 'header'}}
 <nav class="navbar navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark">
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="/images/typescript.svg" alt="TypeScript">
+      <img src="/images/typescript.svg" alt="Logo" title="TypeScript">
       Message Board SSR
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -40,7 +40,7 @@
         <form action="/logout" method="post">
           <div class="dropdown">
             <a class="btn btn-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{ user.avatar }}" alt="{{ user.username }}" class="avatar">{{ user.username }}
+              <img src={{ user.avatar }} alt="Avatar" title={{ user.username }} class="avatar">{{ user.username }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item" href="/user">Profile</a></li>
@@ -59,12 +59,12 @@
   </div>
 </nav>
 {{/block}}
-</div>
+</section>
 
-<div class="content">
+<section class="content">
 {{block 'content'}}
 {{/block}}
-</div>
+</section>
 
 {{block 'footer'}}
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>

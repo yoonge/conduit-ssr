@@ -42,7 +42,7 @@ const UserSchema = new mongoose.Schema({
     default: ''
   },
   birthday: {
-    type: Date
+    type: String
   }
 })
 

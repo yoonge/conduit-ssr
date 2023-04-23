@@ -1,33 +1,25 @@
 import { Context, Next } from 'koa'
 import KoaRouter from '@koa/router'
-import jwt from 'jsonwebtoken'
 
-import DEFAULT from '../config/default.js'
+import UserCtrl from '../controllers/user.js'
 
 const router = new KoaRouter()
 
 router.get('/', async (ctx: Context, next: Next) => {
-  try {
-    const token = ctx.cookies.get('token')
-    const decoded = await new Promise((resolve, reject) => {
-      jwt.verify(token as string, DEFAULT.JWT_SECRET, (err, decoded) => {
-        if (err) reject(err)
-        resolve(decoded)
-      })
-    })
-
-    const { avatar, username } = decoded as jwt.JwtPayload
+  const { user } = await UserCtrl.getCurrentUser(ctx, next)
+  if (!user) {
     await ctx.render('index', {
       title: 'Hello Message Board',
-      msg: 'Homepage logged in.',
-      user: { avatar, username }
+      msg: 'Logged out.',
     })
-  } catch (err) {
-    await ctx.render('index', {
-      title: 'Hello Message Board',
-      msg: 'Homepage logged out.',
-    })
+    return
   }
+
+  await ctx.render('index', {
+    title: 'Hello Message Board',
+    msg: 'Logged in.',
+    user
+  })
 })
 
 router.get('/string', async (ctx: Context, next: Next) => {

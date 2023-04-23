@@ -4,6 +4,7 @@ import jwt from 'jsonwebtoken'
 import DEFAULT from '../config/default.js'
 import UserModel from '../models/user.js'
 import md5 from '../util/md5.js'
+
 import { User } from '../types/user'
 
 export default class UserCtrl {
@@ -73,10 +74,10 @@ export default class UserCtrl {
       return
     }
 
-    const { _id, avatar, username } = user
+    const { _id, username } = user
     const token = await new Promise((resolve, reject) => {
       jwt.sign(
-        { avatar, currentUserId: _id, username },
+        { cuid: _id, username },
         DEFAULT.JWT_SECRET,
         { expiresIn: '1h' },
         (err, token) => {
@@ -91,16 +92,13 @@ export default class UserCtrl {
       ctx.body = {
         msg: 'Internal Server Error.'
       }
+      return
     }
 
     ctx.status = 200
+    ctx.cookies.set('cuid', _id.toString())
     ctx.cookies.set('token', token as string)
     ctx.redirect('/')
-    // ctx.body = {
-    //   msg: 'Login succeeded.',
-    //   user,
-    //   token
-    // }
   }
 
   /**
@@ -151,25 +149,63 @@ export default class UserCtrl {
    *     }
    */
   static async getCurrentUser(ctx: Context, next: Next) {
-    const { currentUserId } = ctx.state
-    const user = await UserModel.findById(currentUserId)
+    try {
+      const cuid = ctx.cookies.get('cuid')
+      const user = await UserModel.findById(cuid)
+      return { err: null, user }
+    } catch (err) {
+      return { err, user: null }
+    }
+  }
 
-    if (!user) {
+  static async getUserProfile(ctx: Context, next: Next) {
+    const { err, user } = await UserCtrl.getCurrentUser(ctx, next)
+
+    if (err) {
       ctx.status = 500
-      ctx.body = {
+      await ctx.render('error', {
+        err: {
+          status: 500,
+          stack: JSON.stringify(err)
+        },
         msg: 'Internal Server Error.'
-      }
+      })
+      return
     }
 
     ctx.status = 200
     await ctx.render('user', {
-      title: 'User Profile',
-      msg: 'Query succeeded.',
+      title: 'Profile Settings',
+      msg: 'User query succeeded.',
       user
     })
   }
 
+  static async updateUserProfile(ctx: Context, next: Next) {
+    try {
+      let newUser
+      const { _id, gender, password, ...rest } = ctx.request.body as User
+      if (password.trim()) {
+        newUser = { gender: Number(gender), password: md5(password), ...rest }
+      } else {
+        newUser = { gender: Number(gender), ...rest }
+      }
+      await UserModel.findByIdAndUpdate(_id, { $set: { ...newUser } })
+      ctx.redirect('/user')
+    } catch (err) {
+      ctx.status = 500
+      await ctx.render('error', {
+        err: {
+          status: 500,
+          stack: JSON.stringify(err)
+        },
+        msg: 'Internal Server Error.'
+      })
+    }
+  }
+
   static logout(ctx: Context, next: Next) {
+    ctx.cookies.set('cuid', null)
     ctx.cookies.set('token', null)
     ctx.redirect('/login')
   }

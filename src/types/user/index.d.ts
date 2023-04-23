@@ -1,8 +1,12 @@
 declare type User = {
-  _id: string,
+  _id: string
+  avatar: string
+  bio: string
+  birthday: string
   email: string
-  username: string
+  gender: number
   password: string
+  username: string
 }
 
 export { User }

@@ -1,7 +1,67 @@
 {{extend 'layout.html'}}
 
 {{block 'content'}}
-<h2>{{ title }}</h2>
-<h4>{{ msg }}</h4>
-<code>{{ user }}</code>
+<div class="profile">
+  <h2>{{ title }}</h2>
+  <h4><img src={{ user.avatar }} alt="Avatar" title={{ user.username }} width="48" height="48"></h4>
+  <form action="/user/update" method="post">
+    <input type="hidden" name="_id" value={{ user._id.toString() }}>
+    <div class="mb-3">
+      <label for="avatar" class="form-label">Avatar</label>
+      <select id="avatar" name="avatar" class="form-select">
+        <option value="/images/typescript.svg" {{if (user.avatar === '/images/typescript.svg')}}selected{{/if}}>
+          typescript.svg
+        </option>
+        <option value="/images/favicon.png" {{if (user.avatar === '/images/favicon.png')}}selected{{/if}}>
+          favicon.png
+        </option>
+        <option value="/images/svelte.svg" {{if (user.avatar === '/images/svelte.svg')}}selected{{/if}}>
+          svelte.svg
+        </option>
+        <option value="/images/vite.svg" {{if (user.avatar === '/images/vite.svg')}}selected{{/if}}>
+          vite.svg
+        </option>
+      </select>
+    </div>
+    <div class="mb-3">
+      <label for="username" class="form-label">Username</label>
+      <input type="text" class="form-control" id="username" name="username" value={{ user.username }}>
+    </div>
+    <div class="mb-3">
+      <label for="gender" class="form-label">Gender</label>
+      <div class="form-control form-radio-control" id="gender">
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="gender" value={{1}} {{if (user.gender === 1)}}checked{{/if}}>Male
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="gender" value={{0}} {{if (user.gender === 0)}}checked{{/if}}>Female
+          </label>
+        </div>
+        <div class="form-check form-check-inline">
+          <label class="form-check-label">
+            <input class="form-check-input" type="radio" name="gender" value={{-1}} {{if (user.gender === -1)}}checked{{/if}}>Secret
+          </label>
+        </div>
+      </div>
+    </div>
+    <div class="mb-3">
+      <label for="birthday" class="form-label">Birthday</label>
+      <input type="text" class="form-control" id="birthday" name="birthday" placeholder="2016/03/14" value={{ user.birthday }}>
+    </div>
+    <div class="mb-3">
+      <label for="bio" class="form-label">Bio</label>
+      <textarea class="form-control" id="bio" name="bio" cols="30" rows="10" placeholder="Short bio about you">{{ user.bio }}</textarea>
+    </div>
+    <div class="mb-3">
+      <label for="password" class="form-label">Password</label>
+      <input type="password" class="form-control" id="password" name="password" placeholder="A new password, if you wanna change">
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-dark">Update</button>
+    </div>
+  </form>
+</div>
 {{/block}}
