@@ -4,12 +4,7 @@ import jwt from 'jsonwebtoken'
 import DEFAULT from '../config/default.js'
 import UserModel from '../models/user.js'
 import md5 from '../util/md5.js'
-
-declare type User = {
-  email: string
-  username: string
-  password: string
-}
+import { User } from '../types/user'
 
 export default class UserCtrl {
   static async register(ctx: Context, next: Next) {

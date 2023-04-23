@@ -1,7 +1,7 @@
 {{extend 'layout.html'}}
 
 {{block 'content'}}
-<h1>{{ message }}</h1>
-<h2>{{ error.status }}</h2>
-<pre>{{ error.stack }}</pre>
+<h2>{{ err.status }}</h2>
+<h4>{{ msg }}</h4>
+<code>{{ err.stack }}</code>
 {{/block}}

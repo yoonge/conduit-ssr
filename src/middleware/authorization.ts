@@ -4,33 +4,26 @@ import jwt from 'jsonwebtoken'
 import DEFAULT from '../config/default.js'
 
 export default async (ctx: Context, next: Next) => {
-  const token = ctx.cookies.get('token') || null
-
-  if (!token) {
-    ctx.status = 401
-    ctx.body = {
-      msg: 'Unauthorized.'
-    }
-    return
-  }
-
-  const decoded = await new Promise((resolve, reject) => {
-    jwt.verify(token, DEFAULT.JWT_SECRET, (err, decoded) => {
-      if (err) reject(err)
-      resolve(decoded)
+  try {
+    const token = ctx.cookies.get('token')
+    const decoded = await new Promise((resolve, reject) => {
+      jwt.verify(token as string, DEFAULT.JWT_SECRET, (err, decoded) => {
+        if (err) reject(err)
+        resolve(decoded)
+      })
     })
-  })
-  if (!decoded) {
+    // console.log('decoded', decoded)
+    const { currentUserId } = decoded as jwt.JwtPayload
+    ctx.state.currentUserId = currentUserId
+    await next()
+  } catch (err) {
     ctx.status = 401
-    ctx.body = {
-      msg: 'Unauthorized.'
-    }
-    return
+    await ctx.render('error', {
+      msg: 'Unauthorized.',
+      err: {
+        status: 401,
+        stack: JSON.stringify(err),
+      }
+    })
   }
-
-  // console.log('decoded', decoded)
-  const { currentUserId, username } = decoded as jwt.JwtPayload
-  ctx.state.currentUserId = currentUserId
-  ctx.state.username = username
-  await next()
 }

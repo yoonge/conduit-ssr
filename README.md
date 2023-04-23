@@ -5,8 +5,8 @@
 ## Getting Started
 
 ```sh
-$ git clone https://github.com/yoonge/message-board-be.git
-$ cd message-board-be
+$ git clone https://github.com/yoonge/message-board-ssr.git
+$ cd message-board-ssr
 $ pnpm i
-$ pnpm run dev
+$ pnpm dev
 ```
