@@ -23,13 +23,39 @@ a {
   font-size: 18px;
 }
 
-.header .login {
-  color: #fff;
-  font-size: 20px;
+.header .login form {
+  margin-block-end: 0;
 }
 
 .header .login .btn {
   margin-left: 12px;
+}
+
+.header .login .dropdown-toggle {
+  color: #fff;
+  font-size: 20px;
+  text-decoration: none;
+}
+
+.header .login .dropdown-toggle::after {
+  vertical-align: 3px;
+}
+
+.header .login .dropdown-menu .btn-link {
+  color: orangered;
+  height: 18px;
+  line-height: 18px;
+  text-decoration: none;
+  margin: 0;
+  padding: 0;
+}
+
+.header .login .avatar {
+  width: 20px;
+  height: 20px;
+  border-radius: 8px;
+  margin-top: -2px;
+  margin-right: 6px;
 }
 
 .content {

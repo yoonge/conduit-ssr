@@ -15,8 +15,6 @@ router.post('/login', UserCtrl.doLogin)
 
 router.get('/user', Authorization, UserCtrl.getCurrentUser)
 
-router.get('/bar', (ctx, next) => {
-  ctx.body = 'this is a users/bar response'
-})
+router.post('/logout', UserCtrl.logout)
 
 export default router

@@ -9,7 +9,7 @@ import { User } from '../types/user'
 export default class UserCtrl {
   static async register(ctx: Context, next: Next) {
     await ctx.render('register', {
-      title: 'Register Page'
+      title: 'Register'
     })
   }
 
@@ -38,7 +38,7 @@ export default class UserCtrl {
   static async login(ctx: Context, next: Next) {
     const { email = '' } = ctx.query
     await ctx.render('login', {
-      title: 'Login Page',
+      title: 'Login',
       email
     })
   }
@@ -73,10 +73,10 @@ export default class UserCtrl {
       return
     }
 
-    const { _id, username } = user
+    const { _id, avatar, username } = user
     const token = await new Promise((resolve, reject) => {
       jwt.sign(
-        { currentUserId: _id, username },
+        { avatar, currentUserId: _id, username },
         DEFAULT.JWT_SECRET,
         { expiresIn: '1h' },
         (err, token) => {
@@ -95,11 +95,12 @@ export default class UserCtrl {
 
     ctx.status = 200
     ctx.cookies.set('token', token as string)
-    ctx.body = {
-      msg: 'Login succeeded.',
-      user,
-      token
-    }
+    ctx.redirect('/')
+    // ctx.body = {
+    //   msg: 'Login succeeded.',
+    //   user,
+    //   token
+    // }
   }
 
   /**
@@ -166,5 +167,10 @@ export default class UserCtrl {
       msg: 'Query succeeded.',
       user
     })
+  }
+
+  static logout(ctx: Context, next: Next) {
+    ctx.cookies.set('token', null)
+    ctx.redirect('/login')
   }
 }

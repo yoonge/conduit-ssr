@@ -16,15 +16,15 @@ router.get('/', async (ctx: Context, next: Next) => {
       })
     })
 
-    const { username } = decoded as jwt.JwtPayload
+    const { avatar, username } = decoded as jwt.JwtPayload
     await ctx.render('index', {
-      title: 'Hello Koa 2!',
+      title: 'Hello Message Board',
       msg: 'Homepage logged in.',
-      user: { username }
+      user: { avatar, username }
     })
   } catch (err) {
     await ctx.render('index', {
-      title: 'Hello Koa 2!',
+      title: 'Hello Message Board',
       msg: 'Homepage logged out.',
     })
   }

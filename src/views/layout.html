@@ -29,7 +29,7 @@
           <a {{if (pathname == '/')}}class="nav-link active"{{else}}class="nav-link"{{/if}} href="/">Home</a>
         </li>
         <li class="nav-item">
-          <a {{if (pathname.indexOf('/user') == 0)}}class="nav-link active"{{else}}class="nav-link"{{/if}} href="/user">User</a>
+          <a {{if (pathname.indexOf('/user') == 0)}}class="nav-link active"{{else}}class="nav-link"{{/if}} href="/user">Profile</a>
         </li>
       </ul>
       <div class="d-flex login">
@@ -37,7 +37,22 @@
         <a href="/login" class="btn btn-outline-light">Login</a>
         <a href="/register" class="btn btn-light">Register</a>
         {{else}}
-        {{ user.username }}
+        <form action="/logout" method="post">
+          <div class="dropdown">
+            <a class="btn btn-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+              <img src="{{ user.avatar }}" alt="{{ user.username }}" class="avatar">{{ user.username }}
+            </a>
+            <ul class="dropdown-menu dropdown-menu-end">
+              <li><a class="dropdown-item" href="/user">Profile</a></li>
+              <li><hr class="dropdown-divider"></li>
+              <li>
+                <a class="dropdown-item" href="">
+                  <button class="btn btn-link" type="submit">Logout</button>
+                </a>
+              </li>
+            </ul>
+          </div>
+        </form>
         {{/if}}
       </div>
     </div>
@@ -52,6 +67,6 @@
 </div>
 
 {{block 'footer'}}
-<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
+<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>
 {{/block}}
 </html>
