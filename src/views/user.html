@@ -1,11 +1,15 @@
 {{extend 'layout.html'}}
 
+{{block 'head'}}
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/flatpickr/4.6.13/flatpickr.min.css">
+{{/block}}
+
 {{block 'content'}}
 <div class="profile">
   <h2>{{ title }}</h2>
-  <h4><img src={{ user.avatar }} alt="Avatar" title={{ user.username }} width="48" height="48"></h4>
+  <h4><img src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="48" height="48"></h4>
   <form action="/user/update" method="post">
-    <input type="hidden" name="_id" value={{ user._id.toString() }}>
+    <input type="hidden" name="_id" value="{{ user._id.toString() }}">
     <div class="mb-3">
       <label for="avatar" class="form-label">Avatar</label>
       <select id="avatar" name="avatar" class="form-select">
@@ -24,8 +28,16 @@
       </select>
     </div>
     <div class="mb-3">
+      <label for="email" class="form-label">Email</label>
+      <input type="email" class="form-control" id="email" disabled value="{{ user.email }}">
+    </div>
+    <div class="mb-3">
       <label for="username" class="form-label">Username</label>
-      <input type="text" class="form-control" id="username" name="username" value={{ user.username }}>
+      <input type="text" class="form-control" id="username" name="username" value="{{ user.username }}">
+    </div>
+    <div class="mb-3">
+      <label for="nickname" class="form-label">Nickname</label>
+      <input type="text" class="form-control" id="nickname" name="nickname" value="{{ user.nickname }}">
     </div>
     <div class="mb-3">
       <label for="gender" class="form-label">Gender</label>
@@ -49,7 +61,15 @@
     </div>
     <div class="mb-3">
       <label for="birthday" class="form-label">Birthday</label>
-      <input type="text" class="form-control" id="birthday" name="birthday" placeholder="2016/03/14" value={{ user.birthday }}>
+      <input type="text" class="form-control" id="birthday" name="birthday" placeholder="2016-03-14" value="{{ user.birthday }}">
+    </div>
+    <div class="mb-3">
+      <label for="phone" class="form-label">Phone Number</label>
+      <input type="number" class="form-control" id="phone" name="phone" placeholder="13800138000" value="{{ user.phone }}">
+    </div>
+    <div class="mb-3">
+      <label for="job" class="form-label">Job</label>
+      <input type="text" class="form-control" id="job" name="job" placeholder="What do you do" value="{{ user.job }}">
     </div>
     <div class="mb-3">
       <label for="bio" class="form-label">Bio</label>
@@ -64,4 +84,11 @@
     </div>
   </form>
 </div>
+{{/block}}
+
+{{block 'footer'}}
+<script src="https://cdn.bootcdn.net/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
+<script>
+document.querySelector('#birthday').flatpickr()
+</script>
 {{/block}}

@@ -6,6 +6,8 @@ declare type User = {
   email: string
   gender: number
   password: string
+  phone: number
+  position: string
   username: string
 }
 

@@ -160,6 +160,7 @@ export default class UserCtrl {
 
   static async getUserProfile(ctx: Context, next: Next) {
     const { err, user } = await UserCtrl.getCurrentUser(ctx, next)
+    console.log('user', user)
 
     if (err) {
       ctx.status = 500
@@ -186,9 +187,18 @@ export default class UserCtrl {
       let newUser
       const { _id, gender, password, ...rest } = ctx.request.body as User
       if (password.trim()) {
-        newUser = { gender: Number(gender), password: md5(password), ...rest }
+        newUser = {
+          gender: Number(gender),
+          password: md5(password),
+          updateTime: Date.now(),
+          ...rest
+        }
       } else {
-        newUser = { gender: Number(gender), ...rest }
+        newUser = {
+          gender: Number(gender),
+          updateTime: Date.now(),
+          ...rest
+        }
       }
       await UserModel.findByIdAndUpdate(_id, { $set: { ...newUser } })
       ctx.redirect('/user')
