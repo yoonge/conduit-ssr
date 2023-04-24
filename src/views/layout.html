@@ -33,8 +33,9 @@
             {{else}}
               class="nav-link"
             {{/if}}
-          >Home</a>
+          >Homepage</a>
         </li>
+        {{if user}}
         <li class="nav-item">
           <a
             href="/profile"
@@ -47,14 +48,15 @@
         </li>
         <li class="nav-item">
           <a
-            href="/myTopic"
-            {{if (pathname === '/myTopic')}}
+            href="/myTopics"
+            {{if (pathname === '/myTopics')}}
               class="nav-link active"
             {{else}}
               class="nav-link"
             {{/if}}
-          >My Topic</a>
+          >My Topics</a>
         </li>
+        {{/if}}
       </ul>
       <div class="d-flex login">
         {{if !user}}
@@ -68,7 +70,7 @@
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item mb-1" href="/profile">Profile</a></li>
-              <li><a class="dropdown-item mb-1" href="/myTopic">My Topic</a></li>
+              <li><a class="dropdown-item mb-1" href="/myTopics">My Topics</a></li>
               <li><a class="dropdown-item mb-1" href="/topic/post">New Topic</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>

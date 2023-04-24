@@ -1,0 +1,28 @@
+<div class="text-end">
+  <a href="/topic/post" class="btn btn-dark">New Topic</a>
+</div>
+
+<ul class="nav nav-tabs mb-3">
+  <li class="nav-item">
+    <a
+      href="/"
+      {{if pathname === '/'}}
+        class="nav-link active"
+      {{else}}
+        class="nav-link"
+      {{/if}}
+    >All Topics</a>
+  </li>
+  {{if user}}
+  <li class="nav-item">
+    <a
+      href="/myTopics"
+      {{if pathname === '/myTopics'}}
+        class="nav-link active"
+      {{else}}
+        class="nav-link"
+      {{/if}}
+    >My Topics</a>
+  </li>
+  {{/if}}
+</ul>

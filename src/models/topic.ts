@@ -1,3 +1,5 @@
+import { Types } from 'mongoose'
+
 import mongoose from './db.js'
 
 const TopicSchema = new mongoose.Schema({
@@ -11,10 +13,9 @@ const TopicSchema = new mongoose.Schema({
     required: true,
     trim: true
   },
-  userId: {
-    type: String,
-    required: true,
-    trim: true
+  user: {
+    type: Types.ObjectId,
+    ref: 'User'
   },
   comment: {
     type: Number,

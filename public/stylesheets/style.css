@@ -74,6 +74,7 @@ a {
 .topicList .updateTime {
   min-width: 96px;
   text-align: right;
+  white-space: nowrap;
 }
 
 .flex-shrink-0 {
