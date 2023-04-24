@@ -18,6 +18,10 @@ export default async (ctx: Context, next: Next) => {
     await next()
   } catch (err) {
     console.error('err', err)
+    if (err instanceof jwt.TokenExpiredError) {
+      ctx.cookies.set('cuid', null)
+      ctx.cookies.set('token', null)
+    }
     ctx.status = 401
     await ctx.render('error', {
       msg: 'Unauthorized.',

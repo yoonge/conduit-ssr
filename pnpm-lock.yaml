@@ -46,6 +46,9 @@ dependencies:
   mongoose:
     specifier: ^7.0.3
     version: registry.npmmirror.com/mongoose@7.0.3
+  timeago.js:
+    specifier: ^4.0.2
+    version: registry.npmmirror.com/timeago.js@4.0.2
 
 devDependencies:
   '@types/apidoc':
@@ -5637,6 +5640,12 @@ packages:
     name: text-table
     version: 0.2.0
     dev: true
+
+  registry.npmmirror.com/timeago.js@4.0.2:
+    resolution: {integrity: sha512-a7wPxPdVlQL7lqvitHGGRsofhdwtkoSXPGATFuSOA2i1ZNQEPLrGnj68vOp2sOJTCFAQVXPeNMX/GctBaO9L2w==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/timeago.js/-/timeago.js-4.0.2.tgz}
+    name: timeago.js
+    version: 4.0.2
+    dev: false
 
   registry.npmmirror.com/timed-out@4.0.1:
     resolution: {integrity: sha512-G7r3AhovYtr5YKOWQkta8RKAPb+J9IsO4uVmzjl8AZwfhs8UcUwTiD6gcJYSgOtzyjvQKrKYn41syHbUWMkafA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/timed-out/-/timed-out-4.0.1.tgz}

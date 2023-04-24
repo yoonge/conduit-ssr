@@ -1,0 +1,26 @@
+{{extend 'layout.html'}}
+
+{{block 'content'}}
+<div class="newTopic">
+  <h2>{{ title }}</h2>
+  <h4><img src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="48" height="48"></h4>
+  <form action="/topic/post" method="post">
+    <input type="hidden" name="_id" value="{{ user._id.toString() }}">
+    <div class="mb-3">
+      <label for="nickname" class="form-label">Author</label>
+      <input type="text" class="form-control" id="nickname" name="nickname" disabled value="{{ user.nickname }}">
+    </div>
+    <div class="mb-3">
+      <label for="title" class="form-label">Title</label>
+      <input type="text" class="form-control" id="title" name="title" placeholder="What's this topic about">
+    </div>
+    <div class="mb-3">
+      <label for="content" class="form-label">Content</label>
+      <textarea class="form-control" id="content" name="content" cols="30" rows="10" placeholder="Write your topic content here"></textarea>
+    </div>
+    <div class="mb-3">
+      <button type="submit" class="btn btn-dark">Post</button>
+    </div>
+  </form>
+</div>
+{{/block}}

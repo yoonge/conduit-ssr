@@ -39,7 +39,8 @@
     "koa-session": "^6.4.0",
     "koa-static": "^5.0.0",
     "md5": "^2.3.0",
-    "mongoose": "^7.0.3"
+    "mongoose": "^7.0.3",
+    "timeago.js": "^4.0.2"
   },
   "devDependencies": {
     "@types/apidoc": "^0.50.0",

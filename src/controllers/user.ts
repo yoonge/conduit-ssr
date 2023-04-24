@@ -160,7 +160,7 @@ export default class UserCtrl {
 
   static async getUserProfile(ctx: Context, next: Next) {
     const { err, user } = await UserCtrl.getCurrentUser(ctx, next)
-    console.log('user', user)
+    // console.log('user', user)
 
     if (err) {
       ctx.status = 500
@@ -175,7 +175,7 @@ export default class UserCtrl {
     }
 
     ctx.status = 200
-    await ctx.render('user', {
+    await ctx.render('profile', {
       title: 'Profile Settings',
       msg: 'User query succeeded.',
       user
@@ -201,7 +201,7 @@ export default class UserCtrl {
         }
       }
       await UserModel.findByIdAndUpdate(_id, { $set: { ...newUser } })
-      ctx.redirect('/user')
+      ctx.redirect('/profile')
     } catch (err) {
       ctx.status = 500
       await ctx.render('error', {

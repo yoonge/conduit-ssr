@@ -26,10 +26,34 @@
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav me-auto mb-2 mb-lg-0">
         <li class="nav-item">
-          <a {{if (pathname == '/')}}class="nav-link active"{{else}}class="nav-link"{{/if}} href="/">Home</a>
+          <a
+            href="/"
+            {{if (pathname === '/' || pathname.indexOf('/topic') === 0)}}
+              class="nav-link active"
+            {{else}}
+              class="nav-link"
+            {{/if}}
+          >Home</a>
         </li>
         <li class="nav-item">
-          <a {{if (pathname.indexOf('/user') == 0)}}class="nav-link active"{{else}}class="nav-link"{{/if}} href="/user">Profile</a>
+          <a
+            href="/profile"
+            {{if (pathname === '/profile')}}
+              class="nav-link active"
+            {{else}}
+              class="nav-link"
+            {{/if}}
+          >Profile</a>
+        </li>
+        <li class="nav-item">
+          <a
+            href="/myTopic"
+            {{if (pathname === '/myTopic')}}
+              class="nav-link active"
+            {{else}}
+              class="nav-link"
+            {{/if}}
+          >My Topic</a>
         </li>
       </ul>
       <div class="d-flex login">
@@ -43,7 +67,9 @@
               <img src="{{ user.avatar }}" alt="Avatar" title="{{ user.nickname }}" class="avatar">{{ user.nickname }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
-              <li><a class="dropdown-item" href="/user">Profile</a></li>
+              <li><a class="dropdown-item mb-1" href="/profile">Profile</a></li>
+              <li><a class="dropdown-item mb-1" href="/myTopic">My Topic</a></li>
+              <li><a class="dropdown-item mb-1" href="/topic/post">New Topic</a></li>
               <li><hr class="dropdown-divider"></li>
               <li>
                 <a class="dropdown-item" href="">

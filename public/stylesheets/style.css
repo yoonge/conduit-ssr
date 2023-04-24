@@ -62,13 +62,34 @@ a {
   padding: 24px 36px;
 }
 
-.profile {
-  max-width: 640px;
+.content .nav-tabs {
+  font-size: 22px;
+}
+
+.topicList a {
+  color: #373a3c;
+  text-decoration: none;
+}
+
+.topicList .updateTime {
+  min-width: 96px;
+  text-align: right;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+.profile,
+.newTopic {
+  max-width: 800px;
   margin: 0 auto;
 }
 
 .profile h2,
-.profile h4 {
+.profile h4,
+.newTopic h2,
+.newTopic h4 {
   text-align: center;
 }
 

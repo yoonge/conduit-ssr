@@ -55,7 +55,7 @@ const UserSchema = new mongoose.Schema({
   status: {
     type: Number,
     default: 1,
-    enum: [-1, 0, 1] // Ban, Mute，Normal
+    enum: [-1, 0, 1, 2] // Ban, Mute，Normal, Admin
   },
   createTime: {
     type: Date,
