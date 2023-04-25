@@ -33,26 +33,35 @@
 {{block 'footer'}}
 <script src="https://cdn.bootcdn.net/ajax/libs/vditor/3.9.2/index.min.js"></script>
 <script>
-new Vditor('vditor', {
-  // icon: 'material',
-  blur(val) {
-    document.querySelector('#content').value = val
-  },
-  input(val) {
-    document.querySelector('#content').value = val
-  },
-  minHeight: 320,
-  placeholder: 'Write your topic content here (in markdown)',
-  // theme: 'dark',
-  toolbar: [
-    'emoji', 'headings', 'bold', 'italic', 'strike', '|', 'line', 'quote', 'list', 'ordered-list', 'check', 'outdent','indent', 'code', 'inline-code', 'insert-after', 'insert-before', 'undo', 'redo',
-    // 'upload',
-    'link', 'table',
-    // 'record',
-    'edit-mode', 'both', 'preview', 'fullscreen', 'outline',
-    // 'code-theme', 'content-theme',
-    // 'export', 'devtools', 'info', 'help', 'br'
-  ]
-})
+  new Vditor('vditor', {
+    blur(val) {
+      document.querySelector('#content').value = val
+    },
+    cache: { enable: false },
+    input(val) {
+      document.querySelector('#content').value = val
+    },
+    lang: 'en_US',
+    minHeight: 480,
+    placeholder: 'Write your topic content here (in markdown)',
+    preview: {
+      actions: [
+        'desktop', 'tablet', 'mobile',
+        // 'mp-wechat', 'zhihu'
+      ]
+    },
+    // theme: 'dark',
+    toolbar: [
+      'emoji', 'headings', 'bold', 'italic', 'strike', '|', 'line', 'quote', 'list', 'ordered-list', 'check', 'outdent','indent', 'code', 'inline-code', '|',
+      // 'insert-after', 'insert-before',
+      'undo', 'redo', '|',
+      // 'upload',
+      'link', 'table', '|',
+      // 'record',
+      'edit-mode', 'both', 'preview', 'fullscreen', 'outline',
+      // 'code-theme', 'content-theme',
+      // 'export', 'devtools', 'info', 'help', 'br'
+    ]
+  })
 </script>
 {{/block}}
