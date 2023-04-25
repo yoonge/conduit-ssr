@@ -4,10 +4,11 @@
 
 {{include 'tabs.html'}}
 
+{{if formatTopics.length}}
 <div class="topicList list-group">
   {{each formatTopics}}
   <div class="d-flex list-group-item list-group-item-action gap-3">
-    <img src="{{ user.avatar }}" alt="avatar" title="{{ user.nickname }}" width="32" height="32" class="rounded-circle flex-shrink-0">
+    <img src="{{ user.avatar }}" alt="avatar" title="{{ user.nickname }}" width="32" height="32" class="avatar flex-shrink-0">
     <div class="d-flex w-100 justify-content-between">
       <a href="/topic/{{ $value._id }}">
         <h5 class="mb-1">{{ $value.title }}</h5>
@@ -19,4 +20,7 @@
   </div>
   {{/each}}
 </div>
+{{else}}
+<p class="text-muted">Nothing yet... You can create a new topic <a href="/topic/post">HERE</a>.</p>
+{{/if}}
 {{/block}}

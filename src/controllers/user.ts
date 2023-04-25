@@ -2,6 +2,7 @@ import { Context, Next } from 'koa'
 import jwt from 'jsonwebtoken'
 
 import DEFAULT from '../config/default.js'
+import AVATAR  from '../config/avatar.js'
 import UserModel from '../models/user.js'
 import TopicModel from '../models/topic.js'
 import render500 from '../util/500.js'
@@ -175,8 +176,9 @@ export default class UserCtrl {
 
     ctx.status = 200
     await ctx.render('profile', {
-      title: 'Profile Settings',
       msg: 'User query succeeded.',
+      title: 'Profile Settings',
+      AVATAR,
       user
     })
   }

@@ -7,24 +7,17 @@
 {{block 'content'}}
 <div class="profile">
   <h2>{{ title }}</h2>
-  <h4><img src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="48" height="48"></h4>
+  <h4><img class="avatar" src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="48" height="48"></h4>
   <form action="/profile/update" method="post">
     <input type="hidden" name="_id" value="{{ user._id.toString() }}">
     <div class="mb-3">
       <label for="avatar" class="form-label">Avatar</label>
       <select id="avatar" name="avatar" class="form-select">
-        <option value="/images/typescript.svg" {{if (user.avatar === '/images/typescript.svg')}}selected{{/if}}>
-          typescript.svg
+        {{each AVATAR}}
+        <option value="{{ $value.src }}" {{if (user.avatar === $value.src)}}selected{{/if}}>
+          {{ $value.title }}
         </option>
-        <option value="/images/favicon.png" {{if (user.avatar === '/images/favicon.png')}}selected{{/if}}>
-          favicon.png
-        </option>
-        <option value="/images/svelte.svg" {{if (user.avatar === '/images/svelte.svg')}}selected{{/if}}>
-          svelte.svg
-        </option>
-        <option value="/images/vite.svg" {{if (user.avatar === '/images/vite.svg')}}selected{{/if}}>
-          vite.svg
-        </option>
+        {{/each}}
       </select>
     </div>
     <div class="mb-3">
@@ -90,5 +83,8 @@
 <script src="https://cdn.bootcdn.net/ajax/libs/flatpickr/4.6.13/flatpickr.min.js"></script>
 <script>
 document.querySelector('#birthday').flatpickr()
+document.querySelector('#avatar').addEventListener('change', e => {
+  document.querySelector('.profile .avatar').setAttribute('src', e.target.value)
+})
 </script>
 {{/block}}

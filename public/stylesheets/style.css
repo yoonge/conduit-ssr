@@ -53,7 +53,7 @@ a {
 .header .login .avatar {
   width: 20px;
   height: 20px;
-  border-radius: 8px;
+  border-radius: 7.5px;
   margin-top: -3px;
   margin-right: 6px;
 }
@@ -69,6 +69,15 @@ a {
 .topicList a {
   color: #373a3c;
   text-decoration: none;
+}
+
+.topicList .list-group-item {
+  padding-top: 16px;
+  padding-bottom: 16px;
+}
+
+.topicList .avatar {
+  border-radius: 12px;
 }
 
 .topicList .updateTime {
@@ -92,6 +101,20 @@ a {
 .newTopic h2,
 .newTopic h4 {
   text-align: center;
+}
+
+.profile .avatar,
+.newTopic .avatar {
+  border-radius: 16px;
+}
+
+.profile .form-label,
+.newTopic .form-label {
+  font-size: 18px;
+}
+
+.profile .form-select > option {
+  font-size: 18px !important;
 }
 
 .profile .form-radio-control {
