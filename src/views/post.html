@@ -7,7 +7,16 @@
 {{block 'content'}}
 <div class="newTopic">
   <h2>{{ title }}</h2>
-  <h4><img src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="48" height="48"></h4>
+  <h4>
+    <img
+      alt="Avatar"
+      class="avatar"
+      src="{{ user.avatar }}"
+      title="{{ user.username }}"
+      width="48"
+      height="48"
+    >
+  </h4>
   <form action="/topic/post" method="post">
     <input type="hidden" name="user" value="{{ user._id.toString() }}">
     <div class="mb-3">

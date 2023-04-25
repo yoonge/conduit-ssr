@@ -54,9 +54,7 @@ a {
 }
 
 .header .login .avatar {
-  width: 20px;
-  height: 20px;
-  border-radius: 7.5px;
+  border-radius: 5px;
   margin-top: -3px;
   margin-right: 6px;
 }
@@ -80,7 +78,7 @@ a {
 }
 
 .topicList .avatar {
-  border-radius: 12px;
+  border-radius: 8px;
 }
 
 .topicList .updateTime {
@@ -108,7 +106,7 @@ a {
 
 .profile .avatar,
 .newTopic .avatar {
-  border-radius: 16px;
+  border-radius: 12px;
 }
 
 .profile .form-label,

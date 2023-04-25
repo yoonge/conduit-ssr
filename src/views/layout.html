@@ -24,8 +24,8 @@
 >
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
-      <img src="/images/typescript.svg" alt="Logo" title="TypeScript">
-      Message Board SSR
+      <img src="/images/nodejs.ico" alt="Logo" title="Node.js" width="32" height="32">
+      CONDUIT
     </a>
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
@@ -78,7 +78,14 @@
         <form action="/logout" method="post">
           <div class="dropdown">
             <a class="btn btn-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              <img src="{{ user.avatar }}" alt="Avatar" title="{{ user.nickname }}" class="avatar">{{ user.nickname }}
+              <img
+                alt="Avatar"
+                class="avatar"
+                src="{{ user.avatar }}"
+                title="{{ user.nickname }}"
+                width="20"
+                height="20"
+              >{{ user.nickname }}
             </a>
             <ul class="dropdown-menu dropdown-menu-end">
               <li><a class="dropdown-item mb-1" href="/profile">Profile</a></li>
