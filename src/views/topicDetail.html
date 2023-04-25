@@ -1,0 +1,47 @@
+{{extend 'layout.html'}}
+
+{{block 'header'}}
+<div class="topicHeader">
+  <h2>{{ topic?.title }}</h2>
+  <div class="card mt-5">
+    <div class="d-flex justify-content-between">
+      <div class="d-flex align-items-center">
+        <img
+          alt="avatar"
+          class="avatar"
+          src="{{ topic?.user?.avatar }}"
+          title="{{ topic?.user?.username }}"
+          width="32"
+          height="32"
+        >
+      </div>
+      <div>
+        <div class="card-body">
+          <h5 class="card-title">{{ topic?.user?.nickname }}</h5>
+          <p class="card-text">
+            <small class="text-muted">
+              {{ topic?.updateTime?.toLocaleString() }}
+            </small>
+          </p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{{/block}}
+
+{{block 'content'}}
+<div id="topicContent" class="topicContent">
+  <textarea class="form-control" name="content" id="content" style="display: none;">
+    {{ topic?.content }}
+  </textarea>
+</div>
+{{/block}}
+
+{{block 'footer'}}
+<script src="https://cdn.bootcdn.net/ajax/libs/vditor/3.9.2/index.min.js"></script>
+<script>
+  const content = document.querySelector('#content').value
+  Vditor.preview(document.querySelector('#topicContent'), content)
+</script>
+{{/block}}

@@ -38,6 +38,34 @@ export default class TopicCtrl {
     }
   }
 
+  static async detail(ctx: Context, next: Next) {
+    try {
+
+      const { _id } = ctx.params
+      const topic = await TopicModel.findById(_id).populate('user')
+
+      const { user } = await UserCtrl.getCurrentUser(ctx, next)
+      if (!user) {
+        await ctx.render('topicDetail', {
+          msg: 'Topic detail query succeed.',
+          title: 'Topic Detail',
+          topic
+        })
+        return
+      }
+
+      await ctx.render('topicDetail', {
+        msg: 'Topic detail query succeed.',
+        title: 'Topic Detail',
+        topic,
+        user
+      })
+
+    } catch (err) {
+      render500(err as Error, ctx)
+    }
+  }
+
   static async post(ctx: Context, next: Next) {
     const { user } = await UserCtrl.getCurrentUser(ctx, next)
     if (!user) {
@@ -58,13 +86,12 @@ export default class TopicCtrl {
       const newTopic = new TopicModel({
         ...(ctx.request.body as Topic)
       })
+      console.log('newTopic', newTopic)
       await newTopic.save()
       ctx.redirect('/')
 
     } catch (err) {
-
       render500(err as Error, ctx)
-
     }
   }
 }

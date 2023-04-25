@@ -1,5 +1,9 @@
 {{extend 'layout.html'}}
 
+{{block 'head'}}
+<link rel="stylesheet" href="https://cdn.bootcdn.net/ajax/libs/vditor/3.9.2/index.min.css">
+{{/block}}
+
 {{block 'content'}}
 <div class="newTopic">
   <h2>{{ title }}</h2>
@@ -16,11 +20,39 @@
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">Content</label>
-      <textarea class="form-control" id="content" name="content" cols="30" rows="10" placeholder="Write your topic content here"></textarea>
+      <div id="vditor" class="form-control"></div>
+      <textarea class="form-control" id="content" name="content" style="display: none;"></textarea>
     </div>
     <div class="mb-3">
       <button type="submit" class="btn btn-dark">Post</button>
     </div>
   </form>
 </div>
+{{/block}}
+
+{{block 'footer'}}
+<script src="https://cdn.bootcdn.net/ajax/libs/vditor/3.9.2/index.min.js"></script>
+<script>
+new Vditor('vditor', {
+  // icon: 'material',
+  blur(val) {
+    document.querySelector('#content').value = val
+  },
+  input(val) {
+    document.querySelector('#content').value = val
+  },
+  minHeight: 320,
+  placeholder: 'Write your topic content here (in markdown)',
+  // theme: 'dark',
+  toolbar: [
+    'emoji', 'headings', 'bold', 'italic', 'strike', '|', 'line', 'quote', 'list', 'ordered-list', 'check', 'outdent','indent', 'code', 'inline-code', 'insert-after', 'insert-before', 'undo', 'redo',
+    // 'upload',
+    'link', 'table',
+    // 'record',
+    'edit-mode', 'both', 'preview', 'fullscreen', 'outline',
+    // 'code-theme', 'content-theme',
+    // 'export', 'devtools', 'info', 'help', 'br'
+  ]
+})
+</script>
 {{/block}}

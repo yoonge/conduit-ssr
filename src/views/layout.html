@@ -13,8 +13,15 @@
 {{/block}}
 
 <section class="header">
-{{block 'header'}}
-<nav class="navbar navbar-dark navbar-expand-lg bg-dark" data-bs-theme="dark">
+<nav
+  {{if pathname.indexOf('/topicDetail/') === 0}}
+    class="navbar navbar-expand-lg"
+    data-bs-theme="light"
+  {{else}}
+    class="navbar navbar-dark navbar-expand-lg bg-dark"
+    data-bs-theme="dark"
+  {{/if}}
+>
   <div class="container-fluid">
     <a class="navbar-brand" href="/">
       <img src="/images/typescript.svg" alt="Logo" title="TypeScript">
@@ -60,8 +67,13 @@
       </ul>
       <div class="d-flex login">
         {{if !user}}
-        <a href="/login" class="btn btn-outline-light">Login</a>
-        <a href="/register" class="btn btn-light">Register</a>
+          {{if pathname.indexOf('/topicDetail/') === 0}}
+            <a href="/login" class="btn btn-outline-dark">Login</a>
+            <a href="/register" class="btn btn-dark">Register</a>
+          {{else}}
+            <a href="/login" class="btn btn-outline-light">Login</a>
+            <a href="/register" class="btn btn-light">Register</a>
+          {{/if}}
         {{else}}
         <form action="/logout" method="post">
           <div class="dropdown">
@@ -86,6 +98,7 @@
     </div>
   </div>
 </nav>
+{{block 'header'}}
 {{/block}}
 </section>
 

@@ -6,7 +6,7 @@ a {
   color: #00b7ff;
 }
 
-.header .navbar-dark {
+.header .navbar-expand-lg {
   padding: 12px 0;
 }
 
@@ -32,13 +32,16 @@ a {
 }
 
 .header .login .dropdown-toggle {
-  color: #fff;
   font-size: 20px;
   text-decoration: none;
 }
 
 .header .login .dropdown-toggle::after {
   vertical-align: 3px;
+}
+
+.header .navbar-dark .login .dropdown-toggle {
+  color: #fff;
 }
 
 .header .login .dropdown-menu .btn-link {
@@ -59,7 +62,7 @@ a {
 }
 
 .content {
-  padding: 24px 36px;
+  padding: 24px 36px 96px;
 }
 
 .content .nav-tabs {
@@ -92,7 +95,7 @@ a {
 
 .profile,
 .newTopic {
-  max-width: 800px;
+  max-width: 880px;
   margin: 0 auto;
 }
 
@@ -124,4 +127,37 @@ a {
 
 .profile .form-radio-control .form-check-label {
   cursor: pointer;
+}
+
+.newTopic .vditor.form-control {
+  padding: 0;
+}
+
+.topicHeader {
+  color: #fff;
+  background-color: #212529;
+  padding: 36px;
+}
+
+.topicHeader .card {
+  max-width: 172px;
+  border: none;
+  background-color: transparent;
+}
+
+.topicHeader .card .avatar {
+  border-radius: 8px;
+}
+
+.topicHeader .card-body {
+  padding: 8px;
+}
+
+.topicHeader .card-body .card-title {
+  margin-bottom: 3px;
+}
+
+.topicContent {
+  font-size: 18px;
+  line-height: 1.8rem;
 }

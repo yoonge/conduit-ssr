@@ -4,13 +4,13 @@
 
 {{include 'tabs.html'}}
 
-{{if formatTopics.length}}
+{{if formatTopics?.length}}
 <div class="topicList list-group">
   {{each formatTopics}}
   <div class="d-flex list-group-item list-group-item-action gap-3">
     <img src="{{ user.avatar }}" alt="avatar" title="{{ user.nickname }}" width="32" height="32" class="avatar flex-shrink-0">
     <div class="d-flex w-100 justify-content-between">
-      <a href="/topic/{{ $value._id }}">
+      <a href="/topicDetail/{{ $value._id }}">
         <h5 class="mb-1">{{ $value.title }}</h5>
         <p class="mb-3 text-muted">{{ $value.content }}</p>
         <small class="text-muted">{{ $value.comment }} comments.</small>
@@ -21,6 +21,8 @@
   {{/each}}
 </div>
 {{else}}
-<p class="text-muted">Nothing yet... You can create a new topic <a href="/topic/post">HERE</a>.</p>
+<p class="text-muted">
+  Nothing yet... You can create a new topic <a href="/topic/post">HERE</a>.
+</p>
 {{/if}}
 {{/block}}
