@@ -1,3 +1,4 @@
+<html lang="en">
 {{block 'head'}}
 <link
   rel="stylesheet"
@@ -8,12 +9,17 @@
 <link rel="shortcut icon" href="/images/typescript.svg" type="image/x-icon" />
 {{/block}}
 
+{{block 'title'}}
+<title>{{ title }}</title>
+{{/block}}
+
+{{include 'header.html'}}
+
 {{block 'content'}}
 <main class="form-signin w-100 m-auto">
   <form action="/login" method="post">
-    <img class="mb-4" src="/images/typescript.svg" alt="" width="72" height="57" />
-    <!-- <img class="mb-4" src="/images/vite.svg" alt="" width="72" height="57" /> -->
-    <h1 class="h3 mb-3 fw-normal">{{ title }}</h1>
+    <img class="mb-4" src="/images/nodejs.ico" alt="Logo" title="Node.js" height="57" />
+    <!-- <h1 class="h3 mb-3 fw-normal">{{ title }}</h1> -->
 
     <div class="form-floating">
       <input
@@ -41,8 +47,8 @@
     <!-- <div class="checkbox mb-3">
       <label> <input type="checkbox" value="remember-me" /> Remember me </label>
     </div> -->
-    <button class="w-100 btn btn-lg btn-primary" type="submit">Login</button>
-    <p class="mt-4 mb-3">New to MB? <a href="/register">Create an accout</a>.</p>
+    <button class="w-100 btn btn-lg btn-dark" type="submit">Sign In</button>
+    <p class="mt-4 mb-3">Need an accout? <a href="/register">Sign Up</a>.</p>
   </form>
 </main>
 {{/block}}
@@ -50,3 +56,4 @@
 {{block 'footer'}}
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
 {{/block}}
+</html>

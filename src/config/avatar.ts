@@ -12,8 +12,24 @@ export default [
     title: 'Code'
   },
   {
+    src: '/images/coding.ico',
+    title: 'Coding'
+  },
+  {
     src: '/images/eslint.svg',
     title: 'ESLint'
+  },
+  {
+    src: '/images/github.svg',
+    title: 'Github'
+  },
+  {
+    src: '/images/gitlab.svg',
+    title: 'Gitlab'
+  },
+  {
+    src: '/images/gittee.ico',
+    title: 'Gittee'
   },
   {
     src: '/images/joi.png',

@@ -1,9 +1,30 @@
 body {
-  font: 16px 'Lucida Grande', Helvetica, Arial, sans-serif;
+  font: 16px mononoki, Monaco, Consolas, 'Lucida Grande', Helvetica, Arial, sans-serif;
 }
 
-a {
-  color: #00b7ff;
+a,
+.nav-tabs .nav-link {
+  color: #5cb85c;
+}
+
+a:hover,
+.nav-tabs .nav-link:hover {
+  color: #3d8b3d;
+}
+
+.form-check-input {
+  margin-top: 3px;
+}
+
+.form-check-input:checked {
+  border-color: #5cb85c;
+  background-color: #5cb85c;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: #5cb85c;
+  box-shadow: 0 0 0 0.25rem rgba(61, 139, 61, 0.25);
 }
 
 .header .navbar-expand-lg {

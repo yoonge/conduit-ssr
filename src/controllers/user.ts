@@ -14,7 +14,7 @@ import { User } from '../types/user'
 export default class UserCtrl {
   static async register(ctx: Context, next: Next) {
     await ctx.render('register', {
-      title: 'Register'
+      title: 'Sign Up'
     })
   }
 
@@ -47,7 +47,7 @@ export default class UserCtrl {
   static async login(ctx: Context, next: Next) {
     const { email = '' } = ctx.query
     await ctx.render('login', {
-      title: 'Login',
+      title: 'Sign In',
       email
     })
   }
