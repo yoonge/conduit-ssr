@@ -31,7 +31,7 @@ export default async (ctx: Context, next: Next) => {
         stack: JSON.stringify(err),
         status: 401
       },
-      msg: 'Unauthorized.'
+      msg: (err as Error)?.message || 'Unauthorized.'
     })
 
   }

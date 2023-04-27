@@ -21,7 +21,7 @@
             <h5 class="card-title">{{ topic?.user?.nickname }}</h5>
             <p class="card-text">
               <small class="text-muted">
-                {{ topic?.updateTime?.toLocaleString() }}
+                {{ topic?.createTime?.toLocaleString() }}
               </small>
             </p>
           </div>
@@ -35,6 +35,57 @@
 {{block 'content'}}
 <div id="topicContent" class="topicContent">
   <textarea name="content" id="content" style="display: none;">{{ topic?.content }}</textarea>
+</div>
+
+<div class="topicComment">
+  {{if user}}
+  <form class="card" action="/topic/comment" method="post">
+    <input type="hidden" name="topic" value="{{ topic?._id.toString() }}">
+    <input type="hidden" name="user" value="{{ user?._id.toString() }}">
+    <div class="card-body">
+      <div class="card-text">
+        <textarea class="form-control" name="content" id="content" rows="6"></textarea>
+      </div>
+    </div>
+    <div class="d-flex card-footer justify-content-between text-muted">
+      <div class="commentOwner">
+        <img
+          alt="avatar"
+          class="avatar"
+          src="{{ topic?.user?.avatar }}"
+          title="{{ topic?.user?.username }}"
+          width="24"
+          height="24"
+        >{{ topic?.user?.nickname }}
+      </div>
+      <button class="btn btn-sm btn-dark" type="submit">Post comment</button>
+    </div>
+  </form>
+  {{/if}}
+
+  {{each comments}}
+  <div class="card">
+    <div class="card-body">
+      <div class="card-text"><pre>{{ $value?.content }}</pre></div>
+    </div>
+    <div class="d-flex card-footer justify-content-between text-muted">
+      <div class="commentOwner">
+        <img
+          alt="avatar"
+          class="avatar"
+          src="{{ $value?.user?.avatar }}"
+          title="{{ $value?.user?.username }}"
+          width="24"
+          height="24"
+        >{{
+          $value?.user?.nickname
+        }}<small>{{
+          $value?.createTime?.toLocaleString()
+        }}</small>
+      </div>
+    </div>
+  </div>
+  {{/each}}
 </div>
 {{/block}}
 

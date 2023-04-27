@@ -1,5 +1,6 @@
 body {
   font: 16px mononoki, Monaco, Consolas, 'Lucida Grande', Helvetica, Arial, sans-serif;
+  min-width: 345px;
 }
 
 a,
@@ -34,7 +35,7 @@ a:active,
 .form-control:focus,
 .form-select:focus {
   border-color: #5cb85c;
-  box-shadow: 0 0 0 0.25rem rgba(61, 139, 61, 0.25);
+  box-shadow: 0 0 0 .25rem rgba(61, 139, 61, .25);
 }
 
 .header .container-fluid {
@@ -115,6 +116,8 @@ a:active,
 
 .content {
   flex: 1;
+  width: 0;
+  min-width: 0;
   max-width: 1200;
   padding: 24px 36px 96px;
 }
@@ -129,12 +132,19 @@ a:active,
 }
 
 .topicList .list-group-item {
+  word-break: break-all;
   padding-top: 16px;
   padding-bottom: 16px;
 }
 
 .topicList .avatar {
   border-radius: 8px;
+}
+
+.topicList a.topicSummary {
+  flex: 1;
+  width: 0;
+  min-width: 0;
 }
 
 .topicList .updateTime {
@@ -195,6 +205,7 @@ a:active,
 .topicHeader {
   flex: 1;
   max-width: 1200;
+  word-break: break-all;
   padding: 36px;
 }
 
@@ -219,5 +230,50 @@ a:active,
 .topicContent {
   font-size: 18px;
   line-height: 1.8rem;
+  word-break: break-all;
   padding-top: 12px;
+}
+
+.topicComment {
+  font-size: 16px;
+  line-height: 1.8rem;
+  border-top: 1px solid rgba(0, 0, 0, .176);
+  margin-top: 36px;
+  padding: 36px 48px 0;
+}
+
+@media (max-width: 767.98px) {
+  .topicComment {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .topicComment {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.topicComment .card + .card {
+  margin-top: 24px;
+}
+
+.topicComment .card pre {
+  margin-bottom: 0;
+}
+
+.commentOwner {
+  line-height: 39px;
+}
+
+.commentOwner img {
+  margin-top: -4px;
+  margin-right: 8px;
+}
+
+.commentOwner small {
+  opacity: .75;
+  margin-left: 10px;
 }

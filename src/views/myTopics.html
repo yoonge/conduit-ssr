@@ -10,7 +10,7 @@
   <div class="d-flex list-group-item list-group-item-action gap-3">
     <img src="{{ user.avatar }}" alt="avatar" title="{{ user.nickname }}" width="32" height="32" class="avatar flex-shrink-0">
     <div class="d-flex w-100 justify-content-between">
-      <a href="/topicDetail/{{ $value._id }}">
+      <a href="/topicDetail/{{ $value._id }}" class="topicSummary">
         <h5 class="mb-1">{{ $value.title }}</h5>
         <p class="mb-3 text-muted">{{ $value.content }}</p>
         <small class="text-muted">

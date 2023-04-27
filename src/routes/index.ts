@@ -13,4 +13,6 @@ router.get('/topic/initiate', Authorization, TopicCtrl.initiate)
 
 router.post('/topic/initiate', Authorization, TopicCtrl.doInitiate)
 
+router.post('/topic/comment', Authorization, TopicCtrl.doComment)
+
 export default router

@@ -1,11 +1,14 @@
 import { Context, Next } from 'koa'
+import { Types } from 'mongoose'
 
 import TopicModel from '../models/topic.js'
+import CommentModel from '..//models/comment.js'
 import UserCtrl from './user.js'
 import render500 from '../util/500.js'
 import format from '../util/format.js'
 
 import { Topic } from '../types/topic'
+import { Comment } from '../types/comment'
 
 export default class TopicCtrl {
   static async index(ctx: Context, next: Next) {
@@ -43,12 +46,14 @@ export default class TopicCtrl {
 
       const { _id } = ctx.params
       const topic = await TopicModel.findById(_id).populate('user')
+      const comments = await TopicCtrl.getComments(ctx, next, _id)
 
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
         await ctx.render('topicDetail', {
           msg: 'Topic detail query succeed.',
           title: 'Topic Detail',
+          comments,
           topic
         })
         return
@@ -57,6 +62,7 @@ export default class TopicCtrl {
       await ctx.render('topicDetail', {
         msg: 'Topic detail query succeed.',
         title: 'Topic Detail',
+        comments,
         topic,
         user
       })
@@ -89,6 +95,38 @@ export default class TopicCtrl {
       console.log('newTopic', newTopic)
       await newTopic.save()
       ctx.redirect('/')
+
+    } catch (err) {
+      render500(err as Error, ctx)
+    }
+  }
+
+  static async getComments(ctx: Context, next: Next, topicId: Types.ObjectId) {
+    try {
+      return await CommentModel.find({ topic: topicId }).populate('user')
+    } catch (err) {
+      render500(err as Error, ctx)
+    }
+  }
+
+  static async doComment(ctx: Context, next: Next) {
+    try {
+
+      const { content, topic } = ctx.request.body as Comment
+      if (content.trim()) {
+        const newComment = new CommentModel({
+          ...(ctx.request.body as Comment)
+        })
+
+        await newComment.save()
+        await TopicModel.findByIdAndUpdate(topic, {
+          $inc: { comment: 1 },
+          $set: { updateTime: Date.now() }
+        })
+        ctx.redirect(`/topicDetail/${topic}`)
+      } else {
+        ctx.throw(500, 'Comment should not be empty.')
+      }
 
     } catch (err) {
       render500(err as Error, ctx)

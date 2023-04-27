@@ -7,6 +7,6 @@ export default async (err: Error, ctx: Context) => {
       stack: JSON.stringify(err),
       status: 500
     },
-    msg: 'Internal Server Error.'
+    msg: err?.message || 'Internal Server Error.'
   })
 }
