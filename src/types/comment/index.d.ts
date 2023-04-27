@@ -1,5 +1,3 @@
-import { Types } from 'mongoose'
-
 declare type Comment = {
   _id: string
   content: string

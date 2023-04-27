@@ -1,0 +1,30 @@
+{{if formatTopics?.length}}
+<div class="topicList list-group">
+  {{each formatTopics}}
+  <div class="d-flex list-group-item list-group-item-action gap-3">
+    <img src="{{ $value.user.avatar }}" alt="avatar" title="{{ $value.user.nickname }}" width="32" height="32" class="avatar flex-shrink-0">
+    <div class="d-flex w-100 justify-content-between">
+      <a href="/topicDetail/{{ $value._id }}" class="topicSummary">
+        <h5 class="mb-1">{{ $value.title }}</h5>
+        <p class="mb-4 text-muted">{{ $value.content }}</p>
+        <small class="text-muted">
+          {{ $value.comment }} comment{{if $value.comment > 1}}s{{/if}}.
+        </small>
+      </a>
+      <div class="favorite d-flex flex-column justify-content-between align-items-end">
+        <button class="btn btn-sm btn-outline-success">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
+            <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
+          </svg> 0
+        </button>
+        <small class="updateTime text-muted">{{ $value.updateTimeStr }}</small>
+      </div>
+    </div>
+  </div>
+  {{/each}}
+</div>
+{{else}}
+<div class="noTopic text-muted">
+  Nothing yet... You can initiate a new topic <a href="/topic/initiate">HERE</a>.
+</div>
+{{/if}}

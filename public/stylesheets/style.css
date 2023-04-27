@@ -23,6 +23,24 @@ a:active,
   color: #3d8b3d;
 }
 
+.btn {
+  border-radius: 0;
+}
+
+.btn-outline-success {
+  color: #5cb85c;
+  border-color: #5cb85c;
+}
+
+.btn-outline-success:focus,
+.btn-outline-success:hover,
+.btn-outline-success:active,
+.btn-outline-success.active {
+  color: #fff;
+  border-color: #3d8b3d;
+  background-color: #3d8b3d;
+}
+
 .form-check-input {
   margin-top: 3px;
 }
@@ -30,6 +48,11 @@ a:active,
 .form-check-input:checked {
   border-color: #5cb85c;
   background-color: #5cb85c;
+}
+
+.form-control,
+.form-select {
+  border-radius: 0 !important;
 }
 
 .form-control:focus,
@@ -79,6 +102,8 @@ a:active,
 
 .header .navbar-light .login .dropdown-toggle {
   color: #666;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .header .navbar-light .login .dropdown-toggle.show,
@@ -90,6 +115,8 @@ a:active,
 
 .header .navbar-dark .login .dropdown-toggle {
   color: #fff;
+  padding-left: 0;
+  padding-right: 0;
 }
 
 .header .navbar-dark .login .dropdown-toggle.show,
@@ -109,7 +136,7 @@ a:active,
 }
 
 .header .login .avatar {
-  border-radius: 5px;
+  border-radius: 2.5px;
   margin-top: -4px;
   margin-right: 6px;
 }
@@ -126,6 +153,24 @@ a:active,
   font-size: 22px;
 }
 
+.content .nav-tabs .nav-link {
+  color: #6c757d;
+  border-width: 0;
+  border-bottom-width: 2px;
+}
+
+.content .nav-tabs .nav-link:focus,
+.content .nav-tabs .nav-link:hover,
+.content .nav-tabs .nav-link:active {
+  color: #373a3c;
+  border-color: transparent;
+}
+
+.content .nav-tabs .nav-link.active {
+  color: #5cb85c;
+  border-color: #5cb85c;
+}
+
 .topicList a {
   color: #373a3c;
   text-decoration: none;
@@ -133,12 +178,19 @@ a:active,
 
 .topicList .list-group-item {
   word-break: break-all;
-  padding-top: 16px;
-  padding-bottom: 16px;
+  border-radius: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  background-color: transparent;
+  padding: 24px 0;
+}
+
+.topicList .list-group-item:first-child {
+  border-top-width: 0;
 }
 
 .topicList .avatar {
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .topicList a.topicSummary {
@@ -147,10 +199,22 @@ a:active,
   min-width: 0;
 }
 
-.topicList .updateTime {
+.topicList .favorite {
   min-width: 96px;
   text-align: right;
+}
+
+.topicList .favorite .btn svg {
+  margin-top: -2px;
+}
+
+.topicList .updateTime {
+  min-width: 96px;
   white-space: nowrap;
+}
+
+.noTopic {
+  padding: 24px 0;
 }
 
 .flex-shrink-0 {
@@ -172,7 +236,7 @@ a:active,
 
 .profile .avatar,
 .newTopic .avatar {
-  border-radius: 12px;
+  border-radius: 6px;
 }
 
 .profile .form-label,
@@ -216,7 +280,7 @@ a:active,
 }
 
 .topicHeader .card .avatar {
-  border-radius: 8px;
+  border-radius: 4px;
 }
 
 .topicHeader .card-body {
@@ -256,19 +320,35 @@ a:active,
   }
 }
 
+.topicComment .card {
+  border-radius: 0;
+}
+
 .topicComment .card + .card {
-  margin-top: 24px;
+  margin-top: 12px;
 }
 
 .topicComment .card pre {
+  white-space: normal;
+  word-break: break-all;
   margin-bottom: 0;
 }
 
+.topicComment .card-footer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.topicComment .card-footer .btn-sm {
+  height: 31px;
+}
+
 .commentOwner {
-  line-height: 39px;
+  line-height: 31px;
 }
 
 .commentOwner img {
+  border-radius: 3px;
   margin-top: -4px;
   margin-right: 8px;
 }

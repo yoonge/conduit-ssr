@@ -1,30 +1,6 @@
 {{extend 'layout.html'}}
 
 {{block 'content'}}
-
-{{include 'tabs.html'}}
-
-{{if formatTopics?.length}}
-<div class="topicList list-group">
-  {{each formatTopics}}
-  <div class="d-flex list-group-item list-group-item-action gap-3">
-    <img src="{{ $value.user.avatar }}" alt="avatar" title="{{ $value.user.nickname }}" width="32" height="32" class="avatar flex-shrink-0">
-    <div class="d-flex w-100 justify-content-between">
-      <a href="/topicDetail/{{ $value._id }}" class="topicSummary">
-        <h5 class="mb-1">{{ $value.title }}</h5>
-        <p class="mb-3 text-muted">{{ $value.content }}</p>
-        <small class="text-muted">
-          {{ $value.comment }} comment{{if $value.comment > 1}}s{{/if}}.
-        </small>
-      </a>
-      <small class="updateTime text-muted">{{ $value.updateTimeStr }}</small>
-    </div>
-  </div>
-  {{/each}}
-</div>
-{{else}}
-<p class="text-muted">
-  Nothing yet... You can initiate a new topic <a href="/topic/initiate">HERE</a>.
-</p>
-{{/if}}
+  {{include 'tabs.html'}}
+  {{include 'topicList.html'}}
 {{/block}}

@@ -1,13 +1,15 @@
 declare type User = {
   _id: string
-  avatar: string
-  bio: string
-  birthday: string
+  avatar?: string
+  bio?: string
+  birthday?: string
   email: string
-  gender: number
+  favorite?: [Types.ObjectId]
+  gender?: number
+  nickname?: string
   password: string
-  phone: number
-  position: string
+  phone?: number
+  position?: string
   username: string
 }
 

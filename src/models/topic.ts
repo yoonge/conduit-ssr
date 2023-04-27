@@ -21,7 +21,7 @@ const TopicSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
-  like: {
+  favorite: {
     type: Number,
     default: 0
   },

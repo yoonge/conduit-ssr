@@ -221,11 +221,12 @@ export default class UserCtrl {
         return
       }
 
-      const topics = await TopicModel.find({ user: user._id }).sort('-updateTime')
+      const topics = await TopicModel.find({ user: user._id })
+        .populate('user').sort('-updateTime')
       const formatTopics = format(topics)
 
       ctx.status = 200
-      await ctx.render('myTopics', {
+      await ctx.render('index', {
         msg: 'These are all my topics.',
         title: 'My Topics',
         formatTopics,
@@ -233,9 +234,7 @@ export default class UserCtrl {
       })
 
     } catch (err) {
-
       render500(err as Error, ctx)
-
     }
   }
 

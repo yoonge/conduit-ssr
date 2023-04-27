@@ -2,7 +2,7 @@ declare type Topic = {
   _id: string
   comment?: number
   content: string
-  like?: number
+  favorite?: number
   status?: number
   title: string
   updateTime: Date

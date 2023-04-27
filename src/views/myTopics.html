@@ -1,10 +1,14 @@
+<!-- 此文件目前没有用到，待删 -->
+<!-- 此文件目前没有用到，待删 -->
+<!-- 此文件目前没有用到，待删 -->
+
 {{extend 'layout.html'}}
 
 {{block 'content'}}
-
 {{include 'tabs.html'}}
+{{include 'topicList.html'}}
 
-{{if formatTopics?.length}}
+<!-- {{if formatTopics?.length}}
 <div class="topicList list-group">
   {{each formatTopics}}
   <div class="d-flex list-group-item list-group-item-action gap-3">
@@ -12,7 +16,7 @@
     <div class="d-flex w-100 justify-content-between">
       <a href="/topicDetail/{{ $value._id }}" class="topicSummary">
         <h5 class="mb-1">{{ $value.title }}</h5>
-        <p class="mb-3 text-muted">{{ $value.content }}</p>
+        <p class="mb-4 text-muted">{{ $value.content }}</p>
         <small class="text-muted">
           {{ $value.comment }} comment{{if $value.comment > 1}}s{{/if}}.
         </small>
@@ -26,5 +30,5 @@
 <p class="text-muted">
   Nothing yet... You can initiate a new topic <a href="/topic/initiate">HERE</a>.
 </p>
-{{/if}}
+{{/if}} -->
 {{/block}}

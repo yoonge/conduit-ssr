@@ -52,13 +52,13 @@
         <img
           alt="avatar"
           class="avatar"
-          src="{{ topic?.user?.avatar }}"
-          title="{{ topic?.user?.username }}"
+          src="{{ user?.avatar }}"
+          title="{{ user?.username }}"
           width="24"
           height="24"
-        >{{ topic?.user?.nickname }}
+        >{{ user?.nickname }}
       </div>
-      <button class="btn btn-sm btn-dark" type="submit">Post comment</button>
+      <button class="btn btn-sm btn-dark" type="submit">Post Comment</button>
     </div>
   </form>
   {{/if}}

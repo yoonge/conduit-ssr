@@ -1,3 +1,4 @@
+import { Types } from 'mongoose'
 import mongoose from './db.js'
 
 const UserSchema = new mongoose.Schema({
@@ -56,6 +57,10 @@ const UserSchema = new mongoose.Schema({
     type: Number,
     default: 1,
     enum: [-1, 0, 1, 2] // Ban, Mute，Normal, Admin
+  },
+  favorite: {
+    type: [Types.ObjectId],
+    default: []
   },
   createTime: {
     type: Date,
