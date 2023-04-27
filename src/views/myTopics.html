@@ -13,7 +13,9 @@
       <a href="/topicDetail/{{ $value._id }}">
         <h5 class="mb-1">{{ $value.title }}</h5>
         <p class="mb-3 text-muted">{{ $value.content }}</p>
-        <small class="text-muted">{{ $value.comment }} comments.</small>
+        <small class="text-muted">
+          {{ $value.comment }} comment{{if $value.comment > 1}}s{{/if}}.
+        </small>
       </a>
       <small class="updateTime text-muted">{{ $value.updateTimeStr }}</small>
     </div>
@@ -22,7 +24,7 @@
 </div>
 {{else}}
 <p class="text-muted">
-  Nothing yet... You can create a new topic <a href="/topic/post">HERE</a>.
+  Nothing yet... You can initiate a new topic <a href="/topic/initiate">HERE</a>.
 </p>
 {{/if}}
 {{/block}}

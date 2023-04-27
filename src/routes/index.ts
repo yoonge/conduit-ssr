@@ -9,8 +9,8 @@ router.get('/', TopicCtrl.index)
 
 router.get('/topicDetail/:_id', TopicCtrl.detail)
 
-router.get('/topic/post', Authorization, TopicCtrl.post)
+router.get('/topic/initiate', Authorization, TopicCtrl.initiate)
 
-router.post('/topic/post', Authorization, TopicCtrl.doPost)
+router.post('/topic/initiate', Authorization, TopicCtrl.doInitiate)
 
 export default router

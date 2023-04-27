@@ -18,7 +18,7 @@ export default class TopicCtrl {
       if (!user) {
         await ctx.render('index', {
           msg: 'Logged out.',
-          title: 'Message Board SSR',
+          title: 'Welcome',
           formatTopics
         })
         return
@@ -26,7 +26,7 @@ export default class TopicCtrl {
 
       await ctx.render('index', {
         msg: 'Logged in.',
-        title: 'Message Board SSR',
+        title: 'Welcome',
         formatTopics,
         user
       })
@@ -66,21 +66,21 @@ export default class TopicCtrl {
     }
   }
 
-  static async post(ctx: Context, next: Next) {
+  static async initiate(ctx: Context, next: Next) {
     const { user } = await UserCtrl.getCurrentUser(ctx, next)
     if (!user) {
       ctx.redirect('/login')
       return
     }
 
-    await ctx.render('post', {
-      title: 'A New Topic',
-      msg: 'Post a new topic here.',
+    await ctx.render('initiate', {
+      title: 'Initiate a New Topic',
+      msg: 'Initiate a new topic here.',
       user
     })
   }
 
-  static async doPost(ctx: Context, next: Next) {
+  static async doInitiate(ctx: Context, next: Next) {
     try {
 
       const newTopic = new TopicModel({

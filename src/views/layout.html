@@ -4,19 +4,21 @@
   href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css"
 />
 <link rel="stylesheet" href="/stylesheets/style.css" />
-<link rel="shortcut icon" href="/images/typescript.svg" type="image/x-icon" />
+<link rel="shortcut icon" href="/images/nodejs.ico" type="image/x-icon" />
 {{block 'head'}}
 {{/block}}
 
 {{block 'title'}}
-<title>{{ title }}</title>
+<title>{{ title }} · CONDUIT</title>
 {{/block}}
 
 {{include 'header.html'}}
 
-<section class="content">
-{{block 'content'}}
-{{/block}}
+<section class="d-flex justify-content-center contentWrapper">
+  <div class="content">
+  {{block 'content'}}
+  {{/block}}
+  </div>
 </section>
 
 <script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.bundle.min.js"></script>

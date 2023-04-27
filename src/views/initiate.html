@@ -23,7 +23,7 @@
       height="48"
     >
   </h4>
-  <form action="/topic/post" method="post">
+  <form action="/topic/initiate" method="post">
     <input type="hidden" name="user" value="{{ user._id.toString() }}">
     <div class="mb-3">
       <label for="nickname" class="form-label">Initiator</label>
@@ -39,7 +39,7 @@
       <textarea class="form-control" id="content" name="content" style="display: none;"></textarea>
     </div>
     <div class="mb-3">
-      <button type="submit" class="btn btn-dark">Post</button>
+      <button type="submit" class="btn btn-dark">Publish</button>
     </div>
   </form>
 </div>

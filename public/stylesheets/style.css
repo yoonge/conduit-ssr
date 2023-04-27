@@ -3,12 +3,22 @@ body {
 }
 
 a,
+.btn-link,
 .nav-tabs .nav-link {
   color: #5cb85c;
 }
 
+a:focus,
 a:hover,
-.nav-tabs .nav-link:hover {
+a:active,
+.btn.active,
+.btn.show,
+.btn-link:focus,
+.btn-link:hover,
+.btn-link:active,
+.nav-tabs .nav-link:focus,
+.nav-tabs .nav-link:hover,
+.nav-tabs .nav-link:active {
   color: #3d8b3d;
 }
 
@@ -25,6 +35,11 @@ a:hover,
 .form-select:focus {
   border-color: #5cb85c;
   box-shadow: 0 0 0 0.25rem rgba(61, 139, 61, 0.25);
+}
+
+.header .container-fluid {
+  max-width: 1200px;
+  padding: 0 36px;
 }
 
 .header .navbar-expand-lg {
@@ -61,8 +76,26 @@ a:hover,
   vertical-align: 3px;
 }
 
+.header .navbar-light .login .dropdown-toggle {
+  color: #666;
+}
+
+.header .navbar-light .login .dropdown-toggle.show,
+.header .navbar-light .login .dropdown-toggle:focus,
+.header .navbar-light .login .dropdown-toggle:hover,
+.header .navbar-light .login .dropdown-toggle:active {
+  color: #000;
+}
+
 .header .navbar-dark .login .dropdown-toggle {
   color: #fff;
+}
+
+.header .navbar-dark .login .dropdown-toggle.show,
+.header .navbar-dark .login .dropdown-toggle:focus,
+.header .navbar-dark .login .dropdown-toggle:hover,
+.header .navbar-dark .login .dropdown-toggle:active {
+  color: #ccc;
 }
 
 .header .login .dropdown-menu .btn-link {
@@ -76,11 +109,13 @@ a:hover,
 
 .header .login .avatar {
   border-radius: 5px;
-  margin-top: -3px;
+  margin-top: -4px;
   margin-right: 6px;
 }
 
 .content {
+  flex: 1;
+  max-width: 1200;
   padding: 24px 36px 96px;
 }
 
@@ -114,7 +149,7 @@ a:hover,
 
 .profile,
 .newTopic {
-  max-width: 880px;
+  max-width: 960px;
   margin: 0 auto;
 }
 
@@ -152,14 +187,19 @@ a:hover,
   padding: 0;
 }
 
-.topicHeader {
+.topicHeaderWrapper {
   color: #fff;
   background-color: #212529;
+}
+
+.topicHeader {
+  flex: 1;
+  max-width: 1200;
   padding: 36px;
 }
 
 .topicHeader .card {
-  max-width: 172px;
+  max-width: 190px;
   border: none;
   background-color: transparent;
 }
@@ -179,4 +219,5 @@ a:hover,
 .topicContent {
   font-size: 18px;
   line-height: 1.8rem;
+  padding-top: 12px;
 }

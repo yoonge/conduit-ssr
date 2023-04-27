@@ -1,7 +1,7 @@
 <section class="header">
   <nav
     {{if pathname.indexOf('/topicDetail/') === 0}}
-      class="navbar navbar-expand-lg"
+      class="navbar navbar-light navbar-expand-lg bg-light"
       data-bs-theme="light"
     {{else}}
       class="navbar navbar-dark navbar-expand-lg bg-dark"
@@ -10,10 +10,17 @@
   >
     <div class="container-fluid">
       <a class="navbar-brand" href="/">
-        <img src="/images/nodejs.ico" alt="Logo" title="Node.js" width="32" height="32">
-        CONDUIT
+        <img src="/images/nodejs.ico" alt="Logo" title="Node.js" width="32" height="32">CONDUIT
       </a>
-      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+      <button
+        class="navbar-toggler"
+        type="button"
+        data-bs-toggle="collapse"
+        data-bs-target="#navbarSupportedContent"
+        aria-controls="navbarSupportedContent"
+        aria-expanded="false"
+        aria-label="Toggle navigation"
+      >
         <span class="navbar-toggler-icon"></span>
       </button>
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
@@ -76,7 +83,7 @@
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item mb-1" href="/profile">Profile</a></li>
                 <li><a class="dropdown-item mb-1" href="/myTopics">My Topics</a></li>
-                <li><a class="dropdown-item mb-1" href="/topic/post">New Topic</a></li>
+                <li><a class="dropdown-item mb-1" href="/topic/initiate">New Topic</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>
                   <a class="dropdown-item" href="">
