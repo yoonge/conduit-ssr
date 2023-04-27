@@ -56,6 +56,16 @@
               {{/if}}
             >My Topics</a>
           </li>
+          <li class="nav-item">
+            <a
+              href="/myFavorite"
+              {{if (pathname === '/myFavorite')}}
+                class="nav-link active"
+              {{else}}
+                class="nav-link"
+              {{/if}}
+            >My Favorite</a>
+          </li>
           {{/if}}
         </ul>
         <div class="d-flex login">
@@ -83,6 +93,7 @@
               <ul class="dropdown-menu dropdown-menu-end">
                 <li><a class="dropdown-item mb-1" href="/profile">Profile</a></li>
                 <li><a class="dropdown-item mb-1" href="/myTopics">My Topics</a></li>
+                <li><a class="dropdown-item mb-1" href="/myFavorite">My Favorite</a></li>
                 <li><a class="dropdown-item mb-1" href="/topic/initiate">New Topic</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>

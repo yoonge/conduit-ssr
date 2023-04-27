@@ -9,6 +9,7 @@ import render500 from '../util/500.js'
 import format from '../util/format.js'
 import md5 from '../util/md5.js'
 
+import { Topic } from '../types/topic'
 import { User } from '../types/user'
 
 export default class UserCtrl {
@@ -106,6 +107,12 @@ export default class UserCtrl {
       render500(err as Error, ctx)
 
     }
+  }
+
+  static logout(ctx: Context, next: Next) {
+    ctx.cookies.set('cuid', null)
+    ctx.cookies.set('token', null)
+    ctx.redirect('/login')
   }
 
   /**
@@ -238,9 +245,64 @@ export default class UserCtrl {
     }
   }
 
-  static logout(ctx: Context, next: Next) {
-    ctx.cookies.set('cuid', null)
-    ctx.cookies.set('token', null)
-    ctx.redirect('/login')
+  static async getMyFavorite(ctx: Context, next: Next) {
+    try {
+
+      const { user } = await UserCtrl.getCurrentUser(ctx, next)
+      if (!user) {
+        ctx.redirect('/')
+        return
+      }
+
+      const topics = await TopicModel.find({ _id: { $in: user.favorite } })
+        .populate('user').sort('-updateTime')
+      console.log('topics', topics)
+      const formatTopics = format(topics)
+
+      ctx.status = 200
+      await ctx.render('index', {
+        msg: 'These are all my topics.',
+        title: 'My Topics',
+        formatTopics,
+        user
+      })
+
+    } catch (err) {
+      render500(err as Error, ctx)
+    }
+  }
+
+  static async favor(ctx: Context, next: Next) {
+    try {
+
+      const { topicId, userId, flag } = ctx.request.body as any
+      if (flag === 'true') {
+        await TopicModel.findByIdAndUpdate(topicId, { $inc: { favorite: 1 } })
+        await UserModel.findByIdAndUpdate(userId, { $push: { favorite: topicId } })
+        ctx.status = 200
+        ctx.body = {
+          msg: 'Favor succeed.',
+          status: 200
+        }
+      } else if (flag === 'false') {
+        await TopicModel.findByIdAndUpdate(topicId, { $inc: { favorite: -1 } })
+        await UserModel.findByIdAndUpdate(userId, { $pull: { favorite: topicId } })
+        ctx.status = 200
+        ctx.body = {
+          msg: 'Disfavor succeed.',
+          status: 200
+        }
+      }
+
+    } catch (err) {
+      ctx.status = 500
+      ctx.body = {
+        err: {
+          stack: JSON.stringify(err),
+          status: 500
+        },
+        msg: (err as Error)?.message || 'Internal Server Error.'
+      }
+    }
   }
 }

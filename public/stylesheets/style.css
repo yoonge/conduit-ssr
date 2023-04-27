@@ -32,9 +32,7 @@ a:active,
   border-color: #5cb85c;
 }
 
-.btn-outline-success:focus,
 .btn-outline-success:hover,
-.btn-outline-success:active,
 .btn-outline-success.active {
   color: #fff;
   border-color: #3d8b3d;
@@ -126,6 +124,10 @@ a:active,
   color: #ccc;
 }
 
+.header .login .dropdown-menu {
+  border-radius: 0;
+}
+
 .header .login .dropdown-menu .btn-link {
   color: orangered;
   height: 18px;
@@ -150,13 +152,15 @@ a:active,
 }
 
 .content .nav-tabs {
-  font-size: 22px;
+  font-size: 20px;
 }
 
 .content .nav-tabs .nav-link {
   color: #6c757d;
   border-width: 0;
   border-bottom-width: 2px;
+  padding-left: 32px;
+  padding-right: 32px;
 }
 
 .content .nav-tabs .nav-link:focus,
@@ -189,6 +193,10 @@ a:active,
   border-top-width: 0;
 }
 
+.topicList .list-group-item:last-child {
+  border-bottom-width: 0;
+}
+
 .topicList .avatar {
   border-radius: 4px;
 }
@@ -206,6 +214,7 @@ a:active,
 
 .topicList .favorite .btn svg {
   margin-top: -2px;
+  margin-right: 6px;
 }
 
 .topicList .updateTime {

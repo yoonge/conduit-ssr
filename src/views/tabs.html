@@ -26,12 +26,22 @@
       {{/if}}
     >My Topics</a>
   </li>
+  <li class="nav-item">
+    <a
+      href="/myFavorite"
+      {{if pathname === '/myFavorite'}}
+        class="nav-link active"
+      {{else}}
+        class="nav-link"
+      {{/if}}
+    >My Favorite</a>
+  </li>
   {{else}}
   <li class="nav-item">
     <a
       href="/login"
       class="nav-link"
-    >Sign in to see your own topics</a>
+    >Sign in to see your own topics & favorite</a>
   </li>
   {{/if}}
 </ul>

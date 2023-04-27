@@ -12,10 +12,19 @@
         </small>
       </a>
       <div class="favorite d-flex flex-column justify-content-between align-items-end">
-        <button class="btn btn-sm btn-outline-success">
+        <button
+          {{if user && (user?.favorite.indexOf($value._id.toString()) > -1)}}
+            class="btn btn-sm btn-outline-success btnFavor active"
+          {{else}}
+            class="btn btn-sm btn-outline-success btnFavor"
+          {{/if}}
+          type="button"
+        >
+          <input type="hidden" name="currentUserId" value="{{ user?._id.toString() }}">
+          <input type="hidden" name="topicId" value="{{ $value._id.toString() }}">
           <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" fill="currentColor" class="bi bi-heart-fill" viewBox="0 0 16 16">
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
-          </svg> 0
+          </svg><span class="favoriteCount">{{ $value.favorite }}</span>
         </button>
         <small class="updateTime text-muted">{{ $value.updateTimeStr }}</small>
       </div>
@@ -25,6 +34,49 @@
 </div>
 {{else}}
 <div class="noTopic text-muted">
+  {{if (pathname === '/myFavorite')}}
+  Nothing yet... You can find some topics that interest you <a href="/">HERE</a>.
+  {{else}}
   Nothing yet... You can initiate a new topic <a href="/topic/initiate">HERE</a>.
+  {{/if}}
 </div>
 {{/if}}
+
+{{block 'footer'}}
+<script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
+<script type="text/javascript">
+  $('button.btnFavor').click(e => {
+    const btn = e.currentTarget
+    const userId = $($(btn).find('input[name=currentUserId]')[0]).val()
+    if (!userId) {
+      window.location.href = '/login'
+      return
+    }
+
+    let flag = true
+    const cls = btn.classList
+    if (cls.contains('active')) {
+      flag = false
+    }
+    const topicId = $($(btn).find('input[name=topicId]')[0]).val()
+    $.ajax({
+      type: 'post',
+      url: '/favor',
+      data: { flag, userId, topicId }, // Will be converted to string type
+      success(data, status) {
+        if (status === 'success') {
+          const countSpan = $(btn).find('span.favoriteCount')[0]
+          const count = Number($(countSpan).text())
+          if (flag) {
+            $(btn).addClass('active')
+            $(countSpan).text(count + 1)
+          } else {
+            $(btn).removeClass('active')
+            $(countSpan).text(count - 1)
+          }
+        }
+      }
+    })
+  })
+</script>
+{{/block}}
