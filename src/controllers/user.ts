@@ -9,7 +9,6 @@ import render500 from '../util/500.js'
 import format from '../util/format.js'
 import md5 from '../util/md5.js'
 
-import { Topic } from '../types/topic'
 import { User } from '../types/user'
 
 export default class UserCtrl {

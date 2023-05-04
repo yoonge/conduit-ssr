@@ -1,11 +1,13 @@
 import { Context, Next } from 'koa'
 import { Types } from 'mongoose'
 
+import DEFAULT from '../config/default.js'
 import TopicModel from '../models/topic.js'
 import CommentModel from '..//models/comment.js'
 import UserCtrl from './user.js'
 import render500 from '../util/500.js'
 import format from '../util/format.js'
+import pagination from '../util/pagination.js'
 
 import { Topic } from '../types/topic'
 import { Comment } from '../types/comment'
@@ -14,15 +16,21 @@ export default class TopicCtrl {
   static async index(ctx: Context, next: Next) {
     try {
 
-      const topics = await TopicModel.find().populate('user').sort('-updateTime')
+      const { page = '1' } = ctx.query
+      const total = await TopicModel.count()
+      const topics = await TopicModel.find()
+        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user').sort('-updateTime')
       const formatTopics = format(topics)
+      const pageList = pagination('/', DEFAULT.PAGE_SIZE, total, Number(page))
 
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
         await ctx.render('index', {
           msg: 'Logged out.',
           title: 'Welcome',
-          formatTopics
+          formatTopics,
+          pageList
         })
         return
       }
@@ -31,6 +39,7 @@ export default class TopicCtrl {
         msg: 'Logged in.',
         title: 'Welcome',
         formatTopics,
+        pageList,
         user
       })
 

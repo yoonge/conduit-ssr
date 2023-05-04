@@ -42,6 +42,14 @@
 </div>
 {{/if}}
 
+{{if pageList}}
+<nav>
+  <ul class="pagination">
+    {{@ pageList }}
+  </ul>
+</nav>
+{{/if}}
+
 {{block 'footer'}}
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
