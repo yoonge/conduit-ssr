@@ -17,12 +17,12 @@ router.post('/logout', UserCtrl.logout)
 
 router.get('/myTopics', Authorization, UserCtrl.getMyTopics)
 
-router.get('/myFavorite', Authorization, UserCtrl.getMyFavorite)
+router.get('/myFavorites', Authorization, UserCtrl.getMyFavorites)
 
 router.post('/favor', Authorization, UserCtrl.favor)
 
-router.get('/profile', Authorization, UserCtrl.getUserProfile)
+router.get('/settings', Authorization, UserCtrl.getUserSettings)
 
-router.post('/profile/update', Authorization, UserCtrl.updateUserProfile)
+router.post('/settings/update', Authorization, UserCtrl.updateUserSettings)
 
 export default router

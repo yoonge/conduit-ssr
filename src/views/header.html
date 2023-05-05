@@ -38,16 +38,6 @@
           {{if user}}
           <li class="nav-item">
             <a
-              href="/profile"
-              {{if (pathname === '/profile')}}
-                class="nav-link active"
-              {{else}}
-                class="nav-link"
-              {{/if}}
-            >Profile</a>
-          </li>
-          <li class="nav-item">
-            <a
               href="/myTopics"
               {{if (pathname === '/myTopics')}}
                 class="nav-link active"
@@ -58,13 +48,23 @@
           </li>
           <li class="nav-item">
             <a
-              href="/myFavorite"
-              {{if (pathname === '/myFavorite')}}
+              href="/myFavorites"
+              {{if (pathname === '/myFavorites')}}
                 class="nav-link active"
               {{else}}
                 class="nav-link"
               {{/if}}
-            >MyFavorite</a>
+            >MyFavorites</a>
+          </li>
+          <li class="nav-item">
+            <a
+              href="/settings"
+              {{if (pathname === '/settings')}}
+                class="nav-link active"
+              {{else}}
+                class="nav-link"
+              {{/if}}
+            >Settings</a>
           </li>
           {{/if}}
         </ul>
@@ -91,9 +91,9 @@
                 >{{ user.nickname }}
               </a>
               <ul class="dropdown-menu dropdown-menu-end">
-                <li><a class="dropdown-item mb-1" href="/profile">Profile</a></li>
+                <li><a class="dropdown-item mb-1" href="/settings">Settings</a></li>
                 <li><a class="dropdown-item mb-1" href="/myTopics">MyTopics</a></li>
-                <li><a class="dropdown-item mb-1" href="/myFavorite">MyFavorite</a></li>
+                <li><a class="dropdown-item mb-1" href="/myFavorites">MyFavorites</a></li>
                 <li><a class="dropdown-item mb-1" href="/topic/initiate">New Topic</a></li>
                 <li><hr class="dropdown-divider"></li>
                 <li>

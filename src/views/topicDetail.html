@@ -37,6 +37,7 @@
   <textarea name="content" id="content" style="display: none;">{{ topic?.content }}</textarea>
 </div>
 
+{{if (user || comments?.length)}}
 <div class="topicComment">
   {{if user}}
   <form class="card" action="/topic/comment" method="post">
@@ -87,6 +88,7 @@
   </div>
   {{/each}}
 </div>
+{{/if}}
 {{/block}}
 
 {{block 'footer'}}

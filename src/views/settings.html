@@ -5,10 +5,10 @@
 {{/block}}
 
 {{block 'content'}}
-<div class="profile">
+<div class="settings">
   <h2>{{ title }}</h2>
   <h4><img class="avatar" src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="48" height="48"></h4>
-  <form action="/profile/update" method="post">
+  <form action="/settings/update" method="post">
     <input type="hidden" name="_id" value="{{ user._id.toString() }}">
     <div class="mb-3">
       <label for="avatar" class="form-label">Avatar</label>
@@ -84,7 +84,7 @@
 <script>
 document.querySelector('#birthday').flatpickr()
 document.querySelector('#avatar').addEventListener('change', e => {
-  document.querySelector('.profile .avatar').setAttribute('src', e.target.value)
+  document.querySelector('.settings .avatar').setAttribute('src', e.target.value)
 })
 </script>
 {{/block}}

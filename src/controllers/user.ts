@@ -172,9 +172,8 @@ export default class UserCtrl {
     }
   }
 
-  static async getUserProfile(ctx: Context, next: Next) {
+  static async getUserSettings(ctx: Context, next: Next) {
     const { err, user } = await UserCtrl.getCurrentUser(ctx, next)
-    // console.log('user', user)
 
     if (err) {
       render500(err as Error, ctx)
@@ -182,15 +181,15 @@ export default class UserCtrl {
     }
 
     ctx.status = 200
-    await ctx.render('profile', {
+    await ctx.render('settings', {
       msg: 'User query succeeded.',
-      title: 'Profile Settings',
+      title: 'User Settings',
       AVATAR,
       user
     })
   }
 
-  static async updateUserProfile(ctx: Context, next: Next) {
+  static async updateUserSettings(ctx: Context, next: Next) {
     try {
 
       let newUser
@@ -210,7 +209,7 @@ export default class UserCtrl {
         }
       }
       await UserModel.findByIdAndUpdate(_id, { $set: { ...newUser } })
-      ctx.redirect('/profile')
+      ctx.redirect('/settings')
 
     } catch (err) {
 
@@ -250,7 +249,7 @@ export default class UserCtrl {
     }
   }
 
-  static async getMyFavorite(ctx: Context, next: Next) {
+  static async getMyFavorites(ctx: Context, next: Next) {
     try {
 
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
@@ -265,7 +264,7 @@ export default class UserCtrl {
         .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
         .populate('user').sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination('/myFavorite', DEFAULT.PAGE_SIZE, total, Number(page))
+      const pageList = pagination('/myFavorites', DEFAULT.PAGE_SIZE, total, Number(page))
 
       ctx.status = 200
       await ctx.render('index', {

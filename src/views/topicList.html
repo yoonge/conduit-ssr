@@ -26,7 +26,7 @@
             <path fill-rule="evenodd" d="M8 1.314C12.438-3.248 23.534 4.735 8 15-7.534 4.736 3.562-3.248 8 1.314z"/>
           </svg><span class="favoriteCount">{{ $value.favorite }}</span>
         </button>
-        <small class="updateTime text-muted">{{ $value.updateTimeStr }}</small>
+        <small class="updateTime text-muted" title="{{ $value.updateTime.toLocaleString() }}">{{ $value.updateTimeStr }}</small>
       </div>
     </div>
   </div>
