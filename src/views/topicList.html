@@ -43,7 +43,7 @@
 {{/if}}
 
 {{if pageList}}
-<nav>
+<nav class="topicPagination">
   <ul class="pagination">
     {{@ pageList }}
   </ul>
@@ -53,37 +53,53 @@
 {{block 'footer'}}
 <script src="https://cdn.bootcdn.net/ajax/libs/jquery/3.6.4/jquery.min.js"></script>
 <script type="text/javascript">
-  $('button.btnFavor').click(e => {
-    const btn = e.currentTarget
-    const userId = $($(btn).find('input[name=currentUserId]')[0]).val()
-    if (!userId) {
-      window.location.href = '/login'
-      return
-    }
+  $(() => {
+    $('nav.topicPagination').show()
 
-    let flag = true
-    const cls = btn.classList
-    if (cls.contains('active')) {
-      flag = false
-    }
-    const topicId = $($(btn).find('input[name=topicId]')[0]).val()
-    $.ajax({
-      type: 'post',
-      url: '/favor',
-      data: { flag, userId, topicId }, // Will be converted to string type
-      success(data, status) {
-        if (status === 'success') {
-          const countSpan = $(btn).find('span.favoriteCount')[0]
-          const count = Number($(countSpan).text())
-          if (flag) {
-            $(btn).addClass('active')
-            $(countSpan).text(count + 1)
-          } else {
-            $(btn).removeClass('active')
-            $(countSpan).text(count - 1)
+    $('button.btnFavor').on('click', e => {
+      const btn = e.currentTarget
+      const userId = $($(btn).find('input[name=currentUserId]')[0]).val()
+      if (!userId) {
+        window.location.href = '/login'
+        return
+      }
+
+      let flag = true
+      const cls = btn.classList
+      if (cls.contains('active')) {
+        flag = false
+      }
+      const topicId = $($(btn).find('input[name=topicId]')[0]).val()
+      $.ajax({
+        type: 'post',
+        url: '/favor',
+        data: { flag, userId, topicId }, // Will be converted to string type
+        success(data, status) {
+          if (status === 'success') {
+            const countSpan = $(btn).find('span.favoriteCount')[0]
+            const count = Number($(countSpan).text())
+            if (flag) {
+              $(btn).addClass('active')
+              $(countSpan).text(count + 1)
+            } else {
+              $(btn).removeClass('active')
+              $(countSpan).text(count - 1)
+            }
           }
         }
-      }
+      })
+    })
+
+    $('a.page-prev').on('click', e => {
+      e.preventDefault()
+      const current = Number(e.currentTarget.href.split('#')[1])
+      window.location.href = `${window.location.pathname}?page=${current - 1}`
+    })
+
+    $('a.page-next').on('click', e => {
+      e.preventDefault()
+      const current = Number(e.currentTarget.href.split('#')[1])
+      window.location.href = `${window.location.pathname}?page=${current + 1}`
     })
   })
 </script>

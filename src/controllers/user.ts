@@ -8,6 +8,7 @@ import TopicModel from '../models/topic.js'
 import render500 from '../util/500.js'
 import format from '../util/format.js'
 import md5 from '../util/md5.js'
+import pagination from '../util/pagination.js'
 
 import { User } from '../types/user'
 
@@ -227,15 +228,20 @@ export default class UserCtrl {
         return
       }
 
+      const { page = '1' } = ctx.query
+      const total = await TopicModel.find({ user: user._id }).count()
       const topics = await TopicModel.find({ user: user._id })
+        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
         .populate('user').sort('-updateTime')
       const formatTopics = format(topics)
+      const pageList = pagination('/myTopics', DEFAULT.PAGE_SIZE, total, Number(page))
 
       ctx.status = 200
       await ctx.render('index', {
         msg: 'These are all my topics.',
         title: 'My Topics',
         formatTopics,
+        pageList,
         user
       })
 
@@ -253,16 +259,20 @@ export default class UserCtrl {
         return
       }
 
+      const { page = '1' } = ctx.query
+      const total = await TopicModel.find({ _id: { $in: user.favorite } }).count()
       const topics = await TopicModel.find({ _id: { $in: user.favorite } })
+        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
         .populate('user').sort('-updateTime')
-      console.log('topics', topics)
       const formatTopics = format(topics)
+      const pageList = pagination('/myFavorite', DEFAULT.PAGE_SIZE, total, Number(page))
 
       ctx.status = 200
       await ctx.render('index', {
         msg: 'These are all my topics.',
         title: 'My Topics',
         formatTopics,
+        pageList,
         user
       })
 
