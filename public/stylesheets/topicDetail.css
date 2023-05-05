@@ -1,0 +1,96 @@
+.topicHeaderWrapper {
+  color: #fff;
+  background-color: #212529;
+}
+
+.topicHeader {
+  flex: 1;
+  max-width: 1200;
+  word-break: break-all;
+  padding: 36px;
+}
+
+.topicHeader .card {
+  max-width: 190px;
+  border: none;
+  background-color: transparent;
+}
+
+.topicHeader .card .avatar {
+  border-radius: 4px;
+}
+
+.topicHeader .card-body {
+  padding: 8px;
+}
+
+.topicHeader .card-body .card-title {
+  margin-bottom: 3px;
+}
+
+.topicContent {
+  font-size: 18px;
+  line-height: 1.8rem;
+  word-break: break-all;
+  padding-top: 12px;
+}
+
+.topicComment {
+  font-size: 16px;
+  line-height: 1.8rem;
+  border-top: 1px solid rgba(0, 0, 0, .176);
+  margin-top: 36px;
+  padding: 36px 48px 0;
+}
+
+@media (max-width: 767.98px) {
+  .topicComment {
+    padding-left: 16px;
+    padding-right: 16px;
+  }
+}
+
+@media (max-width: 575.98px) {
+  .topicComment {
+    padding-left: 0;
+    padding-right: 0;
+  }
+}
+
+.topicComment .card {
+  border-radius: 0;
+}
+
+.topicComment .card + .card {
+  margin-top: 12px;
+}
+
+.topicComment .card pre {
+  white-space: normal;
+  word-break: break-all;
+  margin-bottom: 0;
+}
+
+.topicComment .card-footer {
+  padding-top: 5px;
+  padding-bottom: 5px;
+}
+
+.topicComment .card-footer .btn-sm {
+  height: 31px;
+}
+
+.commentOwner {
+  line-height: 31px;
+}
+
+.commentOwner img {
+  border-radius: 3px;
+  margin-top: -4px;
+  margin-right: 8px;
+}
+
+.commentOwner small {
+  opacity: .75;
+  margin-left: 10px;
+}

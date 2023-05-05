@@ -1,0 +1,67 @@
+.topicList a {
+  color: #373a3c;
+  text-decoration: none;
+}
+
+.topicList .list-group-item {
+  word-break: break-all;
+  border-radius: 0;
+  border-left-width: 0;
+  border-right-width: 0;
+  background-color: transparent;
+  padding: 24px 0;
+}
+
+.topicList .list-group-item:first-child {
+  border-top-width: 0;
+}
+
+.topicList .list-group-item:last-child {
+  border-bottom-width: 0;
+}
+
+.topicList .avatar {
+  border-radius: 4px;
+}
+
+.topicList a.topicSummary {
+  flex: 1;
+  width: 0;
+  min-width: 0;
+}
+
+.topicList .favorite {
+  min-width: 96px;
+  text-align: right;
+}
+
+.topicList .favorite .btn svg {
+  margin-top: -2px;
+  margin-right: 6px;
+}
+
+.topicList .updateTime {
+  min-width: 96px;
+  white-space: nowrap;
+}
+
+.noTopic {
+  padding: 24px 0;
+}
+
+.flex-shrink-0 {
+  flex-shrink: 0 !important;
+}
+
+.topicPagination {
+  display: none;
+  margin-top: 36px;
+}
+
+.topicPagination .pagination {
+  flex-wrap: wrap;
+}
+
+.topicPagination .pagination .page-item {
+  margin-bottom: 6px;
+}
