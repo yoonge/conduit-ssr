@@ -1,17 +1,19 @@
 {
   "author": "Yoonge <7884008@qq.com>",
-  "description": "Message Board SSR built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.",
+  "description": "Conduit - A SSR RealWorld example App built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.",
   "keywords": [
     "Art-Template",
+    "Conduit",
     "ESlint",
     "Joi",
     "JWT",
     "Koa2",
     "Prettier",
+    "RealWorld",
     "SSR",
     "TypeScript"
   ],
-  "name": "message-board-ssr",
+  "name": "conduit-ssr",
   "private": true,
   "type": "module",
   "version": "0.1.0",
@@ -43,7 +45,6 @@
     "timeago.js": "^4.0.2"
   },
   "devDependencies": {
-    "@types/apidoc": "^0.50.0",
     "@types/debug": "^4.1.7",
     "@types/jsonwebtoken": "^9.0.1",
     "@types/koa": "^2.13.6",
@@ -56,7 +57,6 @@
     "@types/md5": "^2.3.2",
     "@typescript-eslint/eslint-plugin": "^5.58.0",
     "@typescript-eslint/parser": "^5.58.0",
-    "apidoc": "^0.54.0",
     "eslint": "^8.38.0",
     "eslint-config-prettier": "^8.8.0",
     "nodemon": "^1.19.4",

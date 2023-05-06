@@ -7,9 +7,6 @@
 *.sw?
 
 
-# apidoc
-/docs
-
 
 # cypress
 /cypress/videos/
