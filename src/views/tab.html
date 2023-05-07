@@ -1,0 +1,26 @@
+<div class="text-end">
+  <a href="/topic/initiate" class="btn btn-dark">New Topic</a>
+</div>
+
+<ul class="nav nav-tabs">
+  <li class="nav-item">
+    <a
+      href="/profile"
+      {{if pathname === '/profile'}}
+        class="nav-link active"
+      {{else}}
+        class="nav-link"
+      {{/if}}
+    >Topics</a>
+  </li>
+  <li class="nav-item">
+    <a
+      href="/profile/favorites"
+      {{if pathname === '/profile/favorites'}}
+        class="nav-link active"
+      {{else}}
+        class="nav-link"
+      {{/if}}
+    >Favorites</a>
+  </li>
+</ul>

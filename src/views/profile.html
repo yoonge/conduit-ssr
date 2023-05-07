@@ -1,0 +1,19 @@
+{{extend 'layout.html'}}
+
+{{block 'head'}}
+<link rel="stylesheet" href="/stylesheets/profile.css" />
+{{/block}}
+
+{{block 'header'}}
+<div class="d-flex justify-content-center profileHeaderWrapper">
+  <div class="profileHeader">
+    <h2><img src="{{ user.avatar }}" alt="{{ user.username }}" title="{{ user.nickname }}" /></h2>
+    <h4>{{ user.nickname }}</h4>
+  </div>
+</div>
+{{/block}}
+
+{{block 'content'}}
+  {{include 'tab.html'}}
+  {{include 'topicList.html'}}
+{{/block}}
