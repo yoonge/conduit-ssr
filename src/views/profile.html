@@ -7,8 +7,8 @@
 {{block 'header'}}
 <div class="d-flex justify-content-center profileHeaderWrapper">
   <div class="profileHeader">
-    <h2><img src="{{ user.avatar }}" alt="{{ user.username }}" title="{{ user.nickname }}" /></h2>
-    <h4>{{ user.nickname }}</h4>
+    <h2><img src="{{ user?.avatar }}" alt="{{ user?.username }}" title="{{ user?.nickname }}" /></h2>
+    <h4>{{ user?.nickname }}</h4>
   </div>
 </div>
 {{/block}}

@@ -251,4 +251,8 @@ export default class UserCtrl {
       }
     }
   }
+
+  static async getUserProfile(ctx: Context, next: Next) {
+
+  }
 }

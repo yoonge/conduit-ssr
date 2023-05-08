@@ -25,4 +25,6 @@ router.get('/settings', Authorization, UserCtrl.getUserSettings)
 
 router.post('/settings/update', Authorization, UserCtrl.updateUserSettings)
 
+router.get('/profile', Authorization, UserCtrl.getUserProfile)
+
 export default router
