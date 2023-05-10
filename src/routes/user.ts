@@ -25,6 +25,8 @@ router.get('/settings', Authorization, UserCtrl.getUserSettings)
 
 router.post('/settings/update', Authorization, UserCtrl.updateUserSettings)
 
-router.get('/profile', Authorization, UserCtrl.getUserProfile)
+router.get('/profile/:username', Authorization, UserCtrl.getUserProfile)
+
+router.get('/profile/:username/favorites', Authorization, UserCtrl.getUserFavorites)
 
 export default router

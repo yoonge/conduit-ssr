@@ -253,19 +253,72 @@ export default class UserCtrl {
   }
 
   static async getUserProfile(ctx: Context, next: Next) {
-    const { err, user } = await UserCtrl.getCurrentUser(ctx, next)
+    try {
 
-    if (err) {
+      const { user } = await UserCtrl.getCurrentUser(ctx, next)
+      if (!user) {
+        ctx.redirect('/')
+        return
+      }
+
+      const { username } = ctx.params
+      const theUser = await UserModel.findOne({ username })
+
+      const { page = '1' } = ctx.query
+      const total = await TopicModel.find({ user: theUser?._id }).count()
+      const topics = await TopicModel.find({ user: theUser?._id })
+        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user').sort('-updateTime')
+      const formatTopics = format(topics)
+      const pageList = pagination(`/profile/${theUser?.username}`, DEFAULT.PAGE_SIZE, total, Number(page))
+
+      ctx.status = 200
+      await ctx.render('profile', {
+        msg: `User ${theUser?.nickname}'s topics query succeeded.`,
+        title: `User ${theUser?.nickname}'s Topics`,
+        formatTopics,
+        pageList,
+        theUser,
+        user
+      })
+
+    } catch (err) {
       render500(err as Error, ctx)
-      return
     }
+  }
 
-    ctx.status = 200
-    await ctx.render('profile', {
-      msg: 'User query succeeded.',
-      title: 'User Profile',
-      AVATAR,
-      user
-    })
+  static async getUserFavorites(ctx: Context, next: Next) {
+    try {
+
+      const { user } = await UserCtrl.getCurrentUser(ctx, next)
+      if (!user) {
+        ctx.redirect('/')
+        return
+      }
+
+      const { username } = ctx.params
+      const theUser = await UserModel.findOne({ username })
+
+      const { page = '1' } = ctx.query
+      const total = await TopicModel.find({ _id: { $in: theUser?.favorite } }).count()
+      const topics = await TopicModel.find({ _id: { $in: theUser?.favorite } })
+        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user').sort('-updateTime')
+      const formatTopics = format(topics)
+      const pageList = pagination(`/profile/${theUser?.username}/favorites`, DEFAULT.PAGE_SIZE, total, Number(page))
+
+      ctx.status = 200
+      await ctx.render('profile', {
+        msg: `User ${theUser?.nickname}'s favorites query succeeded.`,
+        title: `User ${theUser?.nickname}'s Favorites`,
+        formatTopics,
+        pageList,
+        theUser,
+        user
+      })
+
+    } catch (err) {
+      render500(err as Error, ctx)
+    }
   }
 }

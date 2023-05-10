@@ -5,8 +5,8 @@
 <ul class="nav nav-tabs">
   <li class="nav-item">
     <a
-      href="/profile"
-      {{if pathname === '/profile'}}
+      href="/profile/{{ theUser?.username }}"
+      {{if pathname === `/profile/${theUser?.username}`}}
         class="nav-link active"
       {{else}}
         class="nav-link"
@@ -15,8 +15,8 @@
   </li>
   <li class="nav-item">
     <a
-      href="/profile/favorites"
-      {{if pathname === '/profile/favorites'}}
+      href="/profile/{{ theUser?.username }}/favorites"
+      {{if pathname === `/profile/${theUser?.username}/favorites`}}
         class="nav-link active"
       {{else}}
         class="nav-link"
