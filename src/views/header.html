@@ -1,6 +1,6 @@
 <section class="header">
   <nav
-    {{if pathname.indexOf('/topicDetail/') === 0}}
+    {{if (pathname.indexOf('/topicDetail/') === 0 || pathname.indexOf('/profile') === 0)}}
       class="navbar navbar-light navbar-expand-lg bg-light"
       data-bs-theme="light"
     {{else}}

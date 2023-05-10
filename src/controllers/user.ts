@@ -253,6 +253,19 @@ export default class UserCtrl {
   }
 
   static async getUserProfile(ctx: Context, next: Next) {
+    const { err, user } = await UserCtrl.getCurrentUser(ctx, next)
 
+    if (err) {
+      render500(err as Error, ctx)
+      return
+    }
+
+    ctx.status = 200
+    await ctx.render('profile', {
+      msg: 'User query succeeded.',
+      title: 'User Profile',
+      AVATAR,
+      user
+    })
   }
 }
