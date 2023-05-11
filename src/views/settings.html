@@ -8,7 +8,7 @@
 {{block 'content'}}
 <div class="settings">
   <h2>{{ title }}</h2>
-  <h4><img class="avatar" src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="48" height="48"></h4>
+  <h4><img class="avatar" src="{{ user.avatar }}" alt="Avatar" title="{{ user.username }}" width="64"></h4>
   <form action="/settings/update" method="post">
     <input type="hidden" name="_id" value="{{ user._id.toString() }}">
     <div class="mb-3">
