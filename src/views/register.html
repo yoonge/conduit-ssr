@@ -2,7 +2,7 @@
 {{block 'head'}}
 <link
   rel="stylesheet"
-  href="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css"
+  href="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/css/bootstrap.min.css"
 />
 <link rel="stylesheet" href="/stylesheets/style.css" />
 <link rel="stylesheet" href="/stylesheets/sign.css" />
@@ -19,7 +19,6 @@
 <main class="form-signin w-100 m-auto">
   <form action="/register" method="post">
     <img class="mb-4" src="/images/nodejs.ico" alt="Logo" title="Node.js" height="57" />
-    <!-- <h1 class="h3 mb-3 fw-normal">{{ title }}</h1> -->
 
     <div class="form-floating">
       <input
@@ -28,6 +27,7 @@
         id="email"
         name="email"
         placeholder="name@example.com"
+        autocomplete="off"
         autofocus
       />
       <label for="email">Email address</label>
@@ -61,6 +61,6 @@
 {{/block}}
 
 {{block 'footer'}}
-<script src="https://cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
+<script src="//cdn.bootcdn.net/ajax/libs/twitter-bootstrap/5.2.3/js/bootstrap.min.js"></script>
 {{/block}}
 </html>

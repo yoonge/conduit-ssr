@@ -20,6 +20,10 @@
   border-bottom-width: 0;
 }
 
+.topicList .list-group-item .text-muted {
+  color: rgba(108, 117, 125, .6) !important;
+}
+
 .topicList .avatar {
   border-radius: 4px;
 }

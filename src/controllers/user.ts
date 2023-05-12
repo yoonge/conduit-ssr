@@ -39,9 +39,7 @@ export default class UserCtrl {
       ctx.redirect(`/login?email=${email}`)
 
     } catch (err) {
-
       render500(err as Error, ctx)
-
     }
   }
 
@@ -88,9 +86,7 @@ export default class UserCtrl {
       ctx.redirect('/')
 
     } catch (err) {
-
       render500(err as Error, ctx)
-
     }
   }
 
@@ -150,9 +146,7 @@ export default class UserCtrl {
       ctx.redirect('/settings')
 
     } catch (err) {
-
       render500(err as Error, ctx)
-
     }
   }
 
