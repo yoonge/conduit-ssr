@@ -1,7 +1,7 @@
 {{extend 'layout.html'}}
 
 {{block 'head'}}
-<link rel="stylesheet" href="//cdn.bootcdn.net/ajax/libs/vditor/3.9.2/index.min.css" />
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor@3.9.2/dist/index.css" />
 <link rel="stylesheet" href="/stylesheets/form.css" />
 <style type="text/css">
 .vditor-reset {
@@ -47,16 +47,14 @@
 {{/block}}
 
 {{block 'footer'}}
-<script src="//cdn.bootcdn.net/ajax/libs/vditor/3.9.2/js/lute/lute.min.js" id="vditorLuteScript"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/vditor/3.9.2/js/i18n/en_US.min.js" id="vditorI18nScripten_US"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/vditor/3.9.2/js/icons/ant.min.js" id="vditorIconScript"></script>
-<script src="//cdn.bootcdn.net/ajax/libs/vditor/3.9.2/index.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/vditor@3.9.2/dist/index.min.js"></script>
 <script>
   new Vditor('vditor', {
     blur(val) {
       document.querySelector('#content').value = val
     },
     cache: { enable: false },
+    cdn: 'https://cdn.jsdelivr.net/npm/vditor@3.9.2',
     input(val) {
       document.querySelector('#content').value = val
     },
