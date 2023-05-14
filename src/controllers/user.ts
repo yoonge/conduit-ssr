@@ -2,7 +2,7 @@ import { Context, Next } from 'koa'
 import jwt from 'jsonwebtoken'
 
 import DEFAULT from '../config/default.js'
-import AVATAR  from '../config/avatar.js'
+import AVATAR from '../config/avatar.js'
 import UserModel from '../models/user.js'
 import TopicModel from '../models/topic.js'
 import render500 from '../util/500.js'
@@ -21,7 +21,6 @@ export default class UserCtrl {
 
   static async doRegister(ctx: Context, next: Next) {
     try {
-
       const { email, username, password } = ctx.request.body as User
       const user = await UserModel.findOne({
         $or: [{ email }, { username }]
@@ -37,7 +36,6 @@ export default class UserCtrl {
       })
       await newUser.save()
       ctx.redirect(`/login?email=${email}`)
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -65,15 +63,10 @@ export default class UserCtrl {
 
       const { _id, username } = user
       const token = await new Promise((resolve, reject) => {
-        jwt.sign(
-          { cuid: _id, username },
-          DEFAULT.JWT_SECRET,
-          { expiresIn: '1h' },
-          (err, token) => {
-            if (err) reject(err)
-            resolve(token)
-          }
-        )
+        jwt.sign({ cuid: _id, username }, DEFAULT.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
+          if (err) reject(err)
+          resolve(token)
+        })
       })
 
       if (!token) {
@@ -84,7 +77,6 @@ export default class UserCtrl {
       ctx.cookies.set('cuid', _id.toString())
       ctx.cookies.set('token', token as string)
       ctx.redirect('/')
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -125,7 +117,6 @@ export default class UserCtrl {
 
   static async updateUserSettings(ctx: Context, next: Next) {
     try {
-
       let newUser
       const { _id, gender, password, ...rest } = ctx.request.body as User
       if (password.trim()) {
@@ -144,7 +135,6 @@ export default class UserCtrl {
       }
       await UserModel.findByIdAndUpdate(_id, { $set: { ...newUser } })
       ctx.redirect('/settings')
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -152,7 +142,6 @@ export default class UserCtrl {
 
   static async getMyTopics(ctx: Context, next: Next) {
     try {
-
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
         ctx.redirect('/')
@@ -162,8 +151,10 @@ export default class UserCtrl {
       const { page = '1' } = ctx.query
       const total = await TopicModel.find({ user: user._id }).count()
       const topics = await TopicModel.find({ user: user._id })
-        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
-        .populate('user').sort('-updateTime')
+        .limit(DEFAULT.PAGE_SIZE)
+        .skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user')
+        .sort('-updateTime')
       const formatTopics = format(topics)
       const pageList = pagination('/myTopics', DEFAULT.PAGE_SIZE, total, Number(page))
 
@@ -175,7 +166,6 @@ export default class UserCtrl {
         pageList,
         user
       })
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -183,7 +173,6 @@ export default class UserCtrl {
 
   static async getMyFavorites(ctx: Context, next: Next) {
     try {
-
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
         ctx.redirect('/')
@@ -193,8 +182,10 @@ export default class UserCtrl {
       const { page = '1' } = ctx.query
       const total = await TopicModel.find({ _id: { $in: user.favorite } }).count()
       const topics = await TopicModel.find({ _id: { $in: user.favorite } })
-        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
-        .populate('user').sort('-updateTime')
+        .limit(DEFAULT.PAGE_SIZE)
+        .skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user')
+        .sort('-updateTime')
       const formatTopics = format(topics)
       const pageList = pagination('/myFavorites', DEFAULT.PAGE_SIZE, total, Number(page))
 
@@ -206,7 +197,6 @@ export default class UserCtrl {
         pageList,
         user
       })
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -214,7 +204,6 @@ export default class UserCtrl {
 
   static async favor(ctx: Context, next: Next) {
     try {
-
       const { topicId, userId, flag } = ctx.request.body as any
       if (flag === 'true') {
         await TopicModel.findByIdAndUpdate(topicId, { $inc: { favorite: 1 } })
@@ -233,7 +222,6 @@ export default class UserCtrl {
           status: 200
         }
       }
-
     } catch (err) {
       ctx.status = 500
       ctx.body = {
@@ -248,7 +236,6 @@ export default class UserCtrl {
 
   static async getUserProfile(ctx: Context, next: Next) {
     try {
-
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
         ctx.redirect('/')
@@ -261,10 +248,17 @@ export default class UserCtrl {
       const { page = '1' } = ctx.query
       const total = await TopicModel.find({ user: theUser?._id }).count()
       const topics = await TopicModel.find({ user: theUser?._id })
-        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
-        .populate('user').sort('-updateTime')
+        .limit(DEFAULT.PAGE_SIZE)
+        .skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user')
+        .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination(`/profile/${theUser?.username}`, DEFAULT.PAGE_SIZE, total, Number(page))
+      const pageList = pagination(
+        `/profile/${theUser?.username}`,
+        DEFAULT.PAGE_SIZE,
+        total,
+        Number(page)
+      )
 
       ctx.status = 200
       await ctx.render('profile', {
@@ -275,7 +269,6 @@ export default class UserCtrl {
         theUser,
         user
       })
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -283,7 +276,6 @@ export default class UserCtrl {
 
   static async getUserFavorites(ctx: Context, next: Next) {
     try {
-
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
         ctx.redirect('/')
@@ -296,10 +288,17 @@ export default class UserCtrl {
       const { page = '1' } = ctx.query
       const total = await TopicModel.find({ _id: { $in: theUser?.favorite } }).count()
       const topics = await TopicModel.find({ _id: { $in: theUser?.favorite } })
-        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
-        .populate('user').sort('-updateTime')
+        .limit(DEFAULT.PAGE_SIZE)
+        .skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user')
+        .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination(`/profile/${theUser?.username}/favorites`, DEFAULT.PAGE_SIZE, total, Number(page))
+      const pageList = pagination(
+        `/profile/${theUser?.username}/favorites`,
+        DEFAULT.PAGE_SIZE,
+        total,
+        Number(page)
+      )
 
       ctx.status = 200
       await ctx.render('profile', {
@@ -310,7 +309,6 @@ export default class UserCtrl {
         theUser,
         user
       })
-
     } catch (err) {
       render500(err as Error, ctx)
     }

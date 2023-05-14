@@ -15,12 +15,13 @@ import { Comment } from '../types/comment'
 export default class TopicCtrl {
   static async index(ctx: Context, next: Next) {
     try {
-
       const { page = '1' } = ctx.query
       const total = await TopicModel.count()
       const topics = await TopicModel.find()
-        .limit(DEFAULT.PAGE_SIZE).skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
-        .populate('user').sort('-updateTime')
+        .limit(DEFAULT.PAGE_SIZE)
+        .skip(DEFAULT.PAGE_SIZE * (Number(page) - 1))
+        .populate('user')
+        .sort('-updateTime')
       const formatTopics = format(topics)
       const pageList = pagination('/', DEFAULT.PAGE_SIZE, total, Number(page))
 
@@ -42,17 +43,13 @@ export default class TopicCtrl {
         pageList,
         user
       })
-
     } catch (err) {
-
       render500(err as Error, ctx)
-
     }
   }
 
   static async detail(ctx: Context, next: Next) {
     try {
-
       const { _id } = ctx.params
       const topic = await TopicModel.findById(_id).populate('user')
       const comments = await TopicCtrl.getComments(ctx, next, _id)
@@ -75,7 +72,6 @@ export default class TopicCtrl {
         topic,
         user
       })
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -97,14 +93,12 @@ export default class TopicCtrl {
 
   static async doInitiate(ctx: Context, next: Next) {
     try {
-
       const newTopic = new TopicModel({
         ...(ctx.request.body as Topic)
       })
       console.log('newTopic', newTopic)
       await newTopic.save()
       ctx.redirect('/')
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -120,7 +114,6 @@ export default class TopicCtrl {
 
   static async doComment(ctx: Context, next: Next) {
     try {
-
       const { content, topic } = ctx.request.body as Comment
       if (content.trim()) {
         const newComment = new CommentModel({
@@ -136,7 +129,6 @@ export default class TopicCtrl {
       } else {
         ctx.throw(500, 'Comment should not be empty.')
       }
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -144,7 +136,6 @@ export default class TopicCtrl {
 
   static async update(ctx: Context, next: Next) {
     try {
-
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
         ctx.redirect('/login')
@@ -160,7 +151,6 @@ export default class TopicCtrl {
         topic,
         user
       })
-
     } catch (err) {
       render500(err as Error, ctx)
     }
@@ -168,13 +158,11 @@ export default class TopicCtrl {
 
   static async doUpdate(ctx: Context, next: Next) {
     try {
-
       const { topicId, title, content } = ctx.request.body as any
       await TopicModel.findByIdAndUpdate(topicId, {
         $set: { title, content, updateTime: Date.now() }
       })
       ctx.redirect(`/topicDetail/${topicId}`)
-
     } catch (err) {
       render500(err as Error, ctx)
     }

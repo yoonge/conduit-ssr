@@ -5,7 +5,6 @@ import DEFAULT from '../config/default.js'
 
 export default async (ctx: Context, next: Next) => {
   try {
-
     const token = ctx.cookies.get('token')
     const decoded = await new Promise((resolve, reject) => {
       jwt.verify(token as string, DEFAULT.JWT_SECRET, (err, decoded) => {
@@ -17,9 +16,7 @@ export default async (ctx: Context, next: Next) => {
     const { cuid } = decoded as jwt.JwtPayload
     ctx.state.cuid = cuid
     await next()
-
   } catch (err) {
-
     console.error('err', err)
     if (err instanceof jwt.TokenExpiredError) {
       ctx.cookies.set('cuid', null)
@@ -33,6 +30,5 @@ export default async (ctx: Context, next: Next) => {
       },
       msg: (err as Error)?.message || 'Unauthorized.'
     })
-
   }
 }

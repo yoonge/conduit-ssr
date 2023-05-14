@@ -19,7 +19,7 @@ const TopicSchema = new mongoose.Schema({
   },
   comment: {
     type: Number,
-    default: 0,
+    default: 0
   },
   favorite: {
     type: Number,

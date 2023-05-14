@@ -22,7 +22,8 @@ const _dirName = dirname(fileURLToPath(import.meta.url))
 onerror(app)
 
 // middlewares
-app.use(
+app
+  .use(
     bodyparser({
       enableTypes: ['json', 'form', 'text']
     })
@@ -54,10 +55,7 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes())
-  .use(index.allowedMethods())
-  .use(user.routes())
-  .use(user.allowedMethods())
+app.use(index.routes()).use(index.allowedMethods()).use(user.routes()).use(user.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {
