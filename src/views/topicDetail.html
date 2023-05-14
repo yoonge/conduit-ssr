@@ -1,8 +1,14 @@
 {{extend 'layout.html'}}
 
 {{block 'head'}}
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor@3.9.2/dist/index.css"> -->
+<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/vditor@3.9.2/dist/index.css" />
 <link rel="stylesheet" href="/stylesheets/topicDetail.css" />
+<style type="text/css">
+.vditor-reset {
+  color: #212529;
+  font-family: mononoki, Monaco, Consolas, 'Lucida Grande', Helvetica, Arial, sans-serif;
+}
+</style>
 {{/block}}
 
 {{block 'header'}}
@@ -102,7 +108,10 @@
   const content = document.querySelector('#content').value
   Vditor.preview(document.querySelector('#topicContent'), content, {
     cdn: 'https://cdn.jsdelivr.net/npm/vditor@3.9.2',
-    lang: 'en_US'
+    lang: 'en_US',
+    theme: {
+      path: 'https://cdn.jsdelivr.net/npm/vditor@3.9.2/dist/css/content-theme'
+    }
   })
 </script>
 {{/block}}
