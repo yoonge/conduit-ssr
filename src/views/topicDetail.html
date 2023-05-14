@@ -15,29 +15,36 @@
 <div class="d-flex justify-content-center topicHeaderWrapper">
   <div class="topicHeader">
     <h2>{{ topic?.title }}</h2>
-    <div class="card mt-5">
-      <div class="d-flex justify-content-between">
-        <div class="d-flex align-items-center">
-          <img
-            alt="avatar"
-            class="avatar"
-            src="{{ topic?.user?.avatar }}"
-            title="{{ topic?.user?.username }}"
-            width="32"
-            height="32"
-          >
-        </div>
-        <div>
-          <div class="card-body">
-            <h5 class="card-title">{{ topic?.user?.nickname }}</h5>
-            <p class="card-text">
-              <small class="text-muted">
-                {{ topic?.createTime?.toLocaleString() }}
-              </small>
-            </p>
+    <div class="d-flex justify-content-between mt-5">
+      <div class="card">
+        <div class="d-flex justify-content-between">
+          <div class="d-flex align-items-center">
+            <img
+              alt="avatar"
+              class="avatar"
+              src="{{ topic?.user?.avatar }}"
+              title="{{ topic?.user?.username }}"
+              width="32"
+              height="32"
+            >
+          </div>
+          <div>
+            <div class="card-body">
+              <h5 class="card-title">{{ topic?.user?.nickname }}</h5>
+              <p class="card-text">
+                <small class="text-muted">
+                  {{ topic?.createTime?.toLocaleString() }}
+                </small>
+              </p>
+            </div>
           </div>
         </div>
       </div>
+      {{if (user?.username === topic?.user?.username)}}
+      <div class="d-flex align-items-center">
+        <a class="btn btn-outline-light" href="/topicUpdate/{{ topic?._id?.toString() }}">Edit</a>
+      </div>
+      {{/if}}
     </div>
   </div>
 </div>

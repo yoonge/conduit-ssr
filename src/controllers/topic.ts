@@ -141,4 +141,42 @@ export default class TopicCtrl {
       render500(err as Error, ctx)
     }
   }
+
+  static async update(ctx: Context, next: Next) {
+    try {
+
+      const { user } = await UserCtrl.getCurrentUser(ctx, next)
+      if (!user) {
+        ctx.redirect('/login')
+        return
+      }
+
+      const { _id } = ctx.params
+      const topic = await TopicModel.findById(_id).populate('user')
+
+      await ctx.render('topicUpdate', {
+        msg: 'Topic detail query succeed.',
+        title: 'Topic Update',
+        topic,
+        user
+      })
+
+    } catch (err) {
+      render500(err as Error, ctx)
+    }
+  }
+
+  static async doUpdate(ctx: Context, next: Next) {
+    try {
+
+      const { topicId, title, content } = ctx.request.body as any
+      await TopicModel.findByIdAndUpdate(topicId, {
+        $set: { title, content, updateTime: Date.now() }
+      })
+      ctx.redirect(`/topicDetail/${topicId}`)
+
+    } catch (err) {
+      render500(err as Error, ctx)
+    }
+  }
 }

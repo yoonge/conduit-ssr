@@ -24,23 +24,24 @@
       height="48"
     >
   </h4>
-  <form action="/topic/initiate" method="post">
-    <input type="hidden" name="user" value="{{ user._id.toString() }}">
+  <form action="/topic/update" method="post">
+    <input type="hidden" name="user" value="{{ user?._id?.toString() }}">
+    <input type="hidden" name="topicId" value="{{ topic?._id?.toString() }}">
     <div class="mb-3">
       <label for="nickname" class="form-label">Initiator</label>
-      <input type="text" class="form-control" id="nickname" disabled value="{{ user.nickname }}">
+      <input type="text" class="form-control" id="nickname" disabled value="{{ user?.nickname }}">
     </div>
     <div class="mb-3">
       <label for="title" class="form-label">Title</label>
-      <input type="text" class="form-control" id="title" name="title" placeholder="What's this topic about">
+      <input type="text" class="form-control" id="title" name="title" placeholder="What's this topic about" value="{{ topic?.title }}">
     </div>
     <div class="mb-3">
       <label for="content" class="form-label">Content</label>
       <div id="vditor" class="form-control"></div>
-      <textarea class="form-control" id="content" name="content" style="display: none;"></textarea>
+      <textarea class="form-control" id="content" name="content" style="display: none;">{{ topic?.content }}</textarea>
     </div>
     <div class="mb-3">
-      <button type="submit" class="btn btn-dark">Publish</button>
+      <button type="submit" class="btn btn-dark">Update</button>
     </div>
   </form>
 </div>
@@ -82,7 +83,8 @@
       'edit-mode', 'both', 'preview', 'fullscreen', 'outline',
       // 'code-theme', 'content-theme',
       // 'export', 'devtools', 'info', 'help', 'br'
-    ]
+    ],
+    value: document.querySelector('#content').value
   })
 </script>
 {{/block}}
