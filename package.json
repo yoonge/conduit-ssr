@@ -1,11 +1,10 @@
 {
   "author": "Yoonge <7884008@qq.com>",
-  "description": "Conduit - A SSR RealWorld example App built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.",
+  "description": "Conduit - A SSR RealWorld example App built with Art-Template + ESLint + JWT + Koa2 + Prettier + TypeScript.",
   "keywords": [
     "Art-Template",
     "Conduit",
-    "ESlint",
-    "Joi",
+    "ESLint",
     "JWT",
     "Koa2",
     "Prettier",
@@ -30,7 +29,6 @@
     "@koa/router": "^12.0.0",
     "art-template": "^4.13.2",
     "debug": "^4.3.4",
-    "joi": "^17.9.1",
     "jsonwebtoken": "^9.0.0",
     "koa": "^2.14.2",
     "koa-art-template": "^1.1.1",

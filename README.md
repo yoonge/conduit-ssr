@@ -1,6 +1,6 @@
 # Conduit
 
-[Conduit](https://github.com/yoonge/conduit-ssr.git) - A SSR RealWorld example App built with Art-Template + ESlint + Joi + JWT + Koa2 + Prettier + TypeScript.
+[Conduit](https://github.com/yoonge/conduit-ssr.git) - A SSR RealWorld example App built with Art-Template + ESLint + JWT + Koa2 + Prettier + TypeScript.
 
 ## Getting Started
 

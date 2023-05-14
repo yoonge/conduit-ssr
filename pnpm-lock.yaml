@@ -10,9 +10,6 @@ dependencies:
   debug:
     specifier: ^4.3.4
     version: registry.npmmirror.com/debug@4.3.4
-  joi:
-    specifier: ^17.9.1
-    version: registry.npmmirror.com/joi@17.9.1
   jsonwebtoken:
     specifier: ^9.0.0
     version: registry.npmmirror.com/jsonwebtoken@9.0.0
@@ -163,20 +160,6 @@ packages:
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  registry.npmmirror.com/@hapi/hoek@9.3.0:
-    resolution: {integrity: sha512-/c6rf4UJlmHlC9b5BaNvzAcFv7HZ2QHaV0D4/HNlBdvFnvQq8RI4kYdhyPCl7Xj+oWvTWQ8ujhqS53LIgAe6KQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@hapi/hoek/-/hoek-9.3.0.tgz}
-    name: '@hapi/hoek'
-    version: 9.3.0
-    dev: false
-
-  registry.npmmirror.com/@hapi/topo@5.1.0:
-    resolution: {integrity: sha512-foQZKJig7Ob0BMAYBfcJk8d77QtOe7Wo4ox7ff1lQYoNNAb6jwcY1ncdoy2e9wQZzvNy7ODZCYJkK8kzmcAnAg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@hapi/topo/-/topo-5.1.0.tgz}
-    name: '@hapi/topo'
-    version: 5.1.0
-    dependencies:
-      '@hapi/hoek': registry.npmmirror.com/@hapi/hoek@9.3.0
-    dev: false
-
   registry.npmmirror.com/@humanwhocodes/config-array@0.11.8:
     resolution: {integrity: sha512-UybHIJzJnR5Qc/MsD9Kr+RpO2h+/P1GhOwdiLPXK5TWk5sgTdu88bTD9UP+CKbPPh5Rni1u0GjAdYQLemG8g+g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@humanwhocodes/config-array/-/config-array-0.11.8.tgz}
     name: '@humanwhocodes/config-array'
@@ -263,26 +246,6 @@ packages:
       '@nodelib/fs.scandir': registry.npmmirror.com/@nodelib/fs.scandir@2.1.5
       fastq: registry.npmmirror.com/fastq@1.15.0
     dev: true
-
-  registry.npmmirror.com/@sideway/address@4.1.4:
-    resolution: {integrity: sha512-7vwq+rOHVWjyXxVlR76Agnvhy8I9rpzjosTESvmhNeXOXdZZB15Fl+TI9x1SiHZH5Jv2wTGduSxFDIaq0m3DUw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@sideway/address/-/address-4.1.4.tgz}
-    name: '@sideway/address'
-    version: 4.1.4
-    dependencies:
-      '@hapi/hoek': registry.npmmirror.com/@hapi/hoek@9.3.0
-    dev: false
-
-  registry.npmmirror.com/@sideway/formula@3.0.1:
-    resolution: {integrity: sha512-/poHZJJVjx3L+zVD6g9KgHfYnb443oi7wLu/XKojDviHy6HOEOA6z1Trk5aR1dGcmPenJEgb2sK2I80LeS3MIg==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@sideway/formula/-/formula-3.0.1.tgz}
-    name: '@sideway/formula'
-    version: 3.0.1
-    dev: false
-
-  registry.npmmirror.com/@sideway/pinpoint@2.0.0:
-    resolution: {integrity: sha512-RNiOoTPkptFtSVzQevY/yWtZwf/RxyVnPy/OcA9HBM3MlGDnBEYL5B41H0MTn0Uec8Hi+2qUtTfG2WWZBmMejQ==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@sideway/pinpoint/-/pinpoint-2.0.0.tgz}
-    name: '@sideway/pinpoint'
-    version: 2.0.0
-    dev: false
 
   registry.npmmirror.com/@tsconfig/node10@1.0.9:
     resolution: {integrity: sha512-jNsYVVxU8v5g43Erja32laIDHXeoNvFEpX33OK4d6hljo3jDhCBDhx5dhCCTMWUojscpAagGiRkBKxpdl9fxqA==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/@tsconfig/node10/-/node10-1.0.9.tgz}
@@ -2634,18 +2597,6 @@ packages:
     resolution: {integrity: sha512-Yljz7ffyPbrLpLngrMtZ7NduUgVvi6wG9RJ9IUcyCd59YQ911PBJphODUcbOVbqYfxe1wuYf/LJ8PauMRwsM/g==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/isstream/-/isstream-0.1.2.tgz}
     name: isstream
     version: 0.1.2
-    dev: false
-
-  registry.npmmirror.com/joi@17.9.1:
-    resolution: {integrity: sha512-FariIi9j6QODKATGBrEX7HZcja8Bsh3rfdGYy/Sb65sGlZWK/QWesU1ghk7aJWDj95knjXlQfSmzFSPPkLVsfw==, registry: https://registry.npm.taobao.org/, tarball: https://registry.npmmirror.com/joi/-/joi-17.9.1.tgz}
-    name: joi
-    version: 17.9.1
-    dependencies:
-      '@hapi/hoek': registry.npmmirror.com/@hapi/hoek@9.3.0
-      '@hapi/topo': registry.npmmirror.com/@hapi/topo@5.1.0
-      '@sideway/address': registry.npmmirror.com/@sideway/address@4.1.4
-      '@sideway/formula': registry.npmmirror.com/@sideway/formula@3.0.1
-      '@sideway/pinpoint': registry.npmmirror.com/@sideway/pinpoint@2.0.0
     dev: false
 
   registry.npmmirror.com/js-sdsl@4.4.0:
