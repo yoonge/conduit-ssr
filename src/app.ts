@@ -16,8 +16,8 @@ import render from 'koa-art-template'
 
 import index from './routes/index.js'
 import user from './routes/user.js'
-import indexAPI from './routes/indexAPI.js'
-import userAPI from './routes/userAPI.js'
+import indexAPI from './api/routes/index.js'
+import userAPI from './api/routes/user.js'
 
 const _dirName = dirname(fileURLToPath(import.meta.url))
 

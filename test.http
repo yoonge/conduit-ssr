@@ -15,4 +15,24 @@ content-type: application/json
 ####
 
 
+POST http://localhost:3000/api/register HTTP/1.1
+content-type: application/json
+
+{
+    "email": "q@qq.com",
+    "password": "123456",
+    "username": "q"
+}
+
+
+####
+
+
 GET http://localhost:3000/api/ HTTP/1.1
+
+
+####
+
+
+GET http://localhost:3000/api/settings HTTP/1.1
+Authorization: ""

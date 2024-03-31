@@ -39,16 +39,15 @@ const TopicSchema = new mongoose.Schema({
   createTime: {
     type: Date,
     default: Date.now,
-    get: dateTimeFormatter
+    get: (val: Date) => dateTimeFormatter(val, false)
   },
   updateTime: {
     type: Date,
     default: Date.now,
-    get: dateTimeFormatter
+    get: (val: Date) => dateTimeFormatter(val, false)
   }
-})
+}, { toJSON: { getters: true } })
 
-TopicSchema.set('toJSON', { getters: true })
 const TopicModel = mongoose.model('Topic', TopicSchema, 'topic')
 
 export default TopicModel

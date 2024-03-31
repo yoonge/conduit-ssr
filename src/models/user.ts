@@ -66,16 +66,14 @@ const UserSchema = new mongoose.Schema({
   createTime: {
     type: Date,
     default: Date.now,
-    get: dateTimeFormatter
+    get: (val: Date) => dateTimeFormatter(val, false)
   },
   updateTime: {
     type: Date,
     default: Date.now,
-    get: dateTimeFormatter
+    get: (val: Date) => dateTimeFormatter(val, false)
   }
-})
-
-UserSchema.set('toJSON', { getters: true })
+}, { toJSON: { getters: true } })
 
 const UserModel = mongoose.model('User', UserSchema, 'user')
 

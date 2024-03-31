@@ -1,7 +1,7 @@
 import KoaRouter from '@koa/router'
 
-import Authorization from '../middleware/authorizationAPI.js'
-import TopicCtrl from '../controllers/topicAPI.js'
+import Authorization from '../middleware/authorization.js'
+import TopicCtrl from '../controllers/topic.js'
 
 const router = new KoaRouter()
 

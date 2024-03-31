@@ -1,16 +1,16 @@
 import { Context, Next } from 'koa'
 
-import DEFAULT from '../config/default.js'
-import AVATAR from '../config/avatar.js'
-import UserModel from '../models/user.js'
-import TopicModel from '../models/topic.js'
-import { response401, response500 } from '../util/500.js'
-import { generateToken } from '../util/token.js'
-import format from '../util/format.js'
-import md5 from '../util/md5.js'
-import pagination from '../util/pagination.js'
+import DEFAULT from '../../config/default.js'
+import AVATAR from '../../config/avatar.js'
+import UserModel from '../../models/user.js'
+import TopicModel from '../../models/topic.js'
+import { response401, response500 } from '../../util/500.js'
+import { generateToken } from '../../util/token.js'
+import format from '../../util/format.js'
+import md5 from '../../util/md5.js'
+import pagination from '../../util/pagination.js'
 
-import { User } from '../types/user'
+import { User } from '../../types/user'
 
 export default class UserCtrl {
   static async doRegister(ctx: Context, next: Next) {
