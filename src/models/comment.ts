@@ -24,11 +24,9 @@ const CommentSchema = new mongoose.Schema({
   createTime: {
     type: Date,
     default: Date.now,
-    get: dateTimeFormatter
+    get: (val: Date) => dateTimeFormatter(val, false)
   }
-})
-
-CommentSchema.set('toJSON', { getters: true })
+}, { toJSON: { getters: true } })
 
 const CommentModel = mongoose.model('Comment', CommentSchema, 'comment')
 

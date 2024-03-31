@@ -5,7 +5,9 @@
 
 ## 💡 Introduction
 
-Realworld: "The mother of all demo apps" — SSR exemplary fullstack Medium.com clone (called [Conduit](https://github.com/yoonge/conduit-ssr.git)) built with Art-Template + ESLint + JWT + Koa2 + Prettier + TypeScript.
+Realworld: "The mother of all demo apps" — SSR exemplary fullstack Medium.com clone (called [Conduit](https://github.com/yoonge/conduit-ssr)) built with Art-Template + ESLint + JWT + Koa2 + Prettier + TypeScript.
+
+Besides，this repository also provides RESTful APIs for [Conduit React](https://github.com/yoonge/conduit-react) repository.
 
 
 ## 🔰 Getting Started
