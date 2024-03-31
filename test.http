@@ -1,0 +1,18 @@
+# API request test, like a `Postman`.
+# First, the `REST Client` extension (VS Code) needs to be installed.
+# And then, just click `Send Request` above each request rule,
+# you'll see what happened, have fun!
+
+POST http://localhost:3000/api/login HTTP/1.1
+content-type: application/json
+
+{
+    "email": "one@qq.com",
+    "password": "123456"
+}
+
+
+####
+
+
+GET http://localhost:3000/api/ HTTP/1.1

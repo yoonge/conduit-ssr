@@ -40,7 +40,7 @@
 </div>
 {{else}}
 <div class="noTopic text-muted">
-  {{if (pathname === '/myFavorite')}}
+  {{if (pathname === '/myFavorites' || pathname === '/profile/one/favorites')}}
   Nothing yet... You can find some topics that interest you <a href="/">HERE</a>.
   {{else}}
   Nothing yet... You can initiate a new topic <a href="/topic/initiate">HERE</a>.

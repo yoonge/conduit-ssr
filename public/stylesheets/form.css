@@ -38,6 +38,10 @@
   padding: 0;
 }
 
+.newTopic .vditor.form-control .vditor-reset {
+  min-height: 442px;
+}
+
 .flatpickr-day.selected,
 .flatpickr-day.startRange,
 .flatpickr-day.endRange,

@@ -1,5 +1,6 @@
 import { Types } from 'mongoose'
 import mongoose from './db.js'
+import { dateTimeFormatter } from '../util/format.js'
 
 const UserSchema = new mongoose.Schema({
   email: {
@@ -64,13 +65,17 @@ const UserSchema = new mongoose.Schema({
   },
   createTime: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: dateTimeFormatter
   },
   updateTime: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: dateTimeFormatter
   }
 })
+
+UserSchema.set('toJSON', { getters: true })
 
 const UserModel = mongoose.model('User', UserSchema, 'user')
 

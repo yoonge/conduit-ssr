@@ -1,6 +1,6 @@
 import { Types } from 'mongoose'
-
 import mongoose from './db.js'
+import { dateTimeFormatter } from '../util/format.js'
 
 const TopicSchema = new mongoose.Schema({
   title: {
@@ -21,6 +21,12 @@ const TopicSchema = new mongoose.Schema({
     type: Number,
     default: 0
   },
+  comments: [
+    {
+      type: Types.ObjectId,
+      ref: 'Comment'
+    }
+  ],
   favorite: {
     type: Number,
     default: 0
@@ -32,14 +38,17 @@ const TopicSchema = new mongoose.Schema({
   },
   createTime: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: dateTimeFormatter
   },
   updateTime: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: dateTimeFormatter
   }
 })
 
+TopicSchema.set('toJSON', { getters: true })
 const TopicModel = mongoose.model('Topic', TopicSchema, 'topic')
 
 export default TopicModel

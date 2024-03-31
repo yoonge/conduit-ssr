@@ -1,11 +1,11 @@
 import { Context, Next } from 'koa'
-import jwt from 'jsonwebtoken'
 
 import DEFAULT from '../config/default.js'
 import AVATAR from '../config/avatar.js'
 import UserModel from '../models/user.js'
 import TopicModel from '../models/topic.js'
-import render500 from '../util/500.js'
+import { response401, response500 } from '../util/500.js'
+import { generateToken } from '../util/token.js'
 import format from '../util/format.js'
 import md5 from '../util/md5.js'
 import pagination from '../util/pagination.js'
@@ -13,12 +13,6 @@ import pagination from '../util/pagination.js'
 import { User } from '../types/user'
 
 export default class UserCtrl {
-  static async register(ctx: Context, next: Next) {
-    await ctx.render('register', {
-      title: 'Sign Up'
-    })
-  }
-
   static async doRegister(ctx: Context, next: Next) {
     try {
       const { email, username, password } = ctx.request.body as User
@@ -27,26 +21,35 @@ export default class UserCtrl {
       })
 
       if (user) {
-        ctx.throw(500, 'Email or Username is already exsist.')
+        response500(new Error('Email or Username is already exsist.'), ctx)
+        return
       }
 
       const newUser = new UserModel({
         ...(ctx.request.body as User),
         password: md5(password)
       })
-      await newUser.save()
-      ctx.redirect(`/login?email=${email}`)
-    } catch (err) {
-      render500(err as Error, ctx)
-    }
-  }
+      const savedNewUser = await newUser.save()
+      const { _id, username: _username } = savedNewUser
+      const token = await generateToken(_id.toString(), username)
 
-  static async login(ctx: Context, next: Next) {
-    const { email = '' } = ctx.query
-    await ctx.render('login', {
-      title: 'Sign In',
-      email
-    })
+      if (!token) {
+        response500(new Error('Internal Server Error.'), ctx)
+        return
+      }
+
+      ctx.state.cuid = _id.toString()
+
+      ctx.status = 200
+      ctx.body = {
+        code: 200,
+        msg: 'Register succeed.',
+        user: savedNewUser,
+        token,
+      }
+    } catch (err) {
+      response500(err as Error, ctx)
+    }
   }
 
   static async doLogin(ctx: Context, next: Next) {
@@ -58,39 +61,39 @@ export default class UserCtrl {
       })
 
       if (!user) {
-        ctx.throw(500, 'Email or Password is incorrect.')
+        response500(new Error('Email or Password is incorrect.'), ctx)
+        return
       }
 
       const { _id, username } = user
-      const token = await new Promise((resolve, reject) => {
-        jwt.sign({ cuid: _id, username }, DEFAULT.JWT_SECRET, { expiresIn: '1h' }, (err, token) => {
-          if (err) reject(err)
-          resolve(token)
-        })
-      })
+      const token = await generateToken(_id.toString(), username)
 
       if (!token) {
-        ctx.throw(500, 'Internal Server Error.')
+        response500(new Error('Internal Server Error.'), ctx)
+        return
       }
 
+      ctx.state.cuid = _id.toString()
+
       ctx.status = 200
-      ctx.cookies.set('cuid', _id.toString())
-      ctx.cookies.set('token', token as string)
-      ctx.redirect('/')
+      ctx.body = {
+        code: 200,
+        msg: 'Login succeed.',
+        user,
+        token
+      }
     } catch (err) {
-      render500(err as Error, ctx)
+      response500(err as Error, ctx)
     }
   }
 
   static logout(ctx: Context, next: Next) {
-    ctx.cookies.set('cuid', null)
-    ctx.cookies.set('token', null)
-    ctx.redirect('/login')
+    ctx.state.cuid = null
   }
 
   static async getCurrentUser(ctx: Context, next: Next) {
     try {
-      const cuid = ctx.cookies.get('cuid')
+      const { cuid } = ctx.state
       const user = await UserModel.findById(cuid)
       return { err: null, user }
     } catch (err) {
@@ -102,17 +105,17 @@ export default class UserCtrl {
     const { err, user } = await UserCtrl.getCurrentUser(ctx, next)
 
     if (err) {
-      render500(err as Error, ctx)
+      response500(err as Error, ctx)
       return
     }
 
     ctx.status = 200
-    await ctx.render('settings', {
-      msg: 'User query succeeded.',
-      title: 'User Settings',
+    ctx.body = {
+      code: 200,
+      msg: 'User query succeed.',
       AVATAR,
       user
-    })
+    }
   }
 
   static async updateUserSettings(ctx: Context, next: Next) {
@@ -133,10 +136,20 @@ export default class UserCtrl {
           ...rest
         }
       }
-      await UserModel.findByIdAndUpdate(_id, { $set: { ...newUser } })
-      ctx.redirect('/settings')
+      const updatedUser = await UserModel.findByIdAndUpdate(
+        _id,
+        { $set: { ...newUser } },
+        { new: true }
+      )
+      ctx.status = 200
+      ctx.body = {
+        code: 200,
+        msg: 'User settings were updated succeed.',
+        user: updatedUser
+      }
+      // ctx.redirect('/settings')
     } catch (err) {
-      render500(err as Error, ctx)
+      response500(err as Error, ctx)
     }
   }
 
@@ -144,7 +157,7 @@ export default class UserCtrl {
     try {
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
-        ctx.redirect('/')
+        response401(new Error('Unauthorized'), ctx)
         return
       }
 
@@ -156,18 +169,18 @@ export default class UserCtrl {
         .populate('user')
         .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination('/myTopics', DEFAULT.PAGE_SIZE, total, Number(page))
+      const pageList = pagination('/my-topics', DEFAULT.PAGE_SIZE, total, Number(page))
 
       ctx.status = 200
-      await ctx.render('index', {
-        msg: 'These are all my topics.',
-        title: 'My Topics',
+      ctx.body = {
+        code: 200,
+        msg: 'Query my own topics succeed.',
         formatTopics,
         pageList,
         user
-      })
+      }
     } catch (err) {
-      render500(err as Error, ctx)
+      response500(err as Error, ctx)
     }
   }
 
@@ -175,7 +188,7 @@ export default class UserCtrl {
     try {
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
-        ctx.redirect('/')
+        response401(new Error('Unauthorized'), ctx)
         return
       }
 
@@ -187,50 +200,49 @@ export default class UserCtrl {
         .populate('user')
         .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination('/myFavorites', DEFAULT.PAGE_SIZE, total, Number(page))
+      const pageList = pagination('/my-favorites', DEFAULT.PAGE_SIZE, total, Number(page))
 
       ctx.status = 200
-      await ctx.render('index', {
-        msg: 'These are all my topics.',
-        title: 'My Topics',
+      ctx.body = {
+        code: 200,
+        msg: 'Query my favorite topics succeed.',
         formatTopics,
         pageList,
         user
-      })
+      }
     } catch (err) {
-      render500(err as Error, ctx)
+      response500(err as Error, ctx)
     }
   }
 
   static async favor(ctx: Context, next: Next) {
     try {
+      const { user } = await UserCtrl.getCurrentUser(ctx, next)
+      if (!user) {
+        response401(new Error('Unauthorized'), ctx)
+        return
+      }
+
       const { topicId, userId, flag } = ctx.request.body as any
       if (flag === 'true') {
         await TopicModel.findByIdAndUpdate(topicId, { $inc: { favorite: 1 } })
         await UserModel.findByIdAndUpdate(userId, { $push: { favorite: topicId } })
         ctx.status = 200
         ctx.body = {
-          msg: 'Favor succeed.',
-          status: 200
+          code: 200,
+          msg: 'Favor succeed.'
         }
       } else if (flag === 'false') {
         await TopicModel.findByIdAndUpdate(topicId, { $inc: { favorite: -1 } })
         await UserModel.findByIdAndUpdate(userId, { $pull: { favorite: topicId } })
         ctx.status = 200
         ctx.body = {
-          msg: 'Disfavor succeed.',
-          status: 200
+          code: 200,
+          msg: 'Disfavor succeed.'
         }
       }
     } catch (err) {
-      ctx.status = 500
-      ctx.body = {
-        err: {
-          stack: JSON.stringify(err),
-          status: 500
-        },
-        msg: (err as Error)?.message || 'Internal Server Error.'
-      }
+      response500(err as Error, ctx)
     }
   }
 
@@ -238,7 +250,7 @@ export default class UserCtrl {
     try {
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
-        ctx.redirect('/')
+        response401(new Error('Unauthorized'), ctx)
         return
       }
 
@@ -261,16 +273,16 @@ export default class UserCtrl {
       )
 
       ctx.status = 200
-      await ctx.render('profile', {
-        msg: `User ${theUser?.nickname}'s topics query succeeded.`,
-        title: `User ${theUser?.nickname}'s Topics`,
+      ctx.body = {
+        code: 200,
+        msg: `User ${theUser?.nickname}'s topics query succeed.`,
         formatTopics,
         pageList,
         theUser,
         user
-      })
+      }
     } catch (err) {
-      render500(err as Error, ctx)
+      response500(err as Error, ctx)
     }
   }
 
@@ -278,7 +290,7 @@ export default class UserCtrl {
     try {
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       if (!user) {
-        ctx.redirect('/')
+        response401(new Error('Unauthorized'), ctx)
         return
       }
 
@@ -301,16 +313,16 @@ export default class UserCtrl {
       )
 
       ctx.status = 200
-      await ctx.render('profile', {
-        msg: `User ${theUser?.nickname}'s favorites query succeeded.`,
-        title: `User ${theUser?.nickname}'s Favorites`,
+      ctx.body = {
+        code: 200,
+        msg: `User ${theUser?.nickname}'s favorites query succeed.`,
         formatTopics,
         pageList,
         theUser,
         user
-      })
+      }
     } catch (err) {
-      render500(err as Error, ctx)
+      response500(err as Error, ctx)
     }
   }
 }
