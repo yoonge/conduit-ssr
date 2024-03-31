@@ -17,8 +17,8 @@ export default (topics: any[]) => {
   return formatTopics
 }
 
-export const dateTimeFormatter = (d: Date) => {
-  return new Intl.DateTimeFormat('zh', {
+export const dateTimeFormatter = (d: Date, showTimeZone: boolean = true) => {
+  const dateTimeStr = new Intl.DateTimeFormat('zh', {
     year: 'numeric',
     month: '2-digit',
     day: '2-digit',
@@ -29,4 +29,8 @@ export const dateTimeFormatter = (d: Date) => {
     timeZone: 'Asia/Shanghai',
     timeZoneName: 'short'
   }).format(d)
+
+  return showTimeZone
+    ? dateTimeStr
+    : dateTimeStr.replace(' GMT+8 ', ' ')
 }

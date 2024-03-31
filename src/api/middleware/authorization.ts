@@ -1,7 +1,7 @@
 import { Context, Next } from 'koa'
 import jwt from 'jsonwebtoken'
 
-import DEFAULT from '../config/default.js'
+import DEFAULT from '../../config/default.js'
 
 export default async (ctx: Context, next: Next) => {
   try {
