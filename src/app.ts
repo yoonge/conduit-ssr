@@ -4,6 +4,7 @@ const app = new Koa()
 import path, { dirname } from 'node:path'
 import url, { fileURLToPath } from 'node:url'
 
+import cors from '@koa/cors'
 import bodyparser from 'koa-bodyparser'
 import json from 'koa-json'
 import koaStatic from 'koa-static'
@@ -15,6 +16,8 @@ import render from 'koa-art-template'
 
 import index from './routes/index.js'
 import user from './routes/user.js'
+import indexAPI from './routes/indexAPI.js'
+import userAPI from './routes/userAPI.js'
 
 const _dirName = dirname(fileURLToPath(import.meta.url))
 
@@ -23,6 +26,7 @@ onerror(app)
 
 // middlewares
 app
+  .use(cors())
   .use(
     bodyparser({
       enableTypes: ['json', 'form', 'text']
@@ -55,7 +59,10 @@ app.use(async (ctx, next) => {
 })
 
 // routes
-app.use(index.routes()).use(index.allowedMethods()).use(user.routes()).use(user.allowedMethods())
+app.use(index.routes()).use(index.allowedMethods())
+  .use(user.routes()).use(user.allowedMethods())
+  .use(indexAPI.routes()).use(indexAPI.allowedMethods())
+  .use(userAPI.routes()).use(userAPI.allowedMethods())
 
 // error-handling
 app.on('error', (err, ctx) => {

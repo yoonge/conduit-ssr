@@ -1,12 +1,14 @@
 {
   "author": "Yoonge <7884008@qq.com>",
-  "description": "Conduit - A SSR RealWorld example application built with Art-Template + ESLint + JWT + Koa2 + Prettier + TypeScript.",
+  "description": "Realworld: The mother of all demo apps — SSR exemplary fullstack Medium.com clone (called Conduit) built with Art-Template + ESLint + JWT + Koa2 + MongoDB + Mongoose + Prettier + TypeScript.",
   "keywords": [
     "Art-Template",
     "Conduit",
     "ESLint",
     "JWT",
     "Koa2",
+    "MongoDB",
+    "Mongoose",
     "Prettier",
     "RealWorld",
     "SSR",
@@ -18,14 +20,15 @@
   "version": "0.1.0",
   "scripts": {
     "apidoc": "npx apidoc -i src -o docs",
-    "dev": "npx nodemon src/bin/www.ts",
+    "dev": "NODE_OPTIONS='--import=./register.js' npx nodemon src/bin/www.ts",
     "format": "npx prettier --write src",
     "lint": "npx eslint src",
     "prd": "pm2 start src/bin/www.ts",
-    "start": "npx ts-node src/bin/www.ts",
+    "start": "NODE_OPTIONS='--import=./register.js' npx ts-node src/bin/www.ts",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "dependencies": {
+    "@koa/cors": "^5.0.0",
     "@koa/router": "^12.0.0",
     "art-template": "^4.13.2",
     "debug": "^4.3.4",
@@ -49,6 +52,7 @@
     "@types/koa-json": "^2.0.20",
     "@types/koa-logger": "^3.1.2",
     "@types/koa-static": "^4.0.2",
+    "@types/koa__cors": "^5.0.0",
     "@types/koa__router": "^12.0.0",
     "@types/md5": "^2.3.2",
     "@typescript-eslint/eslint-plugin": "^5.58.0",

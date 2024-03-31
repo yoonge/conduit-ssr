@@ -1,6 +1,6 @@
 import { Types } from 'mongoose'
-
 import mongoose from './db.js'
+import { dateTimeFormatter } from '../util/format.js'
 
 const CommentSchema = new mongoose.Schema({
   content: {
@@ -23,9 +23,12 @@ const CommentSchema = new mongoose.Schema({
   },
   createTime: {
     type: Date,
-    default: Date.now
+    default: Date.now,
+    get: dateTimeFormatter
   }
 })
+
+CommentSchema.set('toJSON', { getters: true })
 
 const CommentModel = mongoose.model('Comment', CommentSchema, 'comment')
 
