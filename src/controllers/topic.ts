@@ -5,7 +5,7 @@ import DEFAULT from '../config/default.js'
 import TopicModel from '../models/topic.js'
 import CommentModel from '..//models/comment.js'
 import UserCtrl from './user.js'
-import render500 from '../util/500.js'
+import render500 from '../util/error.js'
 import format from '../util/format.js'
 import pagination from '../util/pagination.js'
 

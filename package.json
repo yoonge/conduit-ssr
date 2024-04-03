@@ -1,7 +1,8 @@
 {
   "author": "Yoonge <7884008@qq.com>",
-  "description": "Realworld: The mother of all demo apps — SSR exemplary fullstack Medium.com clone (called Conduit) built with Art-Template + ESLint + JWT + Koa2 + MongoDB + Mongoose + Prettier + TypeScript.",
+  "description": "Realworld: The mother of all demo apps — SSR exemplary fullstack Medium.com clone (called Conduit) built with Art-Template + JWT + Koa2 + MongoDB + Mongoose + TypeScript.",
   "keywords": [
+    "API",
     "Art-Template",
     "Conduit",
     "ESLint",
@@ -11,13 +12,14 @@
     "Mongoose",
     "Prettier",
     "RealWorld",
+    "RESTful",
     "SSR",
     "TypeScript"
   ],
   "name": "conduit-ssr",
   "private": true,
   "type": "module",
-  "version": "0.1.0",
+  "version": "0.2.0",
   "scripts": {
     "apidoc": "npx apidoc -i src -o docs",
     "dev": "NODE_OPTIONS='--import=./register.js' npx nodemon src/bin/www.ts",
