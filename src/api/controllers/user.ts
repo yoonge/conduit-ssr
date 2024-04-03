@@ -4,11 +4,10 @@ import DEFAULT from '../../config/default.js'
 import AVATAR from '../../config/avatar.js'
 import UserModel from '../../models/user.js'
 import TopicModel from '../../models/topic.js'
-import { response401, response500 } from '../../util/500.js'
+import { response401, response500 } from '../../util/error.js'
 import { generateToken } from '../../util/token.js'
 import format from '../../util/format.js'
 import md5 from '../../util/md5.js'
-import pagination from '../../util/pagination.js'
 
 import { User } from '../../types/user'
 
@@ -45,7 +44,7 @@ export default class UserCtrl {
         code: 200,
         msg: 'Register succeed.',
         user: savedNewUser,
-        token,
+        token
       }
     } catch (err) {
       response500(err as Error, ctx)
@@ -147,7 +146,6 @@ export default class UserCtrl {
         msg: 'User settings were updated succeed.',
         user: updatedUser
       }
-      // ctx.redirect('/settings')
     } catch (err) {
       response500(err as Error, ctx)
     }
@@ -169,14 +167,13 @@ export default class UserCtrl {
         .populate('user')
         .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination('/my-topics', DEFAULT.PAGE_SIZE, total, Number(page))
 
       ctx.status = 200
       ctx.body = {
         code: 200,
         msg: 'Query my own topics succeed.',
         formatTopics,
-        pageList,
+        total,
         user
       }
     } catch (err) {
@@ -200,14 +197,13 @@ export default class UserCtrl {
         .populate('user')
         .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination('/my-favorites', DEFAULT.PAGE_SIZE, total, Number(page))
 
       ctx.status = 200
       ctx.body = {
         code: 200,
         msg: 'Query my favorite topics succeed.',
         formatTopics,
-        pageList,
+        total,
         user
       }
     } catch (err) {
@@ -223,22 +219,44 @@ export default class UserCtrl {
         return
       }
 
-      const { topicId, userId, flag } = ctx.request.body as any
-      if (flag === 'true') {
-        await TopicModel.findByIdAndUpdate(topicId, { $inc: { favorite: 1 } })
-        await UserModel.findByIdAndUpdate(userId, { $push: { favorite: topicId } })
+      const { topicId, userId } = ctx.request.body as any
+      if (user.favorite?.includes(topicId)) {
+        const updatedTopic = await TopicModel.findByIdAndUpdate(
+          topicId,
+          { $inc: { favorite: -1 } },
+          { new: true }
+        ).populate('user')
+        const formatTopic = format([updatedTopic])[0]
+        const updatedUser = await UserModel.findByIdAndUpdate(
+          userId,
+          { $pull: { favorite: topicId } },
+          { new: true }
+        )
         ctx.status = 200
         ctx.body = {
           code: 200,
-          msg: 'Favor succeed.'
+          msg: 'Disfavor succeed.',
+          updatedTopic: formatTopic,
+          updatedUser
         }
-      } else if (flag === 'false') {
-        await TopicModel.findByIdAndUpdate(topicId, { $inc: { favorite: -1 } })
-        await UserModel.findByIdAndUpdate(userId, { $pull: { favorite: topicId } })
+      } else {
+        const updatedTopic = await TopicModel.findByIdAndUpdate(
+          topicId,
+          { $inc: { favorite: 1 } },
+          { new: true }
+        ).populate('user')
+        const formatTopic = format([updatedTopic])[0]
+        const updatedUser = await UserModel.findByIdAndUpdate(
+          userId,
+          { $push: { favorite: topicId } },
+          { new: true }
+        )
         ctx.status = 200
         ctx.body = {
           code: 200,
-          msg: 'Disfavor succeed.'
+          msg: 'Favor succeed.',
+          updatedTopic: formatTopic,
+          updatedUser
         }
       }
     } catch (err) {
@@ -265,20 +283,14 @@ export default class UserCtrl {
         .populate('user')
         .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination(
-        `/profile/${theUser?.username}`,
-        DEFAULT.PAGE_SIZE,
-        total,
-        Number(page)
-      )
 
       ctx.status = 200
       ctx.body = {
         code: 200,
         msg: `User ${theUser?.nickname}'s topics query succeed.`,
         formatTopics,
-        pageList,
         theUser,
+        total,
         user
       }
     } catch (err) {
@@ -305,20 +317,14 @@ export default class UserCtrl {
         .populate('user')
         .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination(
-        `/profile/${theUser?.username}/favorites`,
-        DEFAULT.PAGE_SIZE,
-        total,
-        Number(page)
-      )
 
       ctx.status = 200
       ctx.body = {
         code: 200,
         msg: `User ${theUser?.nickname}'s favorites query succeed.`,
         formatTopics,
-        pageList,
         theUser,
+        total,
         user
       }
     } catch (err) {
