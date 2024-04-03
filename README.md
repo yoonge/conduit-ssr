@@ -1,11 +1,11 @@
 # ⌨️ Conduit SSR
 
-[![Conduit SSR](https://img.shields.io/badge/Conduit-SSR-orange)](https://github.com/yoonge/conduit-ssr) ![version](https://img.shields.io/badge/version-0.1.1-yellow) [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE) ![Koa](https://img.shields.io/badge/Koa-%5E2.14.2-green.svg) ![JWT](https://img.shields.io/badge/JWT-%5E9.0.0-fuchsia.svg) ![ArtTemplate](https://img.shields.io/badge/ArtTemplate-%5E4.13.2-deepskyblue.svg) ![Mongoose](https://img.shields.io/badge/Mongoose-%5E7.0.3-cyan.svg) ![pnpm](https://img.shields.io/badge/pnpm-8.15.4-purple)
+![version](https://img.shields.io/badge/version-0.2.0-green) [![license](https://img.shields.io/badge/license-MIT-blue)](./LICENSE) ![Koa](https://img.shields.io/badge/Koa-%5E2.14.2-fuchsia) ![JWT](https://img.shields.io/badge/JWT-%5E9.0.0-00f3e6) ![ArtTemplate](https://img.shields.io/badge/ArtTemplate-%5E4.13.2-0f83cd) ![MongoDB](https://img.shields.io/badge/MongoDB-%5E5.1.0-00ed64) ![Mongoose](https://img.shields.io/badge/Mongoose-%5E7.0.3-880000) ![pnpm](https://img.shields.io/badge/pnpm-8.15.5-f69220)
 
 
 ## 💡 Introduction
 
-Realworld: "The mother of all demo apps" — SSR exemplary fullstack Medium.com clone (called [Conduit](https://github.com/yoonge/conduit-ssr)) built with Art-Template + ESLint + JWT + Koa2 + Prettier + TypeScript.
+Realworld: "The mother of all demo apps" — SSR exemplary fullstack Medium.com clone (called [Conduit](https://github.com/yoonge/conduit-ssr)) built with Art-Template + JWT + Koa2 + MongoDB + Mongoose + TypeScript.
 
 Besides，this repository also provides RESTful APIs for [Conduit React](https://github.com/yoonge/conduit-react) repository.
 

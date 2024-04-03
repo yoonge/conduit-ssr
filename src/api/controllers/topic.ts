@@ -4,9 +4,8 @@ import DEFAULT from '../../config/default.js'
 import TopicModel from '../../models/topic.js'
 import CommentModel from '../..//models/comment.js'
 import UserCtrl from './user.js'
-import { response401, response500 } from '../../util/500.js'
+import { response401, response500 } from '../../util/error.js'
 import format from '../../util/format.js'
-import pagination from '../../util/pagination.js'
 
 import { Topic } from '../../types/topic'
 import { Comment } from '../../types/comment'
@@ -22,7 +21,6 @@ export default class TopicCtrl {
         .populate('user')
         .sort('-updateTime')
       const formatTopics = format(topics)
-      const pageList = pagination('/', DEFAULT.PAGE_SIZE, total, Number(page))
 
       const { user } = await UserCtrl.getCurrentUser(ctx, next)
       console.log('user', user);
@@ -32,7 +30,7 @@ export default class TopicCtrl {
           code: 200,
           msg: 'Logged out.',
           formatTopics,
-          pageList
+          total
         }
         return
       }
@@ -41,7 +39,7 @@ export default class TopicCtrl {
         code: 200,
         msg: 'Logged in.',
         formatTopics,
-        pageList,
+        total,
         user
       }
     } catch (err) {
@@ -70,7 +68,6 @@ export default class TopicCtrl {
         ctx.body = {
           code: 200,
           msg: 'Topic detail query succeed.',
-          // comments,
           topic
         }
         return
@@ -79,7 +76,6 @@ export default class TopicCtrl {
       ctx.body = {
         code: 200,
         msg: 'Topic detail query succeed.',
-        // comments,
         topic,
         user
       }
@@ -87,20 +83,6 @@ export default class TopicCtrl {
       response500(err as Error, ctx)
     }
   }
-
-  // static async initiate(ctx: Context, next: Next) {
-  //   const { user } = await UserCtrl.getCurrentUser(ctx, next)
-  //   if (!user) {
-  //     response401(new Error('Unauthorized'), ctx)
-  //     return
-  //   }
-
-  //   await ctx.render('initiate', {
-  //     title: 'Initiate a New Topic',
-  //     msg: 'Initiate a new topic here.',
-  //     user
-  //   })
-  // }
 
   static async doInitiate(ctx: Context, next: Next) {
     try {
@@ -116,19 +98,10 @@ export default class TopicCtrl {
         msg: 'Topic initiate succeed.',
         newTopic
       }
-      // ctx.redirect('/')
     } catch (err) {
       response500(err as Error, ctx)
     }
   }
-
-  // static async getComments(ctx: Context, next: Next, topicId: Types.ObjectId) {
-  //   try {
-  //     return await CommentModel.find({ topic: topicId }).populate('user')
-  //   } catch (err) {
-  //     response500(err as Error, ctx)
-  //   }
-  // }
 
   static async doComment(ctx: Context, next: Next) {
     try {
