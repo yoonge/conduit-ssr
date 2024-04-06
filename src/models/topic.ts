@@ -27,6 +27,12 @@ const TopicSchema = new mongoose.Schema({
       ref: 'Comment'
     }
   ],
+  tags: [
+    {
+      type: String,
+      trim: true
+    }
+  ],
   favorite: {
     type: Number,
     default: 0
