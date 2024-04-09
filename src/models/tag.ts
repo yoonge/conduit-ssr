@@ -1,6 +1,6 @@
 import { Types } from 'mongoose'
 import mongoose from './db.js'
-import { dateTimeFormatter } from '../util/format.js'
+import format, { dateTimeFormatter } from '../util/format.js'
 
 const TagSchema = new mongoose.Schema({
   tag: {
@@ -20,7 +20,7 @@ const TagSchema = new mongoose.Schema({
     type: Date,
     default: Date.now,
     get: (val: Date) => dateTimeFormatter(val, false)
-  }
+  },
 }, { toJSON: { getters: true } })
 
 const TagModel = mongoose.model('Tag', TagSchema, 'tag')
