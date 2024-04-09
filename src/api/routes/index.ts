@@ -7,7 +7,9 @@ const router = new KoaRouter()
 
 router.get('/api/', TopicCtrl.index)
 
-router.get('/api/tag/:tag', TopicCtrl.tag)
+router.get('/api/tags', TopicCtrl.tags)
+
+router.get('/api/tags/:tag', TopicCtrl.tag)
 
 router.get('/api/topic/:_id', TopicCtrl.detail)
 
