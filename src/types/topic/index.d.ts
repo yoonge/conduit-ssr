@@ -4,6 +4,7 @@ declare type Topic = {
   content: string
   favorite?: number
   status?: number
+  tags: Types.ObjectId[]
   title: string
   updateTime: Date
   updateTimeStr?: string
