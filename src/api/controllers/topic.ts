@@ -32,7 +32,8 @@ export default class TopicCtrl {
         ctx.body = {
           code: 200,
           msg: 'Logged out.',
-          formatTopics,
+          page: Number(page),
+          topics: formatTopics,
           total
         }
         return
@@ -41,7 +42,8 @@ export default class TopicCtrl {
       ctx.body = {
         code: 200,
         msg: 'Logged in.',
-        formatTopics,
+        page: Number(page),
+        topics: formatTopics,
         total,
         user
       }
@@ -105,7 +107,8 @@ export default class TopicCtrl {
         ctx.body = {
           code: 200,
           msg: 'Tag query succeed.',
-          formatTopics,
+          page: Number(page),
+          topics: formatTopics,
           total
         }
         return
@@ -114,7 +117,8 @@ export default class TopicCtrl {
       ctx.body = {
         code: 200,
         msg: 'Tag query succeed.',
-        formatTopics,
+        page: Number(page),
+        topics: formatTopics,
         total,
         user
       }

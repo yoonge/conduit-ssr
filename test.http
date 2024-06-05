@@ -4,22 +4,23 @@
 # you'll see what happened, have fun!
 
 @host = http://localhost:3000/api
+@json = application/json
 
 
-### Login
-# @name loggedIn
+### User Login
+# @name user_login
 POST {{host}}/login HTTP/1.1
-content-type: application/json
+content-type: {{json}}
 
 {
-    "email": "one@qq.com",
+    "email": "yoonge@qq.com",
     "password": "123456"
 }
 
 
-### Register
+### User Register
 POST {{host}}/register HTTP/1.1
-content-type: application/json
+content-type: {{json}}
 
 {
     "email": "q@qq.com",
@@ -50,24 +51,24 @@ GET {{host}}/tags/react HTTP/1.1
 
 ### User Profile, Own Topics
 GET {{host}}/profile/one HTTP/1.1
-Authorization: {{loggedIn.response.body.$.token}}
+Authorization: {{user_login.response.body.$.token}}
 
 
 ### User Profile, Favorites
 GET {{host}}/profile/one/favorites HTTP/1.1
-Authorization: {{loggedIn.response.body.$.token}}
+Authorization: {{user_login.response.body.$.token}}
 
 
 ### My Settings
 GET {{host}}/settings HTTP/1.1
-Authorization: {{loggedIn.response.body.$.token}}
+Authorization: {{user_login.response.body.$.token}}
 
 
 ### My Topics
 GET {{host}}/my-topics HTTP/1.1
-Authorization: {{loggedIn.response.body.$.token}}
+Authorization: {{user_login.response.body.$.token}}
 
 
 ### My Favorites
 GET {{host}}/my-favorites HTTP/1.1
-Authorization: {{loggedIn.response.body.$.token}}
+Authorization: {{user_login.response.body.$.token}}
