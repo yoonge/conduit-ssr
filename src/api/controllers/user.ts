@@ -172,7 +172,8 @@ export default class UserCtrl {
       ctx.body = {
         code: 200,
         msg: 'Query my own topics succeed.',
-        formatTopics,
+        page: Number(page),
+        topics: formatTopics,
         total,
         user
       }
@@ -202,7 +203,8 @@ export default class UserCtrl {
       ctx.body = {
         code: 200,
         msg: 'Query my favorite topics succeed.',
-        formatTopics,
+        page: Number(page),
+        topics: formatTopics,
         total,
         user
       }
@@ -288,7 +290,8 @@ export default class UserCtrl {
       ctx.body = {
         code: 200,
         msg: `User ${theUser?.nickname}'s topics query succeed.`,
-        formatTopics,
+        page: Number(page),
+        topics: formatTopics,
         theUser,
         total,
         user
@@ -322,7 +325,8 @@ export default class UserCtrl {
       ctx.body = {
         code: 200,
         msg: `User ${theUser?.nickname}'s favorites query succeed.`,
-        formatTopics,
+        page: Number(page),
+        topics: formatTopics,
         theUser,
         total,
         user

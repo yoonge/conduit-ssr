@@ -1,9 +1,9 @@
 {
   "author": "Yoonge <7884008@qq.com>",
-  "description": "Realworld: 'The mother of all demo apps' — Exemplary SSR fullstack Medium.com clone (called Conduit), built with Art-Template + CORS + JWT + Koa2 + MongoDB + Mongoose + TypeScript.",
+  "description": "Exemplary SSR fullstack realworld application (called Conduit) in TypeScript, built with art-template + CORS + JWT + Koa2 + MongoDB + Mongoose, managed by pnpm.",
   "keywords": [
     "API",
-    "Art-Template",
+    "art-template",
     "Conduit",
     "CORS",
     "ESLint",
@@ -13,6 +13,7 @@
     "md5",
     "MongoDB",
     "Mongoose",
+    "pnpm",
     "Prettier",
     "RealWorld",
     "RESTful",
